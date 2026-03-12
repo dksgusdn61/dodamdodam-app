@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import {
   FlatList,
-  Image,
   StyleSheet,
   View,
   type ImageSourcePropType,
@@ -11,6 +10,7 @@ import { useTheme } from "@shared/theme";
 import { Indicator } from "@shared/ui";
 import { CORNER_RADIUS, BANNER_HEIGHT, HORIZONTAL_PADDING } from "./constants/constants";
 import { useHomeBanner } from "./hooks/useHomeBanner";
+import { BannerImage } from "./BannerImage";
 
 export interface BannerItem {
   id: string;
@@ -20,19 +20,6 @@ export interface BannerItem {
 interface HomeBannerProps {
   items: BannerItem[];
 }
-
-interface BannerImageProps {
-  item: BannerItem;
-  width: number;
-}
-
-const BannerImage = React.memo(({ item, width }: BannerImageProps) => (
-  <Image
-    source={item.image}
-    style={[styles.bannerImage, { width }]}
-    resizeMode="cover"
-  />
-));
 
 export const HomeBanner = React.memo(({ items }: HomeBannerProps) => {
   const { colors } = useTheme();
@@ -100,9 +87,7 @@ const styles = StyleSheet.create({
     borderCurve: "continuous",
     overflow: "hidden",
   },
-  bannerImage: {
-    height: BANNER_HEIGHT,
-  },
+
   indicator: {
     position: "absolute",
     right: 16,

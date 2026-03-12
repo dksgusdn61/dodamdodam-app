@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
 import { TopNavBar, Divider, toast } from "@shared/ui";
@@ -15,6 +16,7 @@ import {
 import { SchoolBus } from "@shared/icons/illustration";
 import { ProfileCard } from "./ui/ProfileCard";
 import { MenuItem } from "./ui/MenuItem";
+import { getRoleLabel } from "./utils/getRoleLabel";
 
 // TODO: 실제 유저 데이터 연동
 const MOCK_USER = {
@@ -25,16 +27,14 @@ const MOCK_USER = {
   number: 6,
 };
 
-const getRoleLabel = (user: typeof MOCK_USER): string => {
-  if (user.role === "student") {
-    return `${user.grade}학년 ${user.classroom}반 ${user.number}번`;
-  }
-  if (user.role === "teacher") return "교사";
-  return "졸업생";
-};
-
 export const MorePage = () => {
   const { colors } = useTheme();
+  const navigation = useNavigation<any>();
+  const openAppInfo = useCallback(
+    (name: string, team: string, description: string) => () =>
+      navigation.navigate("AppInfo", { name, team, description }),
+    [navigation],
+  );
 
   return (
     <SafeAreaView
@@ -65,11 +65,26 @@ export const MorePage = () => {
         <Divider />
 
         <View style={styles.section}>
-          <MenuItem icon={<SchoolBus />} title="귀가 버스 신청하기" appName="버스" />
+          <MenuItem
+            icon={<SchoolBus />}
+            title="귀가 버스 신청하기"
+            appName="버스"
+            onPress={openAppInfo("귀가 버스", "B1ND", "귀가 버스 신청 및 관리 서비스입니다.")}
+          />
           <MenuItem icon={<DoorOpen />} title="외출/외박 확인하기" />
           <MenuItem icon={<Megaphone />} title="기상송 확인하기" />
-          <MenuItem icon={<Note />} title="기상송 신청하기" appName="기상송" />
-          <MenuItem icon={<People />} title="그룹" appName="그룹" />
+          <MenuItem
+            icon={<Note />}
+            title="기상송 신청하기"
+            appName="기상송"
+            onPress={openAppInfo("기상송", "B1ND", "기상송 신청 및 투표 서비스입니다.")}
+          />
+          <MenuItem
+            icon={<People />}
+            title="그룹"
+            appName="그룹"
+            onPress={openAppInfo("그룹", "B1ND", "그룹 생성 및 관리 서비스입니다.")}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -9,22 +9,13 @@ import {
 import { Gesture } from "react-native-gesture-handler";
 import { useHaptic } from "@shared/hooks";
 import { INDICATOR_SIZE, PAN_ACTIVE_OFFSET, TIMING_CONFIG } from "./constants";
+import { calcTargetX } from "./calcTargetX";
 
 interface UseBottomTabBarParams {
   tabCount: number;
   activeIndex: number;
   onTabChange: (index: number) => void;
 }
-
-const calcTargetX = (
-  index: number,
-  barWidth: number,
-  tabCount: number,
-) => {
-  "worklet";
-  const tabW = barWidth / tabCount;
-  return index * tabW + (tabW - INDICATOR_SIZE) / 2;
-};
 
 export const useBottomTabBar = ({
   tabCount,
