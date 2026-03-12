@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, PropsWithChildren } from "react";
+import React, { useCallback, useEffect, useMemo, useState, PropsWithChildren } from "react";
 import { useColorScheme } from "react-native";
 import { lightColors, darkColors } from "@shared/tokens";
 import { ThemeContext } from "./ThemeContext";
@@ -16,6 +16,12 @@ export const ThemeProvider = ({
   const [mode, setMode] = useState<ThemeMode>(
     initialMode ?? (systemScheme === "dark" ? "dark" : "light"),
   );
+
+  useEffect(() => {
+    if (!initialMode && (systemScheme === "light" || systemScheme === "dark")) {
+      setMode(systemScheme);
+    }
+  }, [initialMode, systemScheme]);
 
   const toggleTheme = useCallback(() => {
     setMode((prev) => (prev === "light" ? "dark" : "light"));
