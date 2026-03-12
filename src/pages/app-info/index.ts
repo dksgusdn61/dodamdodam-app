@@ -1,0 +1,1 @@
+export { AppInfoPage } from "./AppInfoPage";
