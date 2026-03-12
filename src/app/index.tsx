@@ -1,9 +1,10 @@
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider } from "@shared/theme";
 import { ToastProvider, OverlayProvider } from "@shared/ui";
-import { ComponentShowcase } from "@pages/component-showcase";
+import { BottomTabNavigator } from "./navigation";
 
 export default function App() {
   return (
@@ -12,7 +13,9 @@ export default function App() {
         <ThemeProvider>
           <OverlayProvider>
             <ToastProvider>
-              <ComponentShowcase />
+              <NavigationContainer>
+                <BottomTabNavigator />
+              </NavigationContainer>
             </ToastProvider>
           </OverlayProvider>
         </ThemeProvider>
