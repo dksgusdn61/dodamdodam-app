@@ -1,17 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback } from "react";
 import {
   FlatList,
   Image,
   StyleSheet,
   View,
-  useWindowDimensions,
   type ImageSourcePropType,
   type ListRenderItemInfo,
-  type ViewabilityConfig,
-  type ViewToken,
 } from "react-native";
 import { useTheme } from "@shared/theme";
 import { Indicator } from "@shared/ui";
+import { CORNER_RADIUS, BANNER_HEIGHT, HORIZONTAL_PADDING } from "./constants/constants";
+import { useHomeBanner } from "./hooks/useHomeBanner";
 
 export interface BannerItem {
   id: string;
@@ -21,16 +20,6 @@ export interface BannerItem {
 interface HomeBannerProps {
   items: BannerItem[];
 }
-
-const CORNER_RADIUS = 20;
-const BANNER_HEIGHT = 56;
-const HORIZONTAL_PADDING = 16;
-const AUTO_SCROLL_INTERVAL = 4000;
-
-
-const viewabilityConfig: ViewabilityConfig = {
-  itemVisiblePercentThreshold: 50,
-};
 
 interface BannerImageProps {
   item: BannerItem;
@@ -45,73 +34,23 @@ const BannerImage = React.memo(({ item, width }: BannerImageProps) => (
   />
 ));
 
-const onScrollBeginDrag = (ref: React.MutableRefObject<boolean>) => () => {
-  ref.current = true;
-};
-
-const onScrollEndDrag = (ref: React.MutableRefObject<boolean>) => () => {
-  ref.current = false;
-};
-
 export const HomeBanner = React.memo(({ items }: HomeBannerProps) => {
   const { colors } = useTheme();
-  const { width: screenWidth } = useWindowDimensions();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const flatListRef = useRef<FlatList<BannerItem>>(null);
-  const isUserScrolling = useRef(false);
-
-  const contentWidth = screenWidth - HORIZONTAL_PADDING * 2;
-
-  useEffect(() => {
-    if (items.length <= 1) return;
-
-    const timer = setInterval(() => {
-      if (isUserScrolling.current) return;
-
-      const nextIndex = (activeIndex + 1) % items.length;
-      flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
-    }, AUTO_SCROLL_INTERVAL);
-
-    return () => clearInterval(timer);
-  }, [activeIndex, items.length]);
-
-  const onViewableItemsChanged = useCallback(
-    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
-      if (viewableItems.length > 0 && viewableItems[0].index != null) {
-        setActiveIndex(viewableItems[0].index);
-      }
-    },
-    [],
-  );
-
-  const viewabilityConfigCallbackPairs = useRef([
-    { viewabilityConfig, onViewableItemsChanged },
-  ]);
+  const {
+    activeIndex,
+    contentWidth,
+    flatListRef,
+    viewabilityConfigCallbackPairs,
+    keyExtractor,
+    handleScrollBeginDrag,
+    handleScrollEndDrag,
+    getItemLayout,
+  } = useHomeBanner(items);
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<BannerItem>) => (
       <BannerImage item={item} width={contentWidth} />
     ),
-    [contentWidth],
-  );
-
-  const keyExtractor = useCallback((item: BannerItem) => item.id, []);
-
-  const handleScrollBeginDrag = useCallback(
-    onScrollBeginDrag(isUserScrolling),
-    [],
-  );
-  const handleScrollEndDrag = useCallback(
-    onScrollEndDrag(isUserScrolling),
-    [],
-  );
-
-  const getItemLayout = useCallback(
-    (_: unknown, index: number) => ({
-      length: contentWidth,
-      offset: contentWidth * index,
-      index,
-    }),
     [contentWidth],
   );
 
