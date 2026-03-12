@@ -11,6 +11,7 @@ import {
   type ViewToken,
 } from "react-native";
 import { useTheme } from "@shared/theme";
+import { Indicator } from "@shared/ui";
 
 export interface BannerItem {
   id: string;
@@ -25,14 +26,34 @@ const CORNER_RADIUS = 20;
 const BANNER_HEIGHT = 56;
 const HORIZONTAL_PADDING = 16;
 const AUTO_SCROLL_INTERVAL = 4000;
-const DOT_SIZE = 6;
-const DOT_GAP = 4;
+
 
 const viewabilityConfig: ViewabilityConfig = {
   itemVisiblePercentThreshold: 50,
 };
 
-export const HomeBanner = ({ items }: HomeBannerProps) => {
+interface BannerImageProps {
+  item: BannerItem;
+  width: number;
+}
+
+const BannerImage = React.memo(({ item, width }: BannerImageProps) => (
+  <Image
+    source={item.image}
+    style={[styles.bannerImage, { width }]}
+    resizeMode="cover"
+  />
+));
+
+const onScrollBeginDrag = (ref: React.MutableRefObject<boolean>) => () => {
+  ref.current = true;
+};
+
+const onScrollEndDrag = (ref: React.MutableRefObject<boolean>) => () => {
+  ref.current = false;
+};
+
+export const HomeBanner = React.memo(({ items }: HomeBannerProps) => {
   const { colors } = useTheme();
   const { width: screenWidth } = useWindowDimensions();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -69,16 +90,30 @@ export const HomeBanner = ({ items }: HomeBannerProps) => {
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<BannerItem>) => (
-      <Image
-        source={item.image}
-        style={[styles.bannerImage, { width: contentWidth }]}
-        resizeMode="cover"
-      />
+      <BannerImage item={item} width={contentWidth} />
     ),
     [contentWidth],
   );
 
   const keyExtractor = useCallback((item: BannerItem) => item.id, []);
+
+  const handleScrollBeginDrag = useCallback(
+    onScrollBeginDrag(isUserScrolling),
+    [],
+  );
+  const handleScrollEndDrag = useCallback(
+    onScrollEndDrag(isUserScrolling),
+    [],
+  );
+
+  const getItemLayout = useCallback(
+    (_: unknown, index: number) => ({
+      length: contentWidth,
+      offset: contentWidth * index,
+      index,
+    }),
+    [contentWidth],
+  );
 
   if (items.length === 0) return null;
 
@@ -95,40 +130,25 @@ export const HomeBanner = ({ items }: HomeBannerProps) => {
           showsHorizontalScrollIndicator={false}
           bounces={false}
           overScrollMode="never"
-          onScrollBeginDrag={() => { isUserScrolling.current = true; }}
-          onScrollEndDrag={() => { isUserScrolling.current = false; }}
+          onScrollBeginDrag={handleScrollBeginDrag}
+          onScrollEndDrag={handleScrollEndDrag}
           style={{ width: contentWidth }}
-          getItemLayout={(_, index) => ({
-            length: contentWidth,
-            offset: contentWidth * index,
-            index,
-          })}
+          getItemLayout={getItemLayout}
           viewabilityConfigCallbackPairs={
             viewabilityConfigCallbackPairs.current
           }
         />
-        {items.length > 1 && (
-          <View style={styles.dotsContainer}>
-            {items.map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.dot,
-                  {
-                    backgroundColor:
-                      index === activeIndex
-                        ? colors.static.white
-                        : colors.static.white + "4D",
-                  },
-                ]}
-              />
-            ))}
-          </View>
-        )}
+        <Indicator
+          current={activeIndex}
+          total={items.length}
+          activeColor={colors.static.white}
+          inactiveColor={colors.static.white + "4D"}
+          style={styles.indicator}
+        />
       </View>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -144,17 +164,9 @@ const styles = StyleSheet.create({
   bannerImage: {
     height: BANNER_HEIGHT,
   },
-  dotsContainer: {
+  indicator: {
     position: "absolute",
     right: 16,
     bottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: DOT_GAP,
-  },
-  dot: {
-    width: DOT_SIZE,
-    height: DOT_SIZE,
-    borderRadius: DOT_SIZE / 2,
   },
 });
