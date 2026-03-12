@@ -8,6 +8,7 @@ export {
 } from "./buttons";
 export { Checkbox } from "./checkbox";
 export { Dialog } from "./dialogs";
+export { Divider } from "./divider";
 export { Dropdown } from "./dropdown";
 export { Indicator, Switcher } from "./indicators";
 export { OverlayProvider, useOverlay } from "./overlay";
