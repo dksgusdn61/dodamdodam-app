@@ -19,7 +19,7 @@ import { MenuItem } from "./ui/MenuItem";
 // TODO: 실제 유저 데이터 연동
 const MOCK_USER = {
   name: "박병춘",
-  role: "teacher" as const,
+  role: "student" as const,
   grade: 3,
   classroom: 4,
   number: 6,
