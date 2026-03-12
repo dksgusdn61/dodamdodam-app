@@ -2038,6 +2038,53 @@ PODS:
     - ReactNativeDependencies
     - RNWorklets
     - Yoga
+  - RNScreens (4.24.0):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-RCTImage
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - RNScreens/common (= 4.24.0)
+    - Yoga
+  - RNScreens/common (4.24.0):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-RCTImage
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - RNSVG (15.15.3):
     - hermes-engine
     - RCTRequired
@@ -2245,6 +2292,7 @@ DEPENDENCIES:
   - "RNDateTimePicker (from `../node_modules/.pnpm/@react-native-community+datetimepicker@8.6.0_expo@55.0.5_react-native@0.83.2_@babel+cor_707c5df44579cebe2bad13fb9c8964b2/node_modules/@react-native-community/datetimepicker`)"
   - "RNGestureHandler (from `../node_modules/.pnpm/react-native-gesture-handler@2.30.0_react-native@0.83.2_@babel+core@7.29.0_@types+react_6b80415f53854bd5d614ad1c2bd3a6a2/node_modules/react-native-gesture-handler`)"
   - "RNReanimated (from `../node_modules/.pnpm/react-native-reanimated@4.2.2_react-native-worklets@0.7.4_@babel+core@7.29.0_react-nati_2f3e03287d118441335888369cb25c68/node_modules/react-native-reanimated`)"
+  - "RNScreens (from `../node_modules/.pnpm/react-native-screens@4.24.0_react-native@0.83.2_@babel+core@7.29.0_@types+react@19.2.14_react@19.2.0__react@19.2.0/node_modules/react-native-screens`)"
   - "RNSVG (from `../node_modules/.pnpm/react-native-svg@15.15.3_react-native@0.83.2_@babel+core@7.29.0_@types+react@19.2.14_react@19.2.0__react@19.2.0/node_modules/react-native-svg`)"
   - "RNWorklets (from `../node_modules/.pnpm/react-native-worklets@0.7.4_@babel+core@7.29.0_react-native@0.83.2_@babel+core@7.29.0_@_1f7d627ad4b1490acf39ba4fd131cbb4/node_modules/react-native-worklets`)"
   - "Yoga (from `../node_modules/.pnpm/react-native@0.83.2_@babel+core@7.29.0_@types+react@19.2.14_react@19.2.0/node_modules/react-native/ReactCommon/yoga`)"
@@ -2425,6 +2473,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/.pnpm/react-native-gesture-handler@2.30.0_react-native@0.83.2_@babel+core@7.29.0_@types+react_6b80415f53854bd5d614ad1c2bd3a6a2/node_modules/react-native-gesture-handler"
   RNReanimated:
     :path: "../node_modules/.pnpm/react-native-reanimated@4.2.2_react-native-worklets@0.7.4_@babel+core@7.29.0_react-nati_2f3e03287d118441335888369cb25c68/node_modules/react-native-reanimated"
+  RNScreens:
+    :path: "../node_modules/.pnpm/react-native-screens@4.24.0_react-native@0.83.2_@babel+core@7.29.0_@types+react@19.2.14_react@19.2.0__react@19.2.0/node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/.pnpm/react-native-svg@15.15.3_react-native@0.83.2_@babel+core@7.29.0_@types+react@19.2.14_react@19.2.0__react@19.2.0/node_modules/react-native-svg"
   RNWorklets:
@@ -2520,6 +2570,7 @@ SPEC CHECKSUMS:
   RNDateTimePicker: 9c0a849bbe1c256f0854fea255734b715f5ea876
   RNGestureHandler: 5494787ce29288a8941fa825663f2b1fa0a5aaf1
   RNReanimated: 345fd9ddd8e2881ae8985cb0b1a3c99603486119
+  RNScreens: 6cb648bdad8fe9bee9259fe144df95b6d1d5b707
   RNSVG: 0bd149b873018bc6e0e3321e2f6435bdba294460
   RNWorklets: b915a1dcf3b7b24cf3a1e0fb24e5e70f23d99dba
   Yoga: dd994d8c85dca5cc9b10f5df8c01f9ef1d0da191

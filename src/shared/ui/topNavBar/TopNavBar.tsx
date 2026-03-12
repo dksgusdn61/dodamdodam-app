@@ -98,7 +98,7 @@ const NavIconButton = memo(
     const { colors } = useTheme();
     const styledIcon = isValidElement<{ color?: string }>(icon)
       ? cloneElement(icon as ReactElement<{ color?: string }>, {
-          color: colors.text.secondary,
+          color: colors.text.tertiary,
         })
       : icon;
 
@@ -116,7 +116,7 @@ const TopNavBarComponent = memo(
       <View
         style={[
           styles.container,
-          { backgroundColor: colors.background.surface },
+          { backgroundColor: colors.background.default },
           customStyle,
         ]}
       >
