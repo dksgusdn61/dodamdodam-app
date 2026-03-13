@@ -30,9 +30,9 @@ const MOCK_USER = {
 export const MorePage = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
-  const openAppInfo = useCallback(
-    (name: string, team: string, description: string) => () =>
-      navigation.navigate("AppInfo", { name, team, description }),
+  const openAppIn = useCallback(
+    (name: string, team: string, subTitle: string, description: string) => () =>
+      navigation.navigate("AppIn", { name, team, subTitle, description }),
     [navigation],
   );
 
@@ -69,7 +69,7 @@ export const MorePage = () => {
             icon={<SchoolBus />}
             title="귀가 버스 신청하기"
             appName="버스"
-            onPress={openAppInfo("귀가 버스", "B1ND", "귀가 버스 신청 및 관리 서비스입니다.")}
+            onPress={openAppIn("귀가 버스", "B1ND", "통학 버스 서비스", "귀가 버스 신청 및 관리 서비스입니다.")}
           />
           <MenuItem icon={<DoorOpen />} title="외출/외박 확인하기" />
           <MenuItem icon={<Megaphone />} title="기상송 확인하기" />
@@ -77,13 +77,13 @@ export const MorePage = () => {
             icon={<Note />}
             title="기상송 신청하기"
             appName="기상송"
-            onPress={openAppInfo("기상송", "B1ND", "기상송 신청 및 투표 서비스입니다.")}
+            onPress={openAppIn("기상송", "B1ND", "기상송 서비스", "기상송 신청 및 투표 서비스입니다.")}
           />
           <MenuItem
             icon={<People />}
             title="그룹"
             appName="그룹"
-            onPress={openAppInfo("그룹", "B1ND", "그룹 생성 및 관리 서비스입니다.")}
+            onPress={openAppIn("그룹", "B1ND", "그룹 서비스", "그룹 생성 및 관리 서비스입니다.")}
           />
         </View>
       </ScrollView>
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
+    flexGrow: 1,
     paddingBottom: 24,
   },
   section: {
