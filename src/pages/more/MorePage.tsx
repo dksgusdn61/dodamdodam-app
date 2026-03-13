@@ -30,6 +30,8 @@ const MOCK_USER = {
 export const MorePage = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
+  const openSettings = useCallback(() => navigation.navigate("Settings"), [navigation]);
+  const openEditProfile = useCallback(() => navigation.navigate("EditProfile"), [navigation]);
   const openAppIn = useCallback(
     (name: string, team: string, subTitle: string, description: string) => () =>
       navigation.navigate("AppIn", { name, team, subTitle, description }),
@@ -42,7 +44,7 @@ export const MorePage = () => {
       edges={["top"]}
     >
       <TopNavBar
-        right={<TopNavBar.IconButton icon={<Gear />} onPress={() => {}} />}
+        right={<TopNavBar.IconButton icon={<Gear />} onPress={openSettings} />}
       >
         <TopNavBar.Title>전체</TopNavBar.Title>
       </TopNavBar>
@@ -54,7 +56,7 @@ export const MorePage = () => {
         <ProfileCard
           name={MOCK_USER.name}
           roleLabel={getRoleLabel(MOCK_USER)}
-          onPress={() => toast("테스트예요")}
+          onPress={openEditProfile}
         />
 
         <View style={styles.section}>
