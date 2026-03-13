@@ -41,14 +41,14 @@ export const AppInInfoPage = () => {
         </View>
         <View style={styles.buttonWrapper}>
           <View style={styles.checkboxRow}>
-            <Text style={[styles.checkboxLabel, { color: colors.text.secondary }]}>
-              다음부턴 보지 않기
-            </Text>
             <Checkbox
               size="small"
               selected={doNotShowAgain}
               onPress={toggleDoNotShowAgain}
             />
+            <Text style={[styles.checkboxLabel, { color: colors.text.tertiary }]}>
+              다음부턴 보지 않기
+            </Text>
           </View>
           <FilledButton display="fill" size="large">서비스 시작하기</FilledButton>
         </View>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   checkboxRow: {
     flexDirection: "row" as const,
     alignItems: "center" as const,
-    justifyContent: "flex-start" as const,
+    justifyContent: "center" as const,
     gap: 4,
     marginBottom: 12,
   },
