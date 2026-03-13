@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Pressable, Text, StyleSheet, type ViewStyle } from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@shared/theme";
@@ -27,11 +27,11 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const getSizeStyles = (size: ButtonSize) => {
   switch (size) {
     case "large":
-      return { paddingHorizontal: 28, minHeight: 48, borderRadius: shapes.medium, typoStyle: typo("Body1", "Medium") };
+      return { paddingHorizontal: 28, height: 48, borderRadius: shapes.medium, typoStyle: typo("Body1", "Medium") };
     case "mideum":
-      return { paddingHorizontal: 20, minHeight: 40, borderRadius: shapes.small, typoStyle: typo("Body2", "Medium") };
+      return { paddingHorizontal: 20, height: 40, borderRadius: shapes.small, typoStyle: typo("Body2", "Medium") };
     case "small":
-      return { paddingHorizontal: 12, minHeight: 32, borderRadius: shapes.extraSmall, typoStyle: typo("Caption2", "Bold") };
+      return { paddingHorizontal: 12, height: 32, borderRadius: shapes.extraSmall, typoStyle: typo("Caption2", "Bold") };
   }
 };
 
@@ -63,9 +63,14 @@ export const FilledButton = ({
   const sizeStyle = getSizeStyles(size);
   const roleStyle = getRoleStyles(role, colors);
 
+  const handlePress = useCallback(() => {
+    if (haptic !== false) triggerHaptic();
+    onPress?.();
+  }, [haptic, triggerHaptic, onPress]);
+
   return (
     <AnimatedPressable
-      onPress={disabled ? undefined : () => { if (haptic !== false) triggerHaptic(); onPress?.(); }}
+      onPress={disabled ? undefined : handlePress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
@@ -73,7 +78,7 @@ export const FilledButton = ({
         styles.container,
         {
           paddingHorizontal: sizeStyle.paddingHorizontal,
-          minHeight: sizeStyle.minHeight,
+          height: sizeStyle.height,
           borderRadius: sizeStyle.borderRadius,
           backgroundColor: roleStyle.bg,
           opacity: disabled ? 0.5 : 1,
@@ -106,11 +111,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   fill: {
-    flex: 1,
-    minWidth: 0,
+    alignSelf: "stretch",
   },
   brightnessOverlay: {
-    ...StyleSheet.absoluteFillObject,
     backgroundColor: "#000",
   },
 });
