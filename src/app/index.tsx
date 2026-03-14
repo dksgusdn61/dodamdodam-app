@@ -4,7 +4,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider } from "@shared/theme";
 import { ToastProvider, OverlayProvider } from "@shared/ui";
-import { BottomTabNavigator } from "./navigation";
+import { RootStackNavigator } from "./navigation";
 
 export default function App() {
   return (
@@ -14,7 +14,7 @@ export default function App() {
           <OverlayProvider>
             <ToastProvider>
               <NavigationContainer>
-                <BottomTabNavigator />
+                <RootStackNavigator />
               </NavigationContainer>
             </ToastProvider>
           </OverlayProvider>

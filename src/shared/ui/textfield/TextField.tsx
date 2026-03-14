@@ -163,6 +163,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     backgroundColor: "transparent",
     paddingRight: 32,
+    paddingVertical: 0,
+    textAlignVertical: "center",
   },
   label: {
     position: "absolute",
