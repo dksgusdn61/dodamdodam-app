@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, Text, Pressable, StyleSheet, type ViewStyle } from "react-native";
+import { View, TextInput, Text, Pressable, StyleSheet, type ViewStyle, type KeyboardTypeOptions } from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
@@ -27,6 +27,7 @@ interface TextFieldComponentProps {
   onRemoveClick?: () => void;
   placeholder?: string;
   onSubmitEditing?: () => void;
+  keyboardType?: KeyboardTypeOptions;
 }
 
 export const TextField = ({
@@ -43,6 +44,7 @@ export const TextField = ({
   onRemoveClick,
   placeholder,
   onSubmitEditing,
+  keyboardType,
 }: TextFieldComponentProps) => {
   const { colors } = useTheme();
   const {
@@ -115,6 +117,7 @@ export const TextField = ({
           placeholder={label ? undefined : placeholder}
           placeholderTextColor={label ? undefined : colors.text.placeholder}
           onSubmitEditing={onSubmitEditing}
+          keyboardType={keyboardType}
         />
         {label ? (
           <Animated.Text
@@ -158,6 +161,7 @@ const styles = StyleSheet.create({
   },
   input: {
     ...typo("Headline", "Medium"),
+    lineHeight: undefined,
     width: "100%",
     height: 45,
     borderBottomWidth: 1.5,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, Pressable, StyleSheet, type ViewStyle } from "react-native";
+import { View, TextInput, Text, Pressable, StyleSheet, type ViewStyle, type KeyboardTypeOptions } from "react-native";
 import { useTheme } from "@shared/theme";
 import { typo, shapes } from "@shared/tokens";
 import {
@@ -30,6 +30,7 @@ interface FilledTextFieldProps {
   customStyle?: ViewStyle;
   onRemoveClick?: () => void;
   placeholder?: string;
+  keyboardType?: KeyboardTypeOptions;
 }
 
 export const FilledTextField = ({
@@ -45,6 +46,7 @@ export const FilledTextField = ({
   customStyle,
   onRemoveClick,
   placeholder,
+  keyboardType,
 }: FilledTextFieldProps) => {
   const { colors } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
@@ -122,6 +124,7 @@ export const FilledTextField = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
+          keyboardType={keyboardType}
           placeholderTextColor={
             disabled
               ? hexToRgba(colors.text.disabled, 0.65)

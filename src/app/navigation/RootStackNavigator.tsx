@@ -9,6 +9,9 @@ import { AppInInfoPage } from "@pages/appIn";
 import { SettingsPage } from "@pages/settings";
 import { EditProfilePage } from "@pages/edit-profile";
 import { NotificationPage } from "@pages/notification";
+import { SelectRolePage } from "@pages/select-role";
+import { EnterNamePage } from "@pages/enter-name";
+import { CreateAccountPage } from "@pages/create-account";
 
 const Stack = createStackNavigator();
 
@@ -36,5 +39,8 @@ export const RootStackNavigator = () => (
     <Stack.Screen name="Settings" component={SettingsPage} />
     <Stack.Screen name="EditProfile" component={EditProfilePage} />
     <Stack.Screen name="Notification" component={NotificationPage} />
+    <Stack.Screen name="SelectRole" component={SelectRolePage} />
+    <Stack.Screen name="EnterName" component={EnterNamePage} />
+    <Stack.Screen name="CreateAccount" component={CreateAccountPage} />
   </Stack.Navigator>
 );

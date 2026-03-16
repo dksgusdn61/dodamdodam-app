@@ -14,5 +14,7 @@ export { Schedule } from "./Schedule";
 export { School } from "./School";
 export { SchoolBus } from "./SchoolBus";
 export { Smile } from "./Smile";
+export { Student } from "./Student";
+export { Teacher } from "./Teacher";
 export { Tent } from "./Tent";
 export { Trophy } from "./Trophy";
