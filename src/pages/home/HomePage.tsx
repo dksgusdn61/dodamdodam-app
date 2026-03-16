@@ -46,7 +46,7 @@ export const HomePage = () => {
       edges={["top"]}
     >
       <TopNavBar
-        right={<TopNavBar.IconButton icon={<Bell />} onPress={() => {}} />}
+        right={<TopNavBar.IconButton icon={<Bell />} onPress={() => navigation.navigate("Notification")} />}
       >
         <TopNavBar.Logo />
       </TopNavBar>

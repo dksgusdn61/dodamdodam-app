@@ -1,5 +1,6 @@
 export { Avatar } from "./avatar";
 export { Badge, Dot } from "./badges";
+export { BottomSheet, type BottomSheetRef } from "./bottomSheet";
 export {
   FilledButton,
   TextButton,
@@ -19,4 +20,5 @@ export { Tab } from "./tab";
 export { Tag } from "./tag";
 export { TextField, FilledTextField } from "./textfield";
 export { ToastProvider, ToastItem, useToast, toast } from "./toast";
+export { TextAreaProvider } from "./textAreaProvider";
 export { TopNavBar, AppLogo } from "./topNavBar";

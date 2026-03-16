@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { typo } from "@shared/tokens";
-import { FilledButton } from "@shared/ui";
+import { FilledButton, type BottomSheetRef } from "@shared/ui";
 import { AppLogo } from "@shared/ui/topNavBar/AppLogo";
 import { useTheme } from "@shared/theme";
 import { AgreementBottomSheet } from "@widgets/agreement-bottom-sheet";
@@ -14,19 +14,16 @@ const APP_LOGO_HEIGHT = 50;
 export const LoginPage = () => {
 	const { colors } = useTheme();
 	const navigation = useNavigation<any>();
-	const [sheetVisible, setSheetVisible] = useState(false);
+	const sheetRef = useRef<BottomSheetRef>(null);
 
 	const handleSignUp = useCallback(() => {
-		setSheetVisible(true);
-	}, []);
-
-	const handleSheetClose = useCallback(() => {
-		setSheetVisible(false);
+		sheetRef.current?.open();
 	}, []);
 
 	const handleAgree = useCallback(() => {
-		// TODO: navigate to sign-up form
-	}, []);
+		sheetRef.current?.close();
+		navigation.navigate("SelectRole");
+	}, [navigation]);
 
 	return (
 		<ImageBackground
@@ -61,11 +58,7 @@ export const LoginPage = () => {
 					</View>
 				</View>
 			</SafeAreaView>
-			<AgreementBottomSheet
-				visible={sheetVisible}
-				onClose={handleSheetClose}
-				onAgree={handleAgree}
-			/>
+			<AgreementBottomSheet ref={sheetRef} onAgree={handleAgree} />
 		</ImageBackground>
 	);
 };

@@ -61,7 +61,7 @@ export const MorePage = () => {
 
         <View style={styles.section}>
           <MenuItem icon={<Chart />} title="내 상벌점 보기" />
-          <MenuItem icon={<File />} title="내 학생코드 보기" />
+          <MenuItem icon={<File />} title="내 학생코드 보기" onPress={() => navigation.navigate("Login")} />
         </View>
 
         <Divider />

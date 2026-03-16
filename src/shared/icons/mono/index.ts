@@ -18,6 +18,7 @@ export { Clock } from "./Clock";
 export { Close } from "./Close";
 export { Crown } from "./Crown";
 export { DoorOpen } from "./DoorOpen";
+export { Ellipsis } from "./Ellipsis";
 export { ExclamationmarkCircle } from "./ExclamationmarkCircle";
 export { Eye } from "./Eye";
 export { EyeSlash } from "./EyeSlash";

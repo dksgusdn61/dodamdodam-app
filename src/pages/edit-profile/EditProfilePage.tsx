@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from "react";
-import { Keyboard, Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { FilledButton, TextField, TopNavBar, toast } from "@shared/ui";
+import { FilledButton, TextField, TopNavBar, toast, TextAreaProvider } from "@shared/ui";
 import { ProfileAvatar } from "./ui/ProfileAvatar";
 
 // TODO: 실제 유저 데이터 연동
@@ -39,7 +39,7 @@ export const EditProfilePage = () => {
       <TopNavBar left={<TopNavBar.BackButton onPress={goBack} />}>
         <TopNavBar.Title hasBackButton>정보 수정</TopNavBar.Title>
       </TopNavBar>
-      <Pressable style={styles.content} onPress={Keyboard.dismiss}>
+      <TextAreaProvider style={styles.content}>
         <View>
           <ProfileAvatar onPress={() => toast("프로필 사진 변경")} />
           <View style={styles.fields}>
@@ -61,7 +61,7 @@ export const EditProfilePage = () => {
             수정 완료
           </FilledButton>
         </View>
-      </Pressable>
+      </TextAreaProvider>
     </SafeAreaView>
   );
 };

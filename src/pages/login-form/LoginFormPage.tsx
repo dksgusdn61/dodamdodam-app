@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
-import { TopNavBar, TextField, FilledButton, Dialog, useOverlay } from "@shared/ui";
+import { TopNavBar, TextField, FilledButton, Dialog, useOverlay, TextAreaProvider } from "@shared/ui";
 import { TextButton } from "@shared/ui/buttons";
 
 export const LoginFormPage = () => {
@@ -47,7 +47,7 @@ export const LoginFormPage = () => {
       >
         <TopNavBar left={<TopNavBar.BackButton onPress={handleBack} />} />
 
-        <View style={styles.content}>
+        <TextAreaProvider style={styles.content}>
           <Text
             style={[
               typo("Title3", "Bold"),
@@ -98,7 +98,7 @@ export const LoginFormPage = () => {
           >
             로그인
           </FilledButton>
-        </View>
+        </TextAreaProvider>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: 16,
   },
   title: {
     marginTop: 12,
