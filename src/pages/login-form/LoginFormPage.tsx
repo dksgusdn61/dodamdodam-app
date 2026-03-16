@@ -1,36 +1,50 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import { View, Text, Pressable, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import { CommonActions, useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
 import { TopNavBar, TextField, FilledButton, Dialog, useOverlay, TextAreaProvider } from "@shared/ui";
 import { TextButton } from "@shared/ui/buttons";
+import { useLogin } from "@features/auth/login";
 
 export const LoginFormPage = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const overlay = useOverlay();
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    username,
+    password,
+    loading,
+    error,
+    setUsername,
+    setPassword,
+    handleLogin,
+  } = useLogin();
 
-  const handleLogin = useCallback(() => {
-    overlay.open(({ isOpen, close, exit, setDimClickHandler }) => (
-      <Dialog
-        open={isOpen}
-        title="승인되지 않은 유저예요."
-        description={"아직 계정이 승인되지 않았어요.\n승인을 기다려주세요."}
-        closeOnDimmerClick
-        onClose={close}
-        onExited={exit}
-        setDimClickHandler={setDimClickHandler}
-      >
-        <TextButton size="large" onPress={close}>
-          닫기
-        </TextButton>
-      </Dialog>
-    ));
-  }, [overlay]);
+  const onLoginPress = useCallback(async () => {
+    const errorMessage = await handleLogin();
+    if (!errorMessage) {
+      navigation.dispatch(
+        CommonActions.reset({ index: 0, routes: [{ name: "Main" }] }),
+      );
+    } else {
+      overlay.open(({ isOpen, close, exit, setDimClickHandler }) => (
+        <Dialog
+          open={isOpen}
+          title={errorMessage}
+          closeOnDimmerClick
+          onClose={close}
+          onExited={exit}
+          setDimClickHandler={setDimClickHandler}
+        >
+          <TextButton size="large" onPress={close}>
+            닫기
+          </TextButton>
+        </Dialog>
+      ));
+    }
+  }, [handleLogin, navigation, overlay]);
 
   const handleBack = useCallback(() => {
     navigation.goBack();
@@ -62,8 +76,8 @@ export const LoginFormPage = () => {
             <TextField
               type="text"
               label="아이디"
-              value={id}
-              onChangeText={setId}
+              value={username}
+              onChangeText={setUsername}
             />
 
             <TextField
@@ -94,7 +108,9 @@ export const LoginFormPage = () => {
           <FilledButton
             size="large"
             display="fill"
-            onPress={handleLogin}
+            disabled={username.trim().length < 5 || !password.trim()}
+            isLoading={loading}
+            onPress={onLoginPress}
           >
             로그인
           </FilledButton>

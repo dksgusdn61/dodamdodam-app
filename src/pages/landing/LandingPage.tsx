@@ -5,6 +5,7 @@ import { CommonActions, useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { AppLogo } from "@shared/ui/topNavBar/AppLogo";
 import { B1NDLogo } from "@shared/icons/logo";
+import { tokenStorage } from "@entities/api/common";
 
 const SPLASH_DURATION = 2000;
 const APP_LOGO_WIDTH = 176;
@@ -16,9 +17,13 @@ export const LandingPage = () => {
   const { bottom } = useSafeAreaInsets();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setTimeout(async () => {
+      const token = await tokenStorage.getAccessToken();
       navigation.dispatch(
-        CommonActions.reset({ index: 0, routes: [{ name: "Main" }] }),
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: token ? "Main" : "Login" }],
+        }),
       );
     }, SPLASH_DURATION);
 

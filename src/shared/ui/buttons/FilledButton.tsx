@@ -16,6 +16,7 @@ interface FilledButtonProps {
   size?: ButtonSize;
   display?: ButtonDisplay;
   disabled?: boolean;
+  isLoading?: boolean;
   haptic?: HapticType | false;
   onPress?: () => void;
   buttonCustomStyle?: ViewStyle;
@@ -51,14 +52,16 @@ export const FilledButton = ({
   size = "mideum",
   display = "inline",
   disabled = false,
+  isLoading = false,
   haptic = "light",
   onPress,
   buttonCustomStyle = {},
   children,
 }: FilledButtonProps) => {
   const { colors } = useTheme();
+  const isDisabled = disabled || isLoading;
   const { animatedStyle, brightnessOverlayStyle, handlePressIn, handlePressOut } =
-    usePressAnimation({ disabled });
+    usePressAnimation({ disabled: isDisabled });
   const triggerHaptic = useHaptic(haptic || "light");
   const sizeStyle = getSizeStyles(size);
   const roleStyle = getRoleStyles(role, colors);
@@ -70,10 +73,10 @@ export const FilledButton = ({
 
   return (
     <AnimatedPressable
-      onPress={disabled ? undefined : handlePress}
+      onPress={isDisabled ? undefined : handlePress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      disabled={disabled}
+      disabled={isDisabled}
       style={[
         styles.container,
         {
@@ -81,7 +84,7 @@ export const FilledButton = ({
           height: sizeStyle.height,
           borderRadius: sizeStyle.borderRadius,
           backgroundColor: roleStyle.bg,
-          opacity: disabled ? 0.5 : 1,
+          opacity: isDisabled ? 0.5 : 1,
         },
         display === "fill" ? styles.fill : undefined,
         animatedStyle,
@@ -97,7 +100,7 @@ export const FilledButton = ({
         pointerEvents="none"
       />
       <Text style={[sizeStyle.typoStyle, { color: roleStyle.color }]}>
-        {children}
+        {isLoading ? "···" : children}
       </Text>
     </AnimatedPressable>
   );
