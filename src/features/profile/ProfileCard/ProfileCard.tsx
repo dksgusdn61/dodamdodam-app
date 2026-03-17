@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { Image, Pressable, Text, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@shared/theme";
 import { usePressAnimation } from "@shared/hooks";
 import { Avatar } from "@shared/ui";
 import { B1NDLogo } from "@shared/icons/logo";
-import { useProfileSuspense } from "../useProfile";
+import { useProfileSuspense } from "./hooks/useProfile";
 import { styles } from "./styles";
 
 interface ProfileCardProps {
@@ -18,8 +18,11 @@ export const ProfileCardComponent = ({ onPress }: ProfileCardProps) => {
   const { animatedStyle, handlePressIn, handlePressOut } =
     usePressAnimation({ scale: 0.97 });
 
-  const isAdmin = user.roles.includes("ADMIN");
-  const isStudent = user.roles.includes("STUDENT");
+  const [imgError, setImgError] = useState(false);
+  const onImageError = useCallback(() => setImgError(true), []);
+
+  const isAdmin = user.roles?.includes("ADMIN") ?? false;
+  const isStudent = user.roles?.includes("STUDENT") ?? false;
 
   const roleLabel = isStudent && user.student
     ? `${user.student.grade}학년 ${user.student.room}반 ${user.student.number}번`
@@ -32,8 +35,8 @@ export const ProfileCardComponent = ({ onPress }: ProfileCardProps) => {
       onPressOut={handlePressOut}
     >
       <Animated.View style={[styles.container, animatedStyle]}>
-        {user.profileImage ? (
-          <Image source={{ uri: user.profileImage }} style={styles.profileImage} />
+        {user.profileImage && !imgError ? (
+          <Image source={{ uri: user.profileImage }} style={styles.profileImage} onError={onImageError} />
         ) : (
           <Avatar size={64} />
         )}
