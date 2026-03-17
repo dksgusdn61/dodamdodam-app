@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { Suspense, useCallback } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,18 +14,8 @@ import {
   People,
 } from "@shared/icons/mono";
 import { SchoolBus } from "@shared/icons/illustration";
-import { ProfileCard } from "./ui/ProfileCard";
+import { ProfileCard } from "@features/profile";
 import { MenuItem } from "./ui/MenuItem";
-import { getRoleLabel } from "./utils/getRoleLabel";
-
-// TODO: 실제 유저 데이터 연동
-const MOCK_USER = {
-  name: "박병춘",
-  role: "student" as const,
-  grade: 3,
-  classroom: 4,
-  number: 6,
-};
 
 export const MorePage = () => {
   const { colors } = useTheme();
@@ -53,11 +43,9 @@ export const MorePage = () => {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <ProfileCard
-          name={MOCK_USER.name}
-          roleLabel={getRoleLabel(MOCK_USER)}
-          onPress={openEditProfile}
-        />
+        <Suspense fallback={<ProfileCard.Skeleton />}>
+          <ProfileCard onPress={openEditProfile} />
+        </Suspense>
 
         <View style={styles.section}>
           <MenuItem icon={<Chart />} title="내 상벌점 보기" />

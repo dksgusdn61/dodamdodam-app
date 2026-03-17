@@ -20,5 +20,6 @@ export { Tab } from "./tab";
 export { Tag } from "./tag";
 export { TextField, FilledTextField } from "./textfield";
 export { ToastProvider, ToastItem, useToast, toast } from "./toast";
+export { Skeleton } from "./skeleton";
 export { TextAreaProvider } from "./textAreaProvider";
 export { TopNavBar, AppLogo } from "./topNavBar";
