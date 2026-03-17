@@ -23,3 +23,9 @@ export interface User {
   teacher: TeacherInfo | null;
   createdAt: string;
 }
+
+export interface UpdateUserRequest {
+  name: string | null;
+  phone: string | null;
+  profileImage: string | null;
+}
