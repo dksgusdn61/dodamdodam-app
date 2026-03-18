@@ -1,2 +1,2 @@
-export { basicApiHandler } from "./basicApiHandler";
+export { basicApiHandler, setSessionExpiredHandler } from "./basicApiHandler";
 export { tokenStorage } from "./tokenStorage";

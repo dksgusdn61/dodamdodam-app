@@ -4,6 +4,12 @@ import { tokenStorage } from "./tokenStorage";
 
 const BASE_URL = env.API_BASE_URL;
 
+let onSessionExpired: (() => void) | null = null;
+
+export const setSessionExpiredHandler = (handler: () => void) => {
+  onSessionExpired = handler;
+};
+
 export const basicApiHandler = axios.create({
   baseURL: BASE_URL,
   timeout: 10000,
@@ -32,6 +38,11 @@ const processQueue = (error: unknown) => {
   failedQueue = [];
 };
 
+const handleSessionExpired = async () => {
+  await tokenStorage.clear();
+  onSessionExpired?.();
+};
+
 basicApiHandler.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
@@ -46,12 +57,18 @@ basicApiHandler.interceptors.response.use(
       }).then(() => basicApiHandler(originalRequest));
     }
 
+    if ((originalRequest as any)._retry) {
+      await handleSessionExpired();
+      return Promise.reject(error);
+    }
+    (originalRequest as any)._retry = true;
+
     isRefreshing = true;
 
     try {
       const refreshToken = await tokenStorage.getRefreshToken();
       if (!refreshToken) {
-        await tokenStorage.clear();
+        await handleSessionExpired();
         return Promise.reject(error);
       }
 
@@ -68,7 +85,7 @@ basicApiHandler.interceptors.response.use(
       return basicApiHandler(originalRequest);
     } catch (refreshError) {
       processQueue(refreshError);
-      await tokenStorage.clear();
+      await handleSessionExpired();
       return Promise.reject(refreshError);
     } finally {
       isRefreshing = false;
