@@ -14,3 +14,4 @@ export {
 } from "./animations";
 export { useHaptic } from "./useHaptic";
 export type { HapticType } from "./useHaptic";
+export { useInfiniteScroll } from "./useInfiniteScroll";

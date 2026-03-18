@@ -3,30 +3,20 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { TopNavBar, Divider, toast } from "@shared/ui";
-import {
-  Gear,
-  Chart,
-  File,
-  DoorOpen,
-  Megaphone,
-  Note,
-  People,
-} from "@shared/icons/mono";
-import { SchoolBus } from "@shared/icons/illustration";
+import { useInfiniteScroll } from "@shared/hooks";
+import { TopNavBar } from "@shared/ui";
+import { Gear, Chart, File } from "@shared/icons/mono";
 import { ProfileCard } from "@features/profile";
+import { InAppList } from "@features/inapp";
 import { MenuItem } from "./ui/MenuItem";
 
 export const MorePage = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
+  const { onScroll, onEndReachedRef } = useInfiniteScroll();
+
   const openSettings = useCallback(() => navigation.navigate("Settings"), [navigation]);
   const openEditProfile = useCallback(() => navigation.navigate("EditProfile"), [navigation]);
-  const openAppIn = useCallback(
-    (name: string, team: string, subTitle: string, description: string) => () =>
-      navigation.navigate("AppIn", { name, team, subTitle, description }),
-    [navigation],
-  );
 
   return (
     <SafeAreaView
@@ -42,6 +32,8 @@ export const MorePage = () => {
         style={styles.scroll}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        onScroll={onScroll}
+        scrollEventThrottle={200}
       >
         <Suspense fallback={<ProfileCard.Skeleton />}>
           <ProfileCard onPress={openEditProfile} />
@@ -52,30 +44,9 @@ export const MorePage = () => {
           <MenuItem icon={<File />} title="내 학생코드 보기" />
         </View>
 
-        <Divider />
-
-        <View style={styles.section}>
-          <MenuItem
-            icon={<SchoolBus />}
-            title="귀가 버스 신청하기"
-            appName="버스"
-            onPress={openAppIn("귀가 버스", "B1ND", "통학 버스 서비스", "귀가 버스 신청 및 관리 서비스입니다.")}
-          />
-          <MenuItem icon={<DoorOpen />} title="외출/외박 확인하기" />
-          <MenuItem icon={<Megaphone />} title="기상송 확인하기" />
-          <MenuItem
-            icon={<Note />}
-            title="기상송 신청하기"
-            appName="기상송"
-            onPress={openAppIn("기상송", "B1ND", "기상송 서비스", "기상송 신청 및 투표 서비스입니다.")}
-          />
-          <MenuItem
-            icon={<People />}
-            title="그룹"
-            appName="그룹"
-            onPress={openAppIn("그룹", "B1ND", "그룹 서비스", "그룹 생성 및 관리 서비스입니다.")}
-          />
-        </View>
+        <Suspense fallback={<InAppList.Skeleton />}>
+          <InAppList onEndReachedRef={onEndReachedRef} />
+        </Suspense>
       </ScrollView>
     </SafeAreaView>
   );

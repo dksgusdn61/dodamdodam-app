@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, useColorScheme } from "react-native";
 import { useNavigation, useRoute, type RouteProp } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
@@ -7,31 +7,38 @@ import { typo } from "@shared/tokens";
 import { Checkbox, FilledButton, TopNavBar } from "@shared/ui";
 
 export interface AppInParams {
+  appId: string;
   name: string;
   team: string;
   subTitle: string;
   description: string;
+  iconUrl: string;
+  darkIconUrl: string | null;
+  appUrl: string;
 }
 
 type AppInRouteProp = RouteProp<{ AppIn: AppInParams }, "AppIn">;
 
 export const AppInInfoPage = () => {
   const { colors } = useTheme();
+  const colorScheme = useColorScheme();
   const navigation = useNavigation();
   const { params } = useRoute<AppInRouteProp>();
   const [doNotShowAgain, setDoNotShowAgain] = useState(true);
   const toggleDoNotShowAgain = useCallback(() => setDoNotShowAgain((prev) => !prev), []);
+
+  const isDark = colorScheme === "dark";
+  const iconUri = isDark && params.darkIconUrl ? params.darkIconUrl : params.iconUrl;
 
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
       edges={["top", "bottom"]}
     >
-      <TopNavBar left={<TopNavBar.BackButton onPress={() => navigation.goBack()} />}>
-      </TopNavBar>
+      <TopNavBar left={<TopNavBar.BackButton onPress={() => navigation.goBack()} />} />
       <View style={styles.content}>
         <View>
-          <View style={[styles.iconPlaceholder, { backgroundColor: colors.fill.secondary }]} />
+          <Image source={{ uri: iconUri }} style={styles.appIcon} />
           <Text style={[styles.appName, { color: colors.text.primary }]}>{params.name}</Text>
           <Text style={[styles.teamName, { color: colors.brand.primary }]}>{params.team}</Text>
           <Text style={[styles.subTitle, { color: colors.text.primary }]}>{params.subTitle}</Text>
@@ -80,11 +87,10 @@ const styles = StyleSheet.create({
   checkboxLabel: {
     ...typo("Label", "Regular"),
   },
-  iconPlaceholder: {
+  appIcon: {
     width: 84,
     height: 84,
     borderRadius: 16,
-    borderCurve: "continuous" as const,
     marginBottom: 16,
   },
   appName: {
