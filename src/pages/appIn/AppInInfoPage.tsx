@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
 import { Checkbox, FilledButton, TopNavBar } from "@shared/ui";
+import { skipStorage } from "@entities/inapp/storage/skipStorage";
 
 export interface AppInParams {
   appId: string;
@@ -57,7 +58,15 @@ export const AppInInfoPage = () => {
               다음부턴 보지 않기
             </Text>
           </View>
-          <FilledButton display="fill" size="large">서비스 시작하기</FilledButton>
+          <FilledButton display="fill" size="large" onPress={async () => {
+            if (doNotShowAgain) {
+              await skipStorage.addSkippedId(params.appId);
+            }
+            (navigation as any).replace("AppWebView", {
+              appUrl: params.appUrl,
+              name: params.name,
+            });
+          }}>서비스 시작하기</FilledButton>
         </View>
       </View>
     </SafeAreaView>
