@@ -54,7 +54,8 @@ export const Skeleton = ({ width, height, radius = 8, style }: SkeletonProps) =>
           styles.shimmer,
           {
             height,
-            backgroundColor: colors.fill.secondary,
+            backgroundColor: colors.fill.primary,
+          opacity: 0.75,
           },
           shimmerStyle,
         ]}

@@ -30,10 +30,10 @@ const MOCK_MENUS = {
 export const MealPage = () => {
   const { colors } = useTheme();
   const calendar = useCalendar();
-  const scrollY = useSharedValue(0);
-
   const rowCount = Math.ceil(calendar.monthDates.length / 7);
   const collapsibleHeight = (rowCount - 1) * ROW_HEIGHT;
+
+  const scrollY = useSharedValue(collapsibleHeight);
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (e) => {
