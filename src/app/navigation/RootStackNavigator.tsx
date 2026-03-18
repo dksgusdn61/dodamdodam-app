@@ -12,6 +12,7 @@ import { NotificationPage } from "@pages/notification";
 import { SelectRolePage } from "@pages/select-role";
 import { EnterNamePage } from "@pages/enter-name";
 import { CreateAccountPage } from "@pages/create-account";
+import { AppWebViewPage } from "@pages/app-webview";
 
 const Stack = createStackNavigator();
 
@@ -42,5 +43,10 @@ export const RootStackNavigator = () => (
     <Stack.Screen name="SelectRole" component={SelectRolePage} />
     <Stack.Screen name="EnterName" component={EnterNamePage} />
     <Stack.Screen name="CreateAccount" component={CreateAccountPage} />
+    <Stack.Screen
+      name="AppWebView"
+      component={AppWebViewPage}
+      options={{ gestureEnabled: false }}
+    />
   </Stack.Navigator>
 );
