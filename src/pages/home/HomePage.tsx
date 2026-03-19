@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { Suspense, useCallback } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,7 +6,7 @@ import { useTheme } from "@shared/theme";
 import { TopNavBar } from "@shared/ui";
 import { Bell } from "@shared/icons/mono";
 import { HomeBanner, type BannerItem } from "@widgets/home-banner";
-import { HomeMealWidget, type MealData } from "@widgets/home-meal";
+import { HomeMealCard } from "@features/meal";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bannerImage = require("../../../banner.png");
@@ -15,24 +15,6 @@ const MOCK_BANNERS: BannerItem[] = [
   { id: "1", image: bannerImage },
   { id: "2", image: bannerImage },
   { id: "3", image: bannerImage },
-];
-
-const MOCK_MEALS: MealData[] = [
-  {
-    id: "breakfast",
-    label: "조식",
-    menus: ["쇠고기우엉볶음밥", "계란실파국", "오이생채", "배추김치"],
-  },
-  {
-    id: "lunch",
-    label: "중식",
-    menus: ["불고기치즈파니니", "미소된장국", "감자고로케", "깍두기", "요구르트"],
-  },
-  {
-    id: "dinner",
-    label: "석식",
-    menus: ["돈까스카레라이스", "유부장국", "콘샐러드", "배추김치"],
-  },
 ];
 
 export const HomePage = () => {
@@ -56,7 +38,9 @@ export const HomePage = () => {
         showsVerticalScrollIndicator={false}
       >
         <HomeBanner items={MOCK_BANNERS} />
-        <HomeMealWidget meals={MOCK_MEALS} onPress={navigateToMeal} />
+        <Suspense fallback={<HomeMealCard.Skeleton />}>
+          <HomeMealCard onPress={navigateToMeal} />
+        </Suspense>
       </ScrollView>
     </SafeAreaView>
   );

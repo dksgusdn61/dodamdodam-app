@@ -22,5 +22,6 @@ export { Tag } from "./tag";
 export { TextField, FilledTextField } from "./textfield";
 export { ToastProvider, ToastItem, useToast, toast } from "./toast";
 export { Skeleton } from "./skeleton";
+export { EmptyState } from "./emptyState";
 export { TextAreaProvider } from "./textAreaProvider";
 export { TopNavBar, AppLogo } from "./topNavBar";
