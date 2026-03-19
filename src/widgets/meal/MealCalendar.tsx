@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo } from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
 import Animated, {
   type SharedValue,
   useAnimatedStyle,
@@ -24,6 +24,10 @@ const INDICATOR_SIZE = 40;
 const headerTypo = typo("Caption1", "Medium");
 const dayTypo = typo("Headline", "Medium");
 
+// dayHeaders (lineHeight + padding + marginBottom) + divider (marginTop + height)
+const CALENDAR_NON_GRID_HEIGHT =
+  (headerTypo.lineHeight ?? 17) + 16 + 4 + 8 + 1;
+
 export const MealCalendar = memo(({ calendar, scrollY }: MealCalendarProps) => {
   const { colors } = useTheme();
   const { days, monthDates, selectDate, selectedDay, selectedWeekRowIndex } = calendar;
@@ -33,27 +37,28 @@ export const MealCalendar = memo(({ calendar, scrollY }: MealCalendarProps) => {
   const collapsible = monthHeight - ROW_HEIGHT;
   const weekOffset = selectedWeekRowIndex * ROW_HEIGHT;
 
-  const containerStyle = useAnimatedStyle(() => ({
-    height: interpolate(
-      scrollY.value,
-      [0, collapsible],
-      [monthHeight, ROW_HEIGHT],
-      Extrapolation.CLAMP,
-    ),
-  }));
+  // iOS: translateY trick to keep calendar pinned while inside ScrollView
+  const stickyStyle = useAnimatedStyle(() => {
+    if (Platform.OS !== "ios") return {};
+    return {
+      transform: [{ translateY: scrollY.value }],
+      zIndex: 1,
+    };
+  });
 
-  const gridStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateY: interpolate(
-          scrollY.value,
-          [0, collapsible],
-          [0, -weekOffset],
-          Extrapolation.CLAMP,
-        ),
-      },
-    ],
-  }));
+  const collapseStyle = useAnimatedStyle(() => {
+    const y = scrollY.value;
+    return {
+      height: interpolate(y, [0, collapsible], [monthHeight, ROW_HEIGHT], Extrapolation.CLAMP),
+    };
+  });
+
+  const gridStyle = useAnimatedStyle(() => {
+    const y = scrollY.value;
+    return {
+      transform: [{ translateY: interpolate(y, [0, collapsible], [0, -weekOffset], Extrapolation.CLAMP) }],
+    };
+  });
 
   const rows = useMemo(() => {
     const result: (number | null)[][] = [];
@@ -63,10 +68,15 @@ export const MealCalendar = memo(({ calendar, scrollY }: MealCalendarProps) => {
     return result;
   }, [monthDates]);
 
+  const isAndroid = Platform.OS === "android";
+
   return (
-    <View style={{ backgroundColor: colors.background.default }}>
-      <View style={styles.container}>
-        <View style={styles.dayHeaders}>
+    <Animated.View
+      style={[{ backgroundColor: colors.background.default }, stickyStyle]}
+      pointerEvents={isAndroid ? "box-none" : "auto"}
+    >
+      <View style={styles.container} pointerEvents={isAndroid ? "box-none" : "auto"}>
+        <View style={styles.dayHeaders} pointerEvents={isAndroid ? "box-none" : "auto"}>
           {days.map((d) => (
             <View key={d} style={styles.headerCell}>
               <Text style={[headerTypo, { color: colors.text.tertiary }]}>{d}</Text>
@@ -74,10 +84,17 @@ export const MealCalendar = memo(({ calendar, scrollY }: MealCalendarProps) => {
           ))}
         </View>
 
-        <Animated.View style={[styles.gridClip, containerStyle]}>
-          <Animated.View style={gridStyle}>
+        <Animated.View
+          style={[styles.gridClip, collapseStyle]}
+          pointerEvents={isAndroid ? "box-none" : "auto"}
+        >
+          <Animated.View style={gridStyle} pointerEvents={isAndroid ? "box-none" : "auto"}>
             {rows.map((row, ri) => (
-              <View key={ri} style={styles.weekRow}>
+              <View
+                key={ri}
+                style={styles.weekRow}
+                pointerEvents={isAndroid ? "box-none" : "auto"}
+              >
                 {row.map((day, ci) =>
                   day ? (
                     <DayCell
@@ -89,7 +106,7 @@ export const MealCalendar = memo(({ calendar, scrollY }: MealCalendarProps) => {
                       textColor={colors.text.primary}
                     />
                   ) : (
-                    <View key={ci} style={styles.cell} />
+                    <View key={ci} style={styles.cell} pointerEvents="none" />
                   ),
                 )}
               </View>
@@ -99,13 +116,13 @@ export const MealCalendar = memo(({ calendar, scrollY }: MealCalendarProps) => {
       </View>
 
       <View style={[styles.divider, { backgroundColor: colors.border.normal }]} />
-    </View>
+    </Animated.View>
   );
 });
 
 MealCalendar.displayName = "MealCalendar";
 
-export { ROW_HEIGHT };
+export { ROW_HEIGHT, CALENDAR_NON_GRID_HEIGHT };
 
 interface DayCellProps {
   day: number;
