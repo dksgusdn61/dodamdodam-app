@@ -20,12 +20,17 @@ export const RefreshView = ({ queryKeys, children, ...scrollProps }: RefreshView
     setRefreshing(true);
     Haptics.selectionAsync();
 
-    await new Promise((r) => setTimeout(r, MIN_REFRESH_MS));
+    const delay = new Promise((r) => setTimeout(r, MIN_REFRESH_MS));
 
     if (queryKeys && queryKeys.length > 0) {
-      queryKeys.forEach((key) => queryClient.removeQueries({ queryKey: key }));
+      await Promise.all([
+        delay,
+        ...queryKeys.map((key) =>
+          queryClient.resetQueries({ queryKey: key }),
+        ),
+      ]);
     } else {
-      queryClient.removeQueries();
+      await Promise.all([delay, queryClient.resetQueries()]);
     }
 
     setRefreshing(false);
