@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
-import { Text, View, type LayoutChangeEvent } from "react-native";
+import React, { useMemo } from "react";
+import { Text, View } from "react-native";
 import { useTheme } from "@shared/theme";
 import { Clock } from "@shared/icons/mono";
-import { DAYS, styles, TODAY_COLUMN_MARGIN } from "./styles";
+import { DAYS, styles } from "./styles";
 
 export interface ScheduleData {
   timetable: string[][];
@@ -58,23 +58,6 @@ export const HomeScheduleWidget = React.memo(({ schedule }: HomeScheduleWidgetPr
   const currentPeriodIndex = useMemo(getCurrentPeriodIndex, []);
   const maxPeriods = Math.max(...schedule.timetable.map((col) => col.length), 0);
 
-  const tableRef = useRef<View>(null);
-  const todayCellRef = useRef<View>(null);
-  const [todayLayout, setTodayLayout] = useState<{ x: number; width: number } | null>(null);
-  const [tableHeight, setTableHeight] = useState(0);
-
-  const onTableLayout = useCallback((e: LayoutChangeEvent) => {
-    setTableHeight(e.nativeEvent.layout.height);
-  }, []);
-
-  const onTodayCellLayout = useCallback(() => {
-    if (todayCellRef.current && tableRef.current) {
-      todayCellRef.current.measureLayout(tableRef.current, (x, _y, width) => {
-        setTodayLayout({ x, width });
-      });
-    }
-  }, []);
-
   return (
     <View style={styles.container}>
       <View style={[styles.card, { backgroundColor: colors.background.surface }]}>
@@ -88,41 +71,20 @@ export const HomeScheduleWidget = React.memo(({ schedule }: HomeScheduleWidgetPr
           </Text>
         </View>
 
-        <View
-          ref={tableRef}
-          style={[styles.table, { backgroundColor: colors.fill.primary }]}
-          onLayout={onTableLayout}
-        >
-          {todayIndex >= 0 && todayLayout && tableHeight > 0 && (
-            <View
-              style={[
-                styles.todayColumn,
-                {
-                  backgroundColor: colors.fill.secondary,
-                  left: todayLayout.x + TODAY_COLUMN_MARGIN,
-                  width: todayLayout.width - TODAY_COLUMN_MARGIN * 2,
-                  height: tableHeight - TODAY_COLUMN_MARGIN * 2,
-                  top: TODAY_COLUMN_MARGIN,
-                },
-              ]}
-            />
-          )}
-
+        <View style={[styles.table, { backgroundColor: colors.fill.primary }]}>
           <View style={styles.tableRow}>
             <View style={styles.periodHeaderCell}>
               <Text style={[styles.headerText, { color: colors.text.tertiary }]}>교시</Text>
             </View>
             {DAYS.map((day, i) => (
-              <View
-                key={day}
-                ref={i === todayIndex ? todayCellRef : undefined}
-                onLayout={i === todayIndex ? onTodayCellLayout : undefined}
-                style={styles.headerCell}
-              >
+              <View key={day} style={styles.headerCell}>
                 <Text
                   style={[
                     styles.headerText,
-                    { color: i === todayIndex ? colors.text.primary : colors.text.tertiary },
+                    {
+                      color: i === todayIndex ? colors.text.primary : colors.text.tertiary,
+                      fontWeight: i === todayIndex ? "700" : undefined,
+                    },
                   ]}
                 >
                   {day}
@@ -138,14 +100,21 @@ export const HomeScheduleWidget = React.memo(({ schedule }: HomeScheduleWidgetPr
               </View>
               {DAYS.map((day, col) => {
                 const subject = schedule.timetable[col]?.[row] ?? "-";
-                const isCurrentCell = col === todayIndex && row === currentPeriodIndex;
+                const isToday = col === todayIndex;
+                const isCurrentCell = isToday && row === currentPeriodIndex;
                 return (
                   <View key={day} style={styles.cell}>
                     <Text
                       style={[
                         styles.cellText,
-                        { color: isCurrentCell ? colors.brand.primary : colors.text.primary },
-                        isCurrentCell && styles.cellTextBold,
+                        {
+                          color: isCurrentCell
+                            ? colors.brand.primary
+                            : isToday
+                              ? colors.text.primary
+                              : colors.text.secondary,
+                          fontWeight: isToday ? "700" : undefined,
+                        },
                       ]}
                     >
                       {subject}

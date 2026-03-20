@@ -7,8 +7,6 @@ const HORIZONTAL_PADDING = 16;
 const ICON_CONTAINER_SIZE = 32;
 
 export const DAYS = ["월", "화", "수", "목", "금"] as const;
-export const TODAY_COLUMN_MARGIN = 6;
-export const TODAY_COLUMN_RADIUS = 10;
 
 export const styles = StyleSheet.create({
   container: {
@@ -89,10 +87,5 @@ export const styles = StyleSheet.create({
   },
   cellTextBold: {
     fontWeight: "700",
-  },
-  todayColumn: {
-    position: "absolute",
-    borderRadius: TODAY_COLUMN_RADIUS,
-    borderCurve: "continuous",
   },
 });

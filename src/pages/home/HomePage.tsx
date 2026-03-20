@@ -9,6 +9,7 @@ import { HomeBanner, type BannerItem } from "@features/home/home-banner";
 import { HomeMealCard } from "@features/meal";
 import { HomeScheduleCard } from "@features/schedule";
 import { mealQueryKeys } from "@entities/meal/api/queryKeys";
+import { scheduleQueryKeys } from "@entities/schedule/api/queryKeys";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bannerImage = require("../../../banner.png");
@@ -33,7 +34,10 @@ export const HomePage = () => {
   const navigateToMeal = useCallback(() => navigation.navigate("Meal"), [navigation]);
 
   const today = useMemo(formatToday, []);
-  const queryKeys = useMemo(() => [mealQueryKeys.byDate(today)], [today]);
+  const queryKeys = useMemo(
+    () => [mealQueryKeys.byDate(today), scheduleQueryKeys.me],
+    [today],
+  );
 
   return (
     <SafeAreaView
@@ -55,7 +59,9 @@ export const HomePage = () => {
         <Suspense fallback={<HomeMealCard.Skeleton />}>
           <HomeMealCard onPress={navigateToMeal} />
         </Suspense>
-        <HomeScheduleCard />
+        <Suspense fallback={<HomeScheduleCard.Skeleton />}>
+          <HomeScheduleCard />
+        </Suspense>
       </RefreshView>
     </SafeAreaView>
   );
