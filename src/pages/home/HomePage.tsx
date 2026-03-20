@@ -5,8 +5,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
 import { TopNavBar, RefreshView } from "@shared/ui";
 import { Bell } from "@shared/icons/mono";
-import { HomeBanner, type BannerItem } from "@widgets/home-banner";
+import { HomeBanner, type BannerItem } from "@features/home/home-banner";
 import { HomeMealCard } from "@features/meal";
+import { HomeScheduleCard } from "@features/schedule";
 import { mealQueryKeys } from "@entities/meal/api/queryKeys";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -54,6 +55,7 @@ export const HomePage = () => {
         <Suspense fallback={<HomeMealCard.Skeleton />}>
           <HomeMealCard onPress={navigateToMeal} />
         </Suspense>
+        <HomeScheduleCard />
       </RefreshView>
     </SafeAreaView>
   );

@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { HomeMealWidget, type MealData } from "@widgets/home-meal";
+import { HomeMealWidget, type MealData } from "@features/home/home-meal";
 import { useMealSuspense } from "./useMeal";
 import type { MealType } from "@entities/meal/types";
 
