@@ -23,5 +23,6 @@ export { TextField, FilledTextField } from "./textfield";
 export { ToastProvider, ToastItem, useToast, toast } from "./toast";
 export { Skeleton } from "./skeleton";
 export { EmptyState } from "./emptyState";
+export { RefreshView } from "./refreshView";
 export { TextAreaProvider } from "./textAreaProvider";
 export { TopNavBar, AppLogo } from "./topNavBar";

@@ -4,13 +4,13 @@
   "main": "index.ts",
   "scripts": {
     "start": "expo start --dev-client --clear",
-    "android": "expo run:android",
+    "android": "expo run:android --device",
     "ios": "expo run:ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@b1nd/aid-kit": "^1.0.0",
+    "@b1nd/aid-kit": "^1.0.9",
     "@gorhom/bottom-sheet": "^5.2.8",
     "@react-native-community/datetimepicker": "^8.6.0",
     "@react-navigation/bottom-tabs": "^7.15.5",
