@@ -13,6 +13,7 @@ import { SelectRolePage } from "@pages/select-role";
 import { EnterNamePage } from "@pages/enter-name";
 import { CreateAccountPage } from "@pages/create-account";
 import { AppWebViewPage } from "@pages/app-webview";
+import { OutingApplyPage } from "@pages/outing";
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,7 @@ export const RootStackNavigator = () => (
     <Stack.Screen name="SelectRole" component={SelectRolePage} />
     <Stack.Screen name="EnterName" component={EnterNamePage} />
     <Stack.Screen name="CreateAccount" component={CreateAccountPage} />
+    <Stack.Screen name="OutingApply" component={OutingApplyPage} />
     <Stack.Screen
       name="AppWebView"
       component={AppWebViewPage}
