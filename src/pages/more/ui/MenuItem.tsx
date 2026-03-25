@@ -16,9 +16,31 @@ interface MenuItemProps {
   onPress?: () => void;
 }
 
-const ICON_CONTAINER_SIZE = 40;
+const ICON_BOX = 40;
 const ICON_RADIUS = 12;
 const ICON_SIZE = 22;
+
+const IconBox = ({ icon, iconImage, iconColor, fillColor }: {
+  icon?: React.ReactNode;
+  iconImage?: ImageSourcePropType;
+  iconColor: string;
+  fillColor: string;
+}) => {
+  if (iconImage) {
+    return <Image source={iconImage} style={styles.iconImage} />;
+  }
+
+  return (
+    <SquircleView
+      style={styles.iconBox}
+      squircleParams={{ cornerRadius: ICON_RADIUS, cornerSmoothing: 0.8, fillColor }}
+    >
+      {React.isValidElement<{ size?: number; color?: string }>(icon)
+        ? React.cloneElement(icon, { size: ICON_SIZE, color: iconColor })
+        : icon}
+    </SquircleView>
+  );
+};
 
 export const MenuItem = React.memo(
   ({ icon, iconImage, iconColor, title, appName, onPress }: MenuItemProps) => {
@@ -26,37 +48,19 @@ export const MenuItem = React.memo(
     const { animatedStyle, handlePressIn, handlePressOut } =
       usePressAnimation({ scale: 0.98 });
 
-    const color = iconColor ?? colors.text.secondary;
-
     return (
-      <Pressable
-        onPress={onPress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-      >
+      <Pressable onPress={onPress} onPressIn={handlePressIn} onPressOut={handlePressOut}>
         <Animated.View style={[styles.container, animatedStyle]}>
-          <SquircleView
-            style={styles.iconContainer}
-            squircleParams={{
-              cornerRadius: ICON_RADIUS,
-              cornerSmoothing: 0.8,
-              fillColor: colors.fill.secondary,
-            }}
-          >
-            {iconImage ? (
-              <Image source={iconImage} style={styles.iconImage} />
-            ) : React.isValidElement<{ size?: number; color?: string }>(icon) ? (
-              React.cloneElement(icon, { size: ICON_SIZE, color })
-            ) : icon}
-          </SquircleView>
+          <IconBox
+            icon={icon}
+            iconImage={iconImage}
+            iconColor={iconColor ?? colors.text.secondary}
+            fillColor={colors.fill.secondary}
+          />
           <View style={styles.titleRow}>
-            <Text style={[styles.title, { color: colors.text.primary }]}>
-              {title}
-            </Text>
+            <Text style={[styles.title, { color: colors.text.primary }]}>{title}</Text>
             {appName && (
-              <Text style={[styles.appName, { color: colors.text.tertiary }]}>
-                - {appName}
-              </Text>
+              <Text style={[styles.appName, { color: colors.text.tertiary }]}>- {appName}</Text>
             )}
           </View>
           <ChevronRight size={16} color={colors.text.tertiary} />
@@ -71,19 +75,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 6,
     gap: 12,
   },
-  iconContainer: {
-    width: ICON_CONTAINER_SIZE,
-    height: ICON_CONTAINER_SIZE,
+  iconBox: {
+    width: ICON_BOX,
+    height: ICON_BOX,
     justifyContent: "center",
     alignItems: "center",
   },
   iconImage: {
-    width: ICON_SIZE,
-    height: ICON_SIZE,
-    borderRadius: 4,
+    width: ICON_BOX,
+    height: ICON_BOX,
+    borderRadius: ICON_RADIUS,
   },
   titleRow: {
     flex: 1,

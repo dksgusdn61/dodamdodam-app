@@ -16,6 +16,7 @@ export const BottomTabNavigator = () => {
       tabBar={(props) => <BottomTabBar {...props} />}
       screenOptions={{
         headerShown: false,
+        animation: "none",
       }}
     >
       <Tab.Screen
