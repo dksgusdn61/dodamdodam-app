@@ -7,6 +7,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { ThemeProvider } from "@shared/theme";
 import { ToastProvider, OverlayProvider } from "@shared/ui";
 import { setSessionExpiredHandler } from "@entities/api/common";
+import { setupNotificationNavigation } from "@shared/lib/notification";
 import { RootStackNavigator } from "./navigation";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,8 @@ export default function App() {
         CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),
       );
     });
+
+    setupNotificationNavigation(navigationRef);
   }, []);
 
   return (
