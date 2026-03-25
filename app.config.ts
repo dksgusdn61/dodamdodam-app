@@ -25,7 +25,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     ...config.android,
     package: "com.dodamdodamapp",
-    usesCleartextTraffic: true,
     googleServicesFile: "./google-services.json",
   },
 });
