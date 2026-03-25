@@ -36,5 +36,12 @@ yarn-error.*
 *.tsbuildinfo
 
 .idea
-.env# env config
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
+firebase-service-account.json
+
+.env
+# env config
 src/shared/config/env.ts

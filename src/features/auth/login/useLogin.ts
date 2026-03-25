@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { type AxiosError } from "axios";
 import { authApi } from "@entities/auth/api";
 import { tokenStorage } from "@entities/api/common";
+import { registerPushToken } from "@shared/lib/notification";
 import type { ApiError } from "@shared/types";
 
 interface UseLoginResult {
@@ -29,6 +30,7 @@ export const useLogin = (): UseLoginResult => {
     try {
       const { data } = await authApi.login({ username, password });
       await tokenStorage.setTokens(data.data.access, data.data.refresh);
+      registerPushToken();
       return null;
     } catch (e) {
       const axiosError = e as AxiosError;

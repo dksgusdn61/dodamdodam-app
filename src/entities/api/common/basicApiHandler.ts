@@ -1,6 +1,7 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { env } from "@shared/config";
 import { tokenStorage } from "./tokenStorage";
+import { unregisterPushToken } from "@shared/lib/notification";
 
 const BASE_URL = env.API_BASE_URL;
 
@@ -39,6 +40,7 @@ const processQueue = (error: unknown) => {
 };
 
 const handleSessionExpired = async () => {
+  await unregisterPushToken();
   await tokenStorage.clear();
   onSessionExpired?.();
 };
