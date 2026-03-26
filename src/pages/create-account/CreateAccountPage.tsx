@@ -2,12 +2,14 @@ import React, { useState, useCallback } from "react";
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import Animated from "react-native-reanimated";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import axios from "axios";
+import { CommonActions, useNavigation, useRoute } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
-import { TopNavBar, TextField, FilledButton, TextAreaProvider } from "@shared/ui";
+import { TopNavBar, TextField, FilledButton, TextAreaProvider, toast } from "@shared/ui";
 import { useSlideAnimation } from "@shared/hooks/animations/useSlideAnimation";
-import type { Role } from "@features/register/types";
+import { authApi } from "@entities/auth/api";
+import { Role } from "@features/register/types";
 
 interface CreateAccountRouteParams {
   role: Role;
@@ -26,6 +28,7 @@ export const CreateAccountPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const showPassword = username.trim().length >= 5;
   const showPasswordConfirm = showPassword && password.length >= 1;
@@ -48,9 +51,47 @@ export const CreateAccountPage = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const handleSignUp = useCallback(() => {
-    // TODO: API 호출 (params.role, params.name, params.extraField, params.phone, username, password)
-  }, [params, username, password]);
+  const handleSignUp = useCallback(async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const phone = params.phone.replace(/-/g, "");
+      if (params.role === Role.STUDENT) {
+        const extra = params.extraField;
+        const grade = Number(extra[0]);
+        const room = Number(extra[1]);
+        const number = Number(extra.slice(2));
+        await authApi.registerStudent({
+          username,
+          name: params.name,
+          password,
+          phone,
+          grade,
+          room,
+          number,
+        });
+      } else {
+        await authApi.registerTeacher({
+          username,
+          name: params.name,
+          password,
+          phone,
+          position: params.extraField,
+        });
+      }
+      toast.info("회원가입에 성공했어요. 관리자의 승인을 기다려주세요.", { position: "top" });
+      navigation.dispatch(
+        CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),
+      );
+    } catch (error) {
+      const message = axios.isAxiosError(error)
+        ? error.response?.data?.message ?? "회원가입에 실패했어요."
+        : "회원가입에 실패했어요.";
+      toast.error(message, { position: "top" });
+    } finally {
+      setLoading(false);
+    }
+  }, [params, username, password, loading, navigation]);
 
   const passwordError = showPasswordConfirm && passwordConfirm.length > 0 && !passwordMatch;
 
@@ -109,6 +150,7 @@ export const CreateAccountPage = () => {
             size="large"
             display="fill"
             disabled={!canSubmit}
+            isLoading={loading}
             onPress={handleSignUp}
           >
             가입하기

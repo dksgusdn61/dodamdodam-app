@@ -13,8 +13,10 @@ import {
   TextAreaProvider,
   Dialog,
   useOverlay,
+  toast,
 } from "@shared/ui";
 import { TextButton } from "@shared/ui/buttons";
+import { authApi } from "@entities/auth/api";
 import { Role } from "@features/register/types";
 import { validateStudentNumber } from "@features/register/validateStudentNumber";
 import { formatPhoneNumber, parsePhoneDigits } from "@features/register/formatPhoneNumber";
@@ -79,25 +81,38 @@ export const EnterNamePage = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const handleSendCode = useCallback(() => {
-    overlay.open(({ isOpen, close, exit, setDimClickHandler }) => (
-      <VerifyCodeDialog
-        isOpen={isOpen}
-        close={close}
-        exit={exit}
-        setDimClickHandler={setDimClickHandler}
-        onVerified={() => {
-          close();
-          (navigation as any).navigate("CreateAccount", {
-            role,
-            name,
-            extraField,
-            phone,
-          });
-        }}
-      />
-    ));
-  }, [overlay, navigation, role, name, extraField, phone]);
+  const [sendingCode, setSendingCode] = useState(false);
+
+  const handleSendCode = useCallback(async () => {
+    if (sendingCode) return;
+    setSendingCode(true);
+    try {
+      await authApi.requestPhoneVerification(phone);
+      toast.success("인증코드가 전송되었어요.", { position: "top" });
+      overlay.open(({ isOpen, close, exit, setDimClickHandler }) => (
+        <VerifyCodeDialog
+          isOpen={isOpen}
+          close={close}
+          exit={exit}
+          setDimClickHandler={setDimClickHandler}
+          phone={phone}
+          onVerified={() => {
+            close();
+            (navigation as any).navigate("CreateAccount", {
+              role,
+              name,
+              extraField,
+              phone,
+            });
+          }}
+        />
+      ));
+    } catch {
+      toast.error("인증코드 전송에 실패했어요.", { position: "top" });
+    } finally {
+      setSendingCode(false);
+    }
+  }, [sendingCode, phone, overlay, navigation, role, name, extraField]);
 
   return (
     <SafeAreaView
@@ -150,7 +165,7 @@ export const EnterNamePage = () => {
 
           {showVerifyButton && (
             <Animated.View style={[styles.verifyButton, verifyButtonStyle]}>
-              <FilledButton size="large" display="fill" onPress={handleSendCode}>
+              <FilledButton size="large" display="fill" isLoading={sendingCode} onPress={handleSendCode}>
                 전화번호 인증코드 전송
               </FilledButton>
             </Animated.View>
@@ -166,6 +181,7 @@ interface VerifyCodeDialogProps {
   close: () => void;
   exit: () => void;
   setDimClickHandler: (handler: () => void) => void;
+  phone: string;
   onVerified: () => void;
 }
 
@@ -174,13 +190,28 @@ const VerifyCodeDialog = ({
   close,
   exit,
   setDimClickHandler,
+  phone,
   onVerified,
 }: VerifyCodeDialogProps) => {
   const [code, setCode] = useState("");
+  const [verifying, setVerifying] = useState(false);
 
   const handleCodeChange = useCallback((text: string) => {
     setCode(text.replace(/[^0-9]/g, "").slice(0, 6));
   }, []);
+
+  const handleConfirm = useCallback(async () => {
+    if (verifying) return;
+    setVerifying(true);
+    try {
+      await authApi.confirmPhoneVerification(phone, code);
+      onVerified();
+    } catch {
+      toast.error("인증코드가 올바르지 않아요.", { position: "top" });
+    } finally {
+      setVerifying(false);
+    }
+  }, [phone, code, verifying, onVerified]);
 
   return (
     <Dialog
@@ -207,7 +238,8 @@ const VerifyCodeDialog = ({
           <FilledButton
             size="large"
             disabled={code.length !== 6}
-            onPress={onVerified}
+            isLoading={verifying}
+            onPress={handleConfirm}
           >
             확인
           </FilledButton>
