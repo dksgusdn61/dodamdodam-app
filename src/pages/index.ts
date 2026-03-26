@@ -1,5 +1,5 @@
 export { HomePage } from "./home";
 export { MealPage } from "./meal";
-export { OutingPage } from "./outing";
+export { OutSleepingPage } from "./out-sleeping";
 export { NightStudyPage } from "./night-study";
 export { MorePage } from "./more";

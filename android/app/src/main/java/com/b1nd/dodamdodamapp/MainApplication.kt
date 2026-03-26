@@ -1,4 +1,4 @@
-package com.dodamdodamapp
+package com.b1nd.dodamdodamapp
 
 import android.app.Application
 import android.content.res.Configuration

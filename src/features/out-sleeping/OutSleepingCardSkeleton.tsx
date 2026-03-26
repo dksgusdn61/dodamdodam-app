@@ -24,6 +24,7 @@ export const OutSleepingCardSkeleton = () => (
   <View style={styles.container}>
     <CardSkeleton />
     <CardSkeleton />
+    <CardSkeleton />
   </View>
 );
 

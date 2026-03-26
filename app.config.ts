@@ -14,7 +14,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ],
   ios: {
     ...config.ios,
-    bundleIdentifier: "com.dodamdodamapp",
+    bundleIdentifier: "com.b1nd.dodamdodamapp",
     googleServicesFile: "./GoogleService-Info.plist",
     infoPlist: {
       NSAppTransportSecurity: {
@@ -24,7 +24,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     ...config.android,
-    package: "com.dodamdodamapp",
+    package: "com.b1nd.dodamdodamapp",
     googleServicesFile: "./google-services.json",
   },
 });

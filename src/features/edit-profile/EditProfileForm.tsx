@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   sheetContent: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    paddingBottom: 16,
+    paddingBottom: 48,
   },
   sheetOption: {
     paddingVertical: 16,

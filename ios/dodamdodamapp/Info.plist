@@ -27,7 +27,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.dodamdodamapp</string>
+				<string>com.b1nd.dodamdodamapp</string>
 			</array>
 		</dict>
 	</array>
