@@ -1,11 +1,19 @@
-import React, { useState, useCallback } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { View, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useTheme } from "@shared/theme";
 import { TopNavBar, FilledButton, SegmentedButton, TextAreaProvider } from "@shared/ui";
 import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
-import { PersonalForm, ProjectForm, useNightStudyForm } from "@features/night-study";
+import {
+  PersonalForm,
+  ProjectForm,
+  useNightStudyForm,
+  useNightStudyPersonalApply,
+  useNightStudyProjectApply,
+  StudentAddSheet,
+} from "@features/night-study";
 
 const makeSegments = (tab: string): SegmentedButtonData[] => [
   { text: "개인", value: "personal", isActive: tab === "personal" },
@@ -17,15 +25,42 @@ export const NightStudyApplyPage = () => {
   const navigation = useNavigation();
   const route = useRoute<any>();
   const initialTab = route.params?.tab ?? "personal";
+  const studentSheetRef = useRef<BottomSheetModal>(null);
 
   const [segments, setSegments] = useState(() => makeSegments(initialTab));
   const activeTab = segments.find((s) => s.isActive)?.value ?? "personal";
   const { common, personal, project } = useNightStudyForm();
+  const { apply: applyPersonal, loading: personalLoading } = useNightStudyPersonalApply();
+  const { apply: applyProject, loading: projectLoading } = useNightStudyProjectApply();
+  const loading = activeTab === "personal" ? personalLoading : projectLoading;
 
-  const handleSubmit = useCallback(() => {
-    // TODO: API 연동
-    navigation.goBack();
-  }, [navigation]);
+  const handleAddMember = useCallback(() => {
+    studentSheetRef.current?.present();
+  }, []);
+
+  const handleSubmit = useCallback(async () => {
+    if (activeTab === "personal") {
+      const success = await applyPersonal({
+        reason: personal.reason,
+        timeSlot: common.timeSlot,
+        startDate: common.startDate,
+        endDate: common.endDate,
+        usePhone: personal.usePhone,
+        phoneReason: personal.phoneReason,
+      });
+      if (success) navigation.goBack();
+    } else {
+      const success = await applyProject({
+        projectName: project.projectName,
+        projectDescription: project.projectDescription,
+        timeSlot: common.timeSlot,
+        startDate: common.startDate,
+        endDate: common.endDate,
+        members: project.members,
+      });
+      if (success) navigation.goBack();
+    }
+  }, [activeTab, applyPersonal, applyProject, personal, project, common, navigation]);
 
   return (
     <SafeAreaView
@@ -48,16 +83,29 @@ export const NightStudyApplyPage = () => {
           {activeTab === "personal" ? (
             <PersonalForm common={common} personal={personal} />
           ) : (
-            <ProjectForm common={common} project={project} />
+            <ProjectForm
+              common={common}
+              project={project}
+              onAddMember={handleAddMember}
+            />
           )}
-
-          <View style={styles.spacer} />
-
-          <FilledButton size="large" display="fill" onPress={handleSubmit}>
-            신청
-          </FilledButton>
         </TextAreaProvider>
       </KeyboardAvoidingView>
+
+      <View style={styles.footer}>
+        <FilledButton size="large" display="fill" isLoading={loading} onPress={handleSubmit}>
+          신청
+        </FilledButton>
+      </View>
+
+      <StudentAddSheet
+        sheetRef={studentSheetRef}
+        selected={project.members}
+        onConfirm={(members) => {
+          project.members.forEach((m) => project.removeMember(m.id));
+          members.forEach((m) => project.addMember(m));
+        }}
+      />
     </SafeAreaView>
   );
 };
@@ -70,5 +118,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     gap: 20,
   },
-  spacer: { flex: 1 },
+  footer: {
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+  },
 });

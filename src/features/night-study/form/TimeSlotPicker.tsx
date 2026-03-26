@@ -1,5 +1,5 @@
 import React, { useRef, useCallback } from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, Keyboard, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import {
   BottomSheetModal,
@@ -68,6 +68,7 @@ export const TimeSlotPicker = ({ value, onChange }: TimeSlotPickerProps) => {
   const sheetRef = useRef<BottomSheetModal>(null);
 
   const handleOpen = useCallback(() => {
+    Keyboard.dismiss();
     sheetRef.current?.present();
   }, []);
 
