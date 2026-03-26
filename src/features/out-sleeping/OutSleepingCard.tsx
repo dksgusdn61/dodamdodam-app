@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import Animated, { FadeOut, LinearTransition } from "react-native-reanimated";
 import { useTheme } from "@shared/theme";
 import { typo, shapes } from "@shared/tokens";
 import { Tag, Divider, Progress, IconButton } from "@shared/ui";
 import { Trash } from "@shared/icons/mono";
+import { calcProgress, calcRemainingTime } from "@shared/utils";
 import type { TagColor } from "@shared/ui/tag/Tag";
 import type { OutSleeping, OutSleepingStatus } from "@entities/out-sleeping/types";
 import { formatDate } from "./utils/formatDate";
@@ -19,63 +21,50 @@ const STATUS_MAP: Record<OutSleepingStatus, { label: string; color: TagColor }> 
   REJECTED: { label: "거절됨", color: "red" },
 };
 
-const calcProgress = (startAt: string, endAt: string): number => {
-  const now = Date.now();
-  const start = new Date(startAt).getTime();
-  const end = new Date(endAt).getTime();
-  if (now <= start) return 0;
-  if (now >= end) return 100;
-  return ((now - start) / (end - start)) * 100;
-};
-
-const calcRemaining = (endAt: string): string | null => {
-  const diff = new Date(endAt).getTime() - Date.now();
-  if (diff <= 0) return null;
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  if (hours > 0) return `${hours}시간 ${minutes}분`;
-  return `${minutes}분`;
-};
-
 export const OutSleepingCard = ({ item, onDelete }: OutSleepingCardProps) => {
   const { colors } = useTheme();
   const { label, color } = STATUS_MAP[item.status];
-  const remaining = calcRemaining(item.endAt);
+  const remaining = calcRemainingTime(item.startAt, item.endAt);
   const progress = calcProgress(item.startAt, item.endAt);
 
   return (
-    <View style={[styles.card, { backgroundColor: colors.background.surface }]}>
+    <Animated.View
+      style={[styles.card, { backgroundColor: colors.background.surface }]}
+      exiting={FadeOut.duration(250)}
+      layout={LinearTransition.duration(300)}
+    >
       <View style={styles.header}>
         <Tag text={label} color={color} />
-        <IconButton
-          icon={<Trash />}
-          size={24}
-          iconSize={24}
-          onPress={() => onDelete?.(item.publicId)}
-        />
+        {onDelete && (
+          <IconButton
+            icon={<Trash color={colors.text.secondary} />}
+            size={34}
+            iconSize={24}
+            onPress={() => onDelete(item.publicId)}
+          />
+        )}
       </View>
 
-      <Text style={[styles.reason, { color: colors.text.primary }]}>
+      <Text style={[styles.description, { color: colors.text.primary }]}>
         {item.reason}
       </Text>
 
       <Divider marginHorizontal={0} marginVertical={0} />
 
-      {item.status !== "REJECTED" && remaining && (
+      {item.status !== "REJECTED" && (
         <>
           <View style={styles.remainingRow}>
             <Text style={[styles.remainingText, { color: colors.text.primary }]}>
               {remaining}
             </Text>
-            <Text style={[styles.remainingLabel, { color: colors.text.tertiary }]}>
-              남음
-            </Text>
+            {remaining !== "시작 전" && remaining !== "종료됨" && (
+              <Text style={[styles.remainingLabel, { color: colors.text.tertiary }]}>
+                남음
+              </Text>
+            )}
           </View>
           <View style={styles.progressSection}>
-            <Progress
-              progress={progress}
-              disabled={item.status === "PENDING"}
-            />
+            <Progress progress={progress} disabled={item.status === "PENDING"} />
             <View style={styles.dateRow}>
               <View style={styles.dateItem}>
                 <Text style={[styles.dateLabel, { color: colors.text.tertiary }]}>외출</Text>
@@ -102,7 +91,7 @@ export const OutSleepingCard = ({ item, onDelete }: OutSleepingCardProps) => {
           </Text>
         </View>
       )}
-    </View>
+    </Animated.View>
   );
 };
 
@@ -118,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  reason: {
+  description: {
     ...typo("Body1", "Medium"),
   },
   remainingRow: {

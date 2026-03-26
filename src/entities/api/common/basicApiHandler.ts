@@ -52,9 +52,14 @@ basicApiHandler.interceptors.response.use(
     const originalRequest = error.config;
     const status = error.response?.status;
 
+    if (error.code === "ECONNABORTED" || error.message === "Network Error") {
+      toast.warning("네트워크 연결이 원활하지 않아요.", { position: "top" });
+      return Promise.reject(error);
+    }
+
     if (status && status >= 500) {
       toast.error("서비스 요청에 실패했어요.", { position: "top" });
-      return new Promise(() => {});
+      return Promise.reject(error);
     }
 
     if (!originalRequest || status !== 401) {

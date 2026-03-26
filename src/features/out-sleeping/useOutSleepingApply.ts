@@ -17,6 +17,11 @@ export const useOutSleepingApply = () => {
         return false;
       }
 
+      if (params.startDate > params.endDate) {
+        toast.warning("외출 날짜가 복귀 날짜보다 늦을 수 없어요.", { position: "top" });
+        return false;
+      }
+
       setLoading(true);
       try {
         await outSleepingApi.create({

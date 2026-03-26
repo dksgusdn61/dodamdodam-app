@@ -1,9 +1,9 @@
-import React, { useCallback } from "react";
+import React, { Suspense, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { Divider, TopNavBar, toast } from "@shared/ui";
+import { Divider, TopNavBar, Skeleton, toast } from "@shared/ui";
 import { useLogout } from "@features/auth";
 import { SettingProfile } from "./ui/SettingProfile";
 import { SettingItem } from "./ui/SettingItem";
@@ -26,7 +26,9 @@ export const SettingsPage = () => {
         <TopNavBar.Title hasBackButton>설정</TopNavBar.Title>
       </TopNavBar>
       <View style={styles.content}>
-        <SettingProfile onEditPress={openEditProfile} />
+        <Suspense fallback={<ProfileSkeleton />}>
+          <SettingProfile onEditPress={openEditProfile} />
+        </Suspense>
         <Divider />
         <View style={styles.section}>
           <SettingItem title="서비스 운영 정책" onPress={() => toast("서비스 운영 정책")} />
@@ -47,6 +49,16 @@ export const SettingsPage = () => {
   );
 };
 
+const ProfileSkeleton = () => (
+  <View style={styles.profileSkeleton}>
+    <Skeleton width={80} height={80} radius={40} />
+    <View style={styles.profileSkeletonText}>
+      <Skeleton width={100} height={20} radius={4} />
+      <Skeleton width={60} height={14} radius={4} />
+    </View>
+  </View>
+);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -56,5 +68,15 @@ const styles = StyleSheet.create({
   },
   section: {
     paddingVertical: 4,
+  },
+  profileSkeleton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+    gap: 16,
+  },
+  profileSkeletonText: {
+    gap: 4,
   },
 });

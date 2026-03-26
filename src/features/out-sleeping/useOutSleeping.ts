@@ -3,26 +3,22 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { outSleepingApi } from "@entities/out-sleeping/api";
 import { outSleepingQueryKeys } from "@entities/out-sleeping/api/queryKeys";
 import { toast } from "@shared/ui";
-import type { OutSleepingResponse } from "@entities/out-sleeping/types";
+import type { OutSleeping } from "@entities/out-sleeping/types";
 
-const EMPTY_RESPONSE: OutSleepingResponse = {
-  outSleeping: [],
-};
-
-const fetchOutSleeping = async (): Promise<OutSleepingResponse> => {
+const fetchOutSleeping = async (): Promise<OutSleeping[]> => {
   try {
     const { data } = await outSleepingApi.getMe();
     return data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.status === 403) {
       toast.error("외박 조회 권한이 없어요.", { position: "top" });
-      return EMPTY_RESPONSE;
+      return [];
     }
     throw error;
   }
 };
 
-export const useOutSleepingSuspense = (): OutSleepingResponse => {
+export const useOutSleepingSuspense = (): OutSleeping[] => {
   const { data } = useSuspenseQuery({
     queryKey: outSleepingQueryKeys.me,
     queryFn: fetchOutSleeping,

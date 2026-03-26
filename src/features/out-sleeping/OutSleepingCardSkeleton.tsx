@@ -29,9 +29,7 @@ export const OutSleepingCardSkeleton = () => (
 );
 
 const styles = StyleSheet.create({
-  container: {
-    gap: 12,
-  },
+  container: { gap: 12 },
   card: {
     padding: 16,
     paddingHorizontal: 12,
@@ -43,9 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  divider: {
-    height: 1,
-  },
+  divider: { height: 1 },
   dateRow: {
     flexDirection: "row",
     justifyContent: "space-between",

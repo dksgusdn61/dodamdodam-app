@@ -8,9 +8,7 @@ export interface OutSleeping {
   endAt: string;
 }
 
-export interface OutSleepingResponse {
-  outSleeping: OutSleeping[];
-}
+export type OutSleepingResponse = OutSleeping[];
 
 export interface OutSleepingRequest {
   reason: string;

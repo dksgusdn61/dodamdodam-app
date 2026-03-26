@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, type ViewStyle } from "react-native";
+import { type ViewStyle } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -23,17 +23,19 @@ export const Skeleton = ({ width, height, radius = 8, style }: SkeletonProps) =>
 
   useEffect(() => {
     progress.value = withRepeat(
-      withTiming(1, { duration: 1200, easing: Easing.linear }),
+      withTiming(1, { duration: 1500, easing: Easing.inOut(Easing.ease) }),
       -1,
       false,
     );
   }, [progress]);
 
-  const shimmerStyle = useAnimatedStyle(() => {
-    const translateX = interpolate(progress.value, [0, 1], [-1, 2]);
-    return {
-      transform: [{ translateX: translateX * (typeof width === "number" ? width : 200) }],
-    };
+  const animatedStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      progress.value,
+      [0, 0.5, 1],
+      [0.4, 1, 0.4],
+    );
+    return { opacity };
   });
 
   return (
@@ -44,33 +46,12 @@ export const Skeleton = ({ width, height, radius = 8, style }: SkeletonProps) =>
           height,
           borderRadius: radius,
           backgroundColor: colors.border.disabled,
-          overflow: "hidden",
         },
+        animatedStyle,
         style,
       ]}
-    >
-      <Animated.View
-        style={[
-          styles.shimmer,
-          {
-            height,
-            backgroundColor: colors.fill.primary,
-          opacity: 0.75,
-          },
-          shimmerStyle,
-        ]}
-      />
-    </Animated.View>
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  shimmer: {
-    width: "60%",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    opacity: 0.4,
-    transform: [{ skewX: "-20deg" }],
-  },
-});
+export type { SkeletonProps };
