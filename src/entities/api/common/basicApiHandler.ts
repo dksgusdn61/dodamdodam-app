@@ -2,6 +2,7 @@ import axios, { type AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { env } from "@shared/config";
 import { tokenStorage } from "./tokenStorage";
 import { unregisterPushToken } from "@shared/lib/notification";
+import { toast } from "@shared/ui/toast/toastManager";
 
 const BASE_URL = env.API_BASE_URL;
 
@@ -49,7 +50,14 @@ basicApiHandler.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config;
-    if (!originalRequest || error.response?.status !== 401) {
+    const status = error.response?.status;
+
+    if (status && status >= 500) {
+      toast.error("서비스 요청에 실패했어요.", { position: "top" });
+      return new Promise(() => {});
+    }
+
+    if (!originalRequest || status !== 401) {
       return Promise.reject(error);
     }
 

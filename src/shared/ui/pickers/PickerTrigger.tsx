@@ -1,10 +1,13 @@
 import React, { memo, useCallback, isValidElement, cloneElement } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useOverlay } from "@shared/ui/overlay";
 
 interface PickerTriggerProps {
   children: React.ReactElement;
-  content: (props: { onClose: () => void }) => React.ReactNode;
+  content: (props: {
+    onClose: () => void;
+    setDimClickHandler: (handler: () => void) => void;
+  }) => React.ReactNode;
   position?: "bottom" | "top";
 }
 
@@ -13,7 +16,9 @@ export const PickerTrigger = memo(
     const overlay = useOverlay();
 
     const handleTriggerPress = useCallback(() => {
-      overlay.open(({ close }) => content({ onClose: close }));
+      overlay.open(({ close, setDimClickHandler }) =>
+        content({ onClose: close, setDimClickHandler })
+      );
     }, [overlay, content]);
 
     const trigger = isValidElement(children)
@@ -23,16 +28,10 @@ export const PickerTrigger = memo(
         )
       : children;
 
-    return <View style={styles.container}>{trigger}</View>;
+    return <View>{trigger}</View>;
   }
 );
 
 PickerTrigger.displayName = "PickerTrigger";
-
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: "flex-start",
-  },
-});
 
 export type { PickerTriggerProps };

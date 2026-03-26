@@ -1,1 +1,0 @@
-export { OutingPage } from "./OutingPage";

@@ -4,7 +4,7 @@ import { Home, ForkAndKnife, DoorOpen, MoonPlus, Menu } from "@shared/icons/mono
 import { BottomTabBar } from "@widgets/bottom-tab-bar";
 import { HomePage } from "@pages/home";
 import { MealPage } from "@pages/meal";
-import { OutingPage } from "@pages/outing";
+import { OutSleepingPage } from "@pages/out-sleeping";
 import { NightStudyPage } from "@pages/night-study";
 import { MorePage } from "@pages/more";
 
@@ -36,8 +36,8 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Outing"
-        component={OutingPage}
+        name="OutSleeping"
+        component={OutSleepingPage}
         options={{
           tabBarIcon: ({ color, size }) => (
             <DoorOpen size={size} color={color} />
