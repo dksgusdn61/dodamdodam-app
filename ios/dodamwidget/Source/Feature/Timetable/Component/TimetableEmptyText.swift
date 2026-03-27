@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct TimetableEmptyText: View {
+  var text: String = "시간표가 없어요"
+  
   var body: some View {
-    Text("시간표가 없어요")
+    Text(text)
       .font(.footnote)
-      .foregroundStyle(WidgetColor.labelAlternative)
+      .multilineTextAlignment(.center)
+      .lineSpacing(4)
+      .foregroundStyle(WidgetColor.labelNormal)
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
   }
 }

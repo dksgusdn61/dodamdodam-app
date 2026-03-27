@@ -14,6 +14,19 @@ struct TimetableWidgetView: View {
   
   private let days = ["월", "화", "수", "목", "금"]
   
+  private var isWeekday: Bool {
+    let weekday = Calendar.current.component(.weekday, from: Date())
+    return weekday >= 2 && weekday <= 6
+  }
+  
+  private var todayLabel: String {
+    let weekday = Calendar.current.component(.weekday, from: Date())
+    let idx = weekday - 2
+    guard idx >= 0, idx < days.count else { return "주말" }
+    return "\(days[idx])요일"
+  }
+  
+  // MARK: - Body
   var body: some View {
     Group {
       if #available(iOSApplicationExtension 17.0, *) {
@@ -48,24 +61,28 @@ struct TimetableWidgetView: View {
         Spacer()
       }
       
-      VStack(alignment: .leading, spacing: 0) {
-        if entry.todaySubjects.isEmpty {
-          TimetableEmptyText()
+      VStack(alignment: .center, spacing: 0) {
+        if !isWeekday {
+          TimetableEmptyText(text: "주말에는\n시간표가 없어요")
+        } else if entry.todaySubjects.isEmpty {
+          TimetableEmptyText(text: "등록된\n시간표가 없어요")
         } else {
-          ForEach(Array(entry.todaySubjects.enumerated()), id: \.offset) { idx, subject in
-            let isCurrent = idx == entry.currentPeriod
-            TimetablePeriodRow(
-              period: idx + 1,
-              subject: subject,
-              fontSize: 10,
-              periodWidth: 26,
-              isHighlighted: isCurrent
-            )
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+          let visibleSubjects = Array(entry.todaySubjects.prefix(6).enumerated())
+          VStack(alignment: .leading, spacing: 0) {
+            ForEach(visibleSubjects, id: \.offset) { idx, subject in
+              TimetablePeriodRow(
+                period: idx + 1,
+                subject: subject,
+                fontSize: 10,
+                periodWidth: 26,
+                isHighlighted: idx == entry.currentPeriod
+              )
+              .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
           }
         }
       }
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
       .padding(10)
       .background(WidgetColor.backgroundNormal)
       .clipShape(RoundedRectangle(cornerRadius: 14))
@@ -83,9 +100,11 @@ struct TimetableWidgetView: View {
         Spacer()
       }
       
-      VStack(alignment: .leading, spacing: 0) {
-        if entry.todaySubjects.isEmpty {
-          TimetableEmptyText()
+      VStack(alignment: .center, spacing: 0) {
+        if !isWeekday {
+          TimetableEmptyText(text: "즐거운 주말 보내세요! \n주말에는 시간표가 없어요.")
+        } else if entry.todaySubjects.isEmpty {
+          TimetableEmptyText(text: "오늘 등록된 시간표가 없습니다.")
         } else {
           let subjects = entry.todaySubjects
           let half = Int(ceil(Double(subjects.count) / 2.0))
@@ -125,7 +144,7 @@ struct TimetableWidgetView: View {
         }
         Spacer(minLength: 0)
       }
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
       .padding(12)
       .background(WidgetColor.backgroundNormal)
       .clipShape(RoundedRectangle(cornerRadius: 14))
@@ -144,12 +163,14 @@ struct TimetableWidgetView: View {
         HStack(spacing: 4) {
           Color.clear.frame(width: 35, height: 1)
           ForEach(Array(days.enumerated()), id: \.offset) { idx, day in
+            let isTodayHighlight = isWeekday && (idx == entry.weekday)
+            
             Text(day)
               .font(.footnote.bold())
-              .foregroundColor(idx == entry.weekday ? .white : WidgetColor.labelAlternative)
+              .foregroundColor(isTodayHighlight ? .white : WidgetColor.labelAlternative)
               .frame(maxWidth: .infinity)
               .padding(.vertical, 6)
-              .background(idx == entry.weekday ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
+              .background(isTodayHighlight ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
               .clipShape(Capsule())
           }
         }
@@ -159,14 +180,16 @@ struct TimetableWidgetView: View {
         VStack(spacing: 4) {
           ForEach(0..<maxPeriod, id: \.self) { period in
             HStack(spacing: 4) {
+              let isCurrentRow = isWeekday && (period == entry.currentPeriod)
+              
               Text("\(period + 1)교시")
                 .font(.caption2.bold())
-                .foregroundStyle(period == entry.currentPeriod ? WidgetColor.primaryNormal : WidgetColor.labelAlternative)
+                .foregroundStyle(isCurrentRow ? WidgetColor.primaryNormal : WidgetColor.labelAlternative)
                 .frame(width: 35)
               
               ForEach(0..<5, id: \.self) { dayIdx in
-                let isCurrentCell = (dayIdx == entry.weekday && period == entry.currentPeriod)
-                let isTodayColumn = (dayIdx == entry.weekday)
+                let isCurrentCell = isWeekday && (dayIdx == entry.weekday && period == entry.currentPeriod)
+                let isTodayColumn = isWeekday && (dayIdx == entry.weekday)
                 
                 let subject = (dayIdx < entry.weekTimetable.count && period < entry.weekTimetable[dayIdx].count)
                 ? entry.weekTimetable[dayIdx][period] : "-"
@@ -194,13 +217,5 @@ struct TimetableWidgetView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(12)
-  }
-  
-  // MARK: - Helpers
-  private var todayLabel: String {
-    let weekday = Calendar.current.component(.weekday, from: Date())
-    let idx = weekday - 2
-    guard idx >= 0, idx < days.count else { return "오늘" }
-    return "\(days[idx])요일"
   }
 }
