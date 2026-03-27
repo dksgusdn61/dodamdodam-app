@@ -67,7 +67,7 @@ struct TimetableWidgetView: View {
         } else if entry.todaySubjects.isEmpty {
           TimetableEmptyText(text: "등록된\n시간표가 없어요")
         } else {
-          let visibleSubjects = Array(entry.todaySubjects.prefix(6).enumerated())
+          let visibleSubjects = Array(entry.todaySubjects.prefix(7).enumerated())
           VStack(alignment: .leading, spacing: 0) {
             ForEach(visibleSubjects, id: \.offset) { idx, subject in
               TimetablePeriodRow(
