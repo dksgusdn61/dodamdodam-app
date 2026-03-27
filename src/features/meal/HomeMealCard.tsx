@@ -1,8 +1,7 @@
-import React, { memo, useMemo, useEffect } from "react";
+import React, { memo, useMemo } from "react";
 import { HomeMealWidget, type MealData } from "@features/home/home-meal";
 import { useMealSuspense } from "./useMeal";
 import type { MealType } from "@entities/meal/types";
-import { saveMealsToWidget } from "@shared/lib/widget/mealWidget";
 
 const MEAL_LABEL: Record<MealType, string> = {
   BREAKFAST: "조식",
@@ -27,26 +26,6 @@ interface HomeMealCardProps {
 export const HomeMealCard = memo(({ onPress }: HomeMealCardProps) => {
   const today = useMemo(formatToday, []);
   const meals = useMealSuspense(today);
-
-  const widgetMeals = useMemo(() => {
-    if (!meals) return null;
-
-    const findMeal = (type: MealType) => meals.find((m) => m.mealType === type);
-
-    return MEAL_ORDER.map((type) => {
-      const m = findMeal(type);
-      return {
-        mealType: m?.mealType ?? type,
-        menus: m?.menus ?? [],
-        kcal: m?.calorie ?? 0,
-      };
-    });
-  }, [meals]);
-
-  useEffect(() => {
-    if (!widgetMeals) return;
-    saveMealsToWidget(widgetMeals);
-  }, [widgetMeals]);
 
   const mealData: MealData[] = useMemo(
     () =>

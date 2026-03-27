@@ -10,21 +10,19 @@ import Foundation
 import WidgetKit
 
 final class SharedDefaults {
-    static let shared = SharedDefaults()
-    
-    private let userDefaults = UserDefaults(suiteName: "group.com.dodamdodam.shared")!
-    
-    private init() {}
-    
-    func setMeals(json: String) {
-        print("DEBUG setMeals json:", json)
-        userDefaults.set(json, forKey: "widgetMeals")
-        WidgetCenter.shared.reloadAllTimelines()
-    }
-    
-    func getMeals() -> String {
-        let value = userDefaults.string(forKey: "widgetMeals") ?? ""
-        print("DEBUG getMeals value:", value)
-        return value
-    }
+  static let shared = SharedDefaults()
+  
+  private let userDefaults = UserDefaults(suiteName: "group.com.dodamdodam.shared")!
+  
+  private init() {}
+  
+  func setMeals(json: String) {
+    userDefaults.set(json, forKey: "widgetMeals")
+    WidgetCenter.shared.reloadAllTimelines()
+  }
+  
+  func setTimetable(json: String) {
+    userDefaults.set(json, forKey: "widgetTimetable")
+    WidgetCenter.shared.reloadAllTimelines()
+  }
 }

@@ -10,7 +10,7 @@ import WidgetKit
 import AppIntents
 
 struct MealWidgetView: View {
-  var entry: SimpleEntry
+  var entry: MealEntry
   @Environment(\.widgetFamily) var widgetFamily
   
   var selectedType: MealType {
