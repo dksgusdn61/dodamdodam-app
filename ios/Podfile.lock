@@ -30,6 +30,10 @@ PODS:
     - Yoga
   - ExpoAsset (55.0.8):
     - ExpoModulesCore
+  - ExpoCamera (55.0.11):
+    - ExpoModulesCore
+    - ZXingObjC/OneD
+    - ZXingObjC/PDF417
   - ExpoDevice (55.0.10):
     - ExpoModulesCore
   - ExpoDomWebView (55.0.3):
@@ -43,6 +47,8 @@ PODS:
   - ExpoImagePicker (55.0.12):
     - ExpoModulesCore
   - ExpoKeepAwake (55.0.4):
+    - ExpoModulesCore
+  - ExpoLocation (55.1.4):
     - ExpoModulesCore
   - ExpoLogBox (55.0.7):
     - React-Core
@@ -79,6 +85,8 @@ PODS:
   - ExpoNotifications (55.0.13):
     - ExpoModulesCore
   - ExpoSecureStore (55.0.8):
+    - ExpoModulesCore
+  - ExpoSystemUI (55.0.10):
     - ExpoModulesCore
   - FBLazyVector (0.83.2)
   - Firebase/CoreOnly (12.10.0):
@@ -1537,6 +1545,8 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
+  - react-native-nfc-manager (3.17.2):
+    - React-Core
   - react-native-safe-area-context (5.7.0):
     - hermes-engine
     - RCTRequired
@@ -2342,12 +2352,18 @@ PODS:
     - ReactNativeDependencies
     - Yoga
   - Yoga (0.0.0)
+  - ZXingObjC/Core (3.6.9)
+  - ZXingObjC/OneD (3.6.9):
+    - ZXingObjC/Core
+  - ZXingObjC/PDF417 (3.6.9):
+    - ZXingObjC/Core
 
 DEPENDENCIES:
   - EXApplication (from `../node_modules/expo-application/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - Expo (from `../node_modules/expo`)
   - ExpoAsset (from `../node_modules/expo-asset/ios`)
+  - ExpoCamera (from `../node_modules/expo-camera/ios`)
   - ExpoDevice (from `../node_modules/expo-device/ios`)
   - "ExpoDomWebView (from `../node_modules/@expo/dom-webview/ios`)"
   - ExpoFileSystem (from `../node_modules/expo-file-system/ios`)
@@ -2355,11 +2371,13 @@ DEPENDENCIES:
   - ExpoHaptics (from `../node_modules/expo-haptics/ios`)
   - ExpoImagePicker (from `../node_modules/expo-image-picker/ios`)
   - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
+  - ExpoLocation (from `../node_modules/expo-location/ios`)
   - "ExpoLogBox (from `../node_modules/@expo/log-box`)"
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
   - ExpoModulesJSI (from `../node_modules/expo-modules-core`)
   - ExpoNotifications (from `../node_modules/expo-notifications/ios`)
   - ExpoSecureStore (from `../node_modules/expo-secure-store/ios`)
+  - ExpoSystemUI (from `../node_modules/expo-system-ui/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -2399,6 +2417,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-nfc-manager (from `../node_modules/react-native-nfc-manager`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -2457,6 +2476,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - ZXingObjC
 
 EXTERNAL SOURCES:
   EXApplication:
@@ -2467,6 +2487,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo"
   ExpoAsset:
     :path: "../node_modules/expo-asset/ios"
+  ExpoCamera:
+    :path: "../node_modules/expo-camera/ios"
   ExpoDevice:
     :path: "../node_modules/expo-device/ios"
   ExpoDomWebView:
@@ -2481,6 +2503,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-image-picker/ios"
   ExpoKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
+  ExpoLocation:
+    :path: "../node_modules/expo-location/ios"
   ExpoLogBox:
     :path: "../node_modules/@expo/log-box"
   ExpoModulesCore:
@@ -2491,6 +2515,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-notifications/ios"
   ExpoSecureStore:
     :path: "../node_modules/expo-secure-store/ios"
+  ExpoSystemUI:
+    :path: "../node_modules/expo-system-ui/ios"
   FBLazyVector:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   hermes-engine:
@@ -2568,6 +2594,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-nfc-manager:
+    :path: "../node_modules/react-native-nfc-manager"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-webview:
@@ -2664,6 +2692,7 @@ SPEC CHECKSUMS:
   EXConstants: 898c24a310046c0e68335619d0f379099a52e199
   Expo: ed1258b36d29c6b5021951ab7933754e765587cb
   ExpoAsset: bdc7bc21fe25d197c3aa7547e14c12c42087d9c9
+  ExpoCamera: fee0aadc5cc2968f39a51d0b2f1ddbdf4dfe5d72
   ExpoDevice: 59e75517522497afec3b48bd1e31735f066a9f43
   ExpoDomWebView: f101fb3db4b6eec4163fca51f7507189b7e48661
   ExpoFileSystem: e1a42d7f69f7faae33f4d7d01708f7861f7bd757
@@ -2671,11 +2700,13 @@ SPEC CHECKSUMS:
   ExpoHaptics: 8952528daeafbb20d147c33f8cc6ab648cd34c58
   ExpoImagePicker: afea73184bf1cd0c1c42f09b74513d31e4004453
   ExpoKeepAwake: 7f3b28c361c37389b18841bb52a58003b39fcb33
+  ExpoLocation: fa2f518dc01243ed21e11b28d884d803eae741d2
   ExpoLogBox: 89b634d5a8a64c4a6a7caad8f9985a28463c7002
   ExpoModulesCore: a57a0a1e39caa9ad5f76c8477b831ee32fbeddfc
   ExpoModulesJSI: a554588f3260ee3c44a3e7f4a8151c2b9ffdb024
   ExpoNotifications: 6936e06a76246e881fcf862ef8b31079d957e092
   ExpoSecureStore: ebb13e5e590b1e62ec530bd0cfe1a3e7f1867e26
+  ExpoSystemUI: e3cffdb694bea7658c22f72659f9d6433f0a0e4d
   FBLazyVector: 32e9ed0301d0fcbc1b2b341dd7fcbf291f51eb83
   Firebase: 99f203d3a114c6ba591f3b32263a9626e450af65
   FirebaseCore: f4428e22415ea3b3eca652c2098413dabf2a23a9
@@ -2724,6 +2755,7 @@ SPEC CHECKSUMS:
   React-logger: 69811317123fe08dc34ed5837dc1d269c468cc8d
   React-Mapbuffer: 8f8cbeb5bedb521cce0897a71274e3a72b5236a1
   React-microtasksnativemodule: bef4a47c7efd42421de52201e6d76a73cf6c816e
+  react-native-nfc-manager: c8891e460b4943b695d63f7f4effc6345bbefc83
   react-native-safe-area-context: ae7587b95fb580d1800c5b0b2a7bd48c2868e67a
   react-native-webview: 0ed52ddb2eafc64a502871218440b8b4d37961c3
   React-NativeModulesApple: f9fa097fc24cec967b77bfc05f72d2ea7db05b87
@@ -2769,6 +2801,7 @@ SPEC CHECKSUMS:
   RNSVG: 0bd149b873018bc6e0e3321e2f6435bdba294460
   RNWorklets: 5eddf924d11308d62920405addeddc3dfe1daaaa
   Yoga: dd994d8c85dca5cc9b10f5df8c01f9ef1d0da191
+  ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
 PODFILE CHECKSUM: 55d0c77d7183870f0b16c8e6d9bbb4de859dca43
 
