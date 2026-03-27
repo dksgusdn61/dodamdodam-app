@@ -44,13 +44,7 @@ struct TimetableWidgetView: View {
   var smallContent: some View {
     VStack(spacing: 8) {
       HStack {
-        Text(todayLabel)
-          .foregroundColor(.white)
-          .padding(.horizontal, 10)
-          .padding(.vertical, 4)
-          .background(WidgetColor.primaryNormal)
-          .clipShape(Capsule())
-          .font(.footnote.bold())
+        TimetableHeaderLabel(label: todayLabel)
         Spacer()
       }
       
@@ -59,17 +53,12 @@ struct TimetableWidgetView: View {
           TimetableEmptyText()
         } else {
           ForEach(Array(entry.todaySubjects.enumerated()), id: \.offset) { idx, subject in
-            HStack(spacing: 4) {
-              Text("\(idx + 1)교시")
-                .font(.system(size: 9, weight: .bold))
-                .foregroundStyle(WidgetColor.labelAlternative)
-                .frame(width: 26)
-              Text(subject)
-                .font(.system(size: 10))
-                .foregroundStyle(WidgetColor.labelNormal)
-                .lineLimit(1)
-              Spacer()
-            }
+            TimetablePeriodRow(
+              period: idx + 1,
+              subject: subject,
+              fontSize: 10,
+              periodWidth: 26
+            )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
           }
         }
@@ -88,13 +77,7 @@ struct TimetableWidgetView: View {
   var mediumContent: some View {
     VStack(spacing: 8) {
       HStack {
-        Text(todayLabel)
-          .foregroundColor(.white)
-          .padding(.horizontal, 10)
-          .padding(.vertical, 4)
-          .background(WidgetColor.primaryNormal)
-          .clipShape(Capsule())
-          .font(.footnote.bold())
+        TimetableHeaderLabel(label: todayLabel)
         Spacer()
       }
       
@@ -110,14 +93,14 @@ struct TimetableWidgetView: View {
           HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading, spacing: 4) {
               ForEach(Array(left.enumerated()), id: \.offset) { idx, subject in
-                periodRow(period: idx + 1, subject: subject)
+                TimetablePeriodRow(period: idx + 1, subject: subject)
               }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
             VStack(alignment: .leading, spacing: 4) {
               ForEach(Array(right.enumerated()), id: \.offset) { idx, subject in
-                periodRow(period: half + idx + 1, subject: subject)
+                TimetablePeriodRow(period: half + idx + 1, subject: subject)
               }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -192,25 +175,11 @@ struct TimetableWidgetView: View {
     .padding(12)
   }
   
+  // MARK: - Helpers
   private var todayLabel: String {
     let weekday = Calendar.current.component(.weekday, from: Date())
     let idx = weekday - 2
     guard idx >= 0, idx < days.count else { return "오늘" }
     return "\(days[idx])요일"
-  }
-  
-  @ViewBuilder
-  private func periodRow(period: Int, subject: String) -> some View {
-    HStack(spacing: 6) {
-      Text("\(period)교시")
-        .font(.caption2.bold())
-        .foregroundStyle(WidgetColor.labelAlternative)
-        .frame(width: 30)
-      Text(subject)
-        .font(.caption)
-        .foregroundStyle(WidgetColor.labelNormal)
-        .lineLimit(1)
-      Spacer()
-    }
   }
 }
