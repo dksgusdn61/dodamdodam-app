@@ -17,14 +17,14 @@ final class SharedDefaults {
     private init() {}
     
     func setMeals(json: String) {
-        print("DEBUG setMeals json:", json) // ⚡ 앱에서 저장되는 값 확인
+        print("DEBUG setMeals json:", json)
         userDefaults.set(json, forKey: "widgetMeals")
         WidgetCenter.shared.reloadAllTimelines()
     }
     
     func getMeals() -> String {
         let value = userDefaults.string(forKey: "widgetMeals") ?? ""
-        print("DEBUG getMeals value:", value) // ⚡ 위젯에서 읽어오는 값 확인
+        print("DEBUG getMeals value:", value)
         return value
     }
 }

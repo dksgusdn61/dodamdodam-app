@@ -38,7 +38,7 @@ export const HomeMealCard = memo(({ onPress }: HomeMealCardProps) => {
       return {
         mealType: m?.mealType ?? type,
         menus: m?.menus ?? [],
-        kcal: m?.calorie ?? "0",
+        kcal: m?.calorie ?? 0,
       };
     });
   }, [meals]);

@@ -16,7 +16,7 @@ struct MealWidget: Widget {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       MealWidgetView(entry: entry)
     }
-    .configurationDisplayName("도담도담 급식")
+    .configurationDisplayName("도담도담 위젯")
     .description("오늘의 급식 정보를 확인해보세요!")
     .supportedFamilies([.systemSmall, .systemMedium])
     .contentMarginsDisabled()
