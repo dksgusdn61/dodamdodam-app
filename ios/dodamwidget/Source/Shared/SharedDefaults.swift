@@ -17,11 +17,13 @@ final class SharedDefaults {
   private init() {}
   
   func setMeals(json: String) {
+    print("DEBUG setMeals json:", json)
     userDefaults.set(json, forKey: "widgetMeals")
     WidgetCenter.shared.reloadAllTimelines()
   }
   
   func setTimetable(json: String) {
+    print("DEBUG setTimeTable json:", json)
     userDefaults.set(json, forKey: "widgetTimetable")
     WidgetCenter.shared.reloadAllTimelines()
   }

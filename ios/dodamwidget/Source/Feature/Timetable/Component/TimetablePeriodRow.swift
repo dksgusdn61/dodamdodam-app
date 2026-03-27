@@ -11,17 +11,19 @@ struct TimetablePeriodRow: View {
   let period: Int
   let subject: String
   var fontSize: CGFloat = 10
-  var periodWidth: CGFloat = 30
+  var periodWidth: CGFloat = 26
+  var isHighlighted: Bool = false
   
   var body: some View {
-    HStack(spacing: 4) {
+    HStack(spacing: 6) {
       Text("\(period)교시")
-        .font(.system(size: fontSize - 1, weight: .bold))
-        .foregroundStyle(WidgetColor.labelAlternative)
-        .frame(width: periodWidth)
+        .font(.system(size: fontSize - 1, weight: isHighlighted ? .bold : .medium))
+        .foregroundStyle(isHighlighted ? WidgetColor.primaryNormal : WidgetColor.labelAlternative)
+        .frame(width: periodWidth, alignment: .leading)
+      
       Text(subject)
-        .font(.system(size: fontSize))
-        .foregroundStyle(WidgetColor.labelNormal)
+        .font(.system(size: fontSize, weight: isHighlighted ? .bold : .regular))
+        .foregroundStyle(isHighlighted ? WidgetColor.primaryNormal : WidgetColor.labelNormal)
         .lineLimit(1)
       Spacer()
     }

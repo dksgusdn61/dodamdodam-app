@@ -61,8 +61,10 @@ struct MealWidgetView: View {
                 Spacer()
                 if let meal {
                   Text("\(Int(meal.kcal))Kcal")
-                    .font(.caption2)
+                    .font(.system(size: 9, weight: .medium))
                     .foregroundColor(isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative)
+                    .lineLimit(1)
+                    .layoutPriority(1)
                 }
               }
               .padding(.horizontal, 10)
@@ -155,8 +157,10 @@ struct MealWidgetView: View {
           if meal.menus.isEmpty {
             MealMenuText(text: "오늘은 급식이 없어요", isMealEmpty: true)
           } else {
-            ForEach(meal.menus.prefix(7), id: \.self) { menu in
-              MealMenuText(text: menu)
+            let displayCount = min(meal.menus.count, 6)
+            ForEach(0..<displayCount, id: \.self) { idx in
+              let menuName = (idx == 5 && meal.menus.count > 6) ? "..." : meal.menus[idx]
+              MealMenuText(text: menuName)
             }
           }
           Spacer(minLength: 0)
