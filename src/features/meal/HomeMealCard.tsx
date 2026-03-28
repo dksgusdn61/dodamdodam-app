@@ -29,8 +29,7 @@ export const HomeMealCard = memo(({ onPress }: HomeMealCardProps) => {
 
   const mealData: MealData[] = useMemo(
     () =>
-      MEAL_ORDER
-        .map((type) => meals.find((m) => m.mealType === type))
+      MEAL_ORDER.map((type) => meals.find((m) => m.mealType === type))
         .filter(Boolean)
         .map((m) => ({
           id: m!.mealType,

@@ -7,4 +7,9 @@ export const mealApi = {
     basicApiHandler.get<ApiResponse<Meal[]>>("/neis/meal", {
       params: { date },
     }),
+
+  getByMonth: (month: string) =>
+    basicApiHandler.get<ApiResponse<Meal[]>>("/neis/meal/month", {
+      params: { yearMonth: month },
+    }),
 };

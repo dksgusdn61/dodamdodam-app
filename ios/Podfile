@@ -63,3 +63,7 @@ target 'dodamdodamapp' do
     )
   end
 end
+
+target 'dodamwidgetExtension' do
+  inherit! :search_paths
+end
