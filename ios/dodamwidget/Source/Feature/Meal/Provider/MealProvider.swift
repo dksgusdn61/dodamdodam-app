@@ -19,11 +19,11 @@ struct MealProvider: TimelineProvider {
   }
   
   func getSnapshot(in context: Context, completion: @escaping (MealEntry) -> ()) {
-    completion(MealEntry(date: Date(), meals: loadMeals()))
+    completion(MealEntry(date: Date(), meals: loadTodayMeals()))
   }
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<MealEntry>) -> ()) {
-    let entry = MealEntry(date: Date(), meals: loadMeals())
+    let entry = MealEntry(date: Date(), meals: loadTodayMeals())
     let nextUpdate = Date().addingTimeInterval(60 * 30)
     completion(Timeline(entries: [entry], policy: .after(nextUpdate)))
   }
