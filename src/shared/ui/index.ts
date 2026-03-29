@@ -8,7 +8,7 @@ export {
   SegmentedButton,
 } from "./buttons";
 export { Checkbox } from "./checkbox";
-export { Dialog } from "./dialogs";
+export { Dialog, VerifyCodeDialog } from "./dialogs";
 export { Divider } from "./divider";
 export { Dropdown } from "./dropdown";
 export { NetworkErrorBoundary } from "./errorBoundary";
@@ -26,3 +26,4 @@ export { EmptyState } from "./emptyState";
 export { RefreshView } from "./refreshView";
 export { TextAreaProvider } from "./textAreaProvider";
 export { TopNavBar, AppLogo } from "./topNavBar";
+export { WebPopup } from "./webPopup/WebPopup";
