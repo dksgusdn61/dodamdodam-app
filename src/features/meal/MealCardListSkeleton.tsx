@@ -1,10 +1,11 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { useTheme } from "@shared/theme";
 import { Skeleton } from "@shared/ui";
 import { shapes } from "@shared/tokens";
 
-const CardSkeleton = () => (
-  <View style={styles.card}>
+const CardSkeleton = ({ backgroundColor }: { backgroundColor: string }) => (
+  <View style={[styles.card, { backgroundColor }]}>
     <View style={styles.header}>
       <Skeleton width={56} height={32} radius={20} />
       <Skeleton width={60} height={16} radius={4} />
@@ -18,13 +19,17 @@ const CardSkeleton = () => (
   </View>
 );
 
-export const MealCardListSkeleton = () => (
-  <View style={styles.container}>
-    <CardSkeleton />
-    <CardSkeleton />
-    <CardSkeleton />
-  </View>
-);
+export const MealCardListSkeleton = () => {
+  const { colors } = useTheme();
+
+  return (
+    <View style={styles.container}>
+      <CardSkeleton backgroundColor={colors.background.surface} />
+      <CardSkeleton backgroundColor={colors.background.surface} />
+      <CardSkeleton backgroundColor={colors.background.surface} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
