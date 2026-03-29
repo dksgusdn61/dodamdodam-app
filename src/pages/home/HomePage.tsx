@@ -1,43 +1,26 @@
-import React, { Suspense, useCallback, useMemo } from "react";
+import React, { Suspense } from "react";
 import { StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { TopNavBar, RefreshView } from "@shared/ui";
+import { TopNavBar, RefreshView, WebPopup } from "@shared/ui";
 import { Bell } from "@shared/icons/mono";
-import { HomeBanner, type BannerItem } from "@features/home/home-banner";
+import { HomeBanner } from "@features/home/home-banner";
 import { HomeMealCard } from "@features/meal";
 import { HomeScheduleCard } from "@features/schedule";
-import { mealQueryKeys } from "@entities/meal/api/queryKeys";
-import { scheduleQueryKeys } from "@entities/schedule/api/queryKeys";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const bannerImage = require("../../../banner.png");
-
-const MOCK_BANNERS: BannerItem[] = [
-  { id: "1", image: bannerImage },
-  { id: "2", image: bannerImage },
-  { id: "3", image: bannerImage },
-];
-
-const formatToday = () => {
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-};
+import { useHomePage } from "./useHomePage";
 
 export const HomePage = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation<any>();
-  const navigateToMeal = useCallback(() => navigation.navigate("Meal"), [navigation]);
-
-  const today = useMemo(formatToday, []);
-  const queryKeys = useMemo(
-    () => [mealQueryKeys.byDate(today), scheduleQueryKeys.me],
-    [today],
-  );
+  const {
+    banners,
+    bannerLoading,
+    webPopupRef,
+    popupUrl,
+    queryKeys,
+    navigateToNotification,
+    navigateToMeal,
+    handleBannerPress,
+  } = useHomePage();
 
   return (
     <SafeAreaView
@@ -45,7 +28,7 @@ export const HomePage = () => {
       edges={["top"]}
     >
       <TopNavBar
-        right={<TopNavBar.IconButton icon={<Bell />} onPress={() => navigation.navigate("Notification")} />}
+        right={<TopNavBar.IconButton icon={<Bell />} onPress={navigateToNotification} />}
       >
         <TopNavBar.Logo />
       </TopNavBar>
@@ -55,7 +38,7 @@ export const HomePage = () => {
         showsVerticalScrollIndicator={false}
         queryKeys={queryKeys}
       >
-        <HomeBanner items={MOCK_BANNERS} />
+        {bannerLoading ? <HomeBanner.Skeleton /> : <HomeBanner items={banners ?? []} onPressItem={handleBannerPress} />}
         <Suspense fallback={<HomeMealCard.Skeleton />}>
           <HomeMealCard onPress={navigateToMeal} />
         </Suspense>
@@ -63,6 +46,8 @@ export const HomePage = () => {
           <HomeScheduleCard />
         </Suspense>
       </RefreshView>
+
+      <WebPopup sheetRef={webPopupRef} url={popupUrl} />
     </SafeAreaView>
   );
 };

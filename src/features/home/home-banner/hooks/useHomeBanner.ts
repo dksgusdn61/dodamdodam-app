@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FlatList, useWindowDimensions, type ViewToken } from "react-native";
-import {
-  AUTO_SCROLL_INTERVAL,
-  HORIZONTAL_PADDING,
-  viewabilityConfig,
-} from "../constants/constants";
+import { FlatList, useWindowDimensions, type NativeSyntheticEvent, type NativeScrollEvent } from "react-native";
+import { AUTO_SCROLL_INTERVAL, HORIZONTAL_PADDING } from "../constants/constants";
 import type { BannerItem } from "../HomeBanner";
 
 export const useHomeBanner = (items: BannerItem[]) => {
@@ -23,23 +19,19 @@ export const useHomeBanner = (items: BannerItem[]) => {
 
       const nextIndex = (activeIndex + 1) % items.length;
       flatListRef.current?.scrollToIndex({ index: nextIndex, animated: true });
+      setActiveIndex(nextIndex);
     }, AUTO_SCROLL_INTERVAL);
 
     return () => clearInterval(timer);
   }, [activeIndex, items.length]);
 
-  const onViewableItemsChanged = useCallback(
-    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
-      if (viewableItems.length > 0 && viewableItems[0].index != null) {
-        setActiveIndex(viewableItems[0].index);
-      }
+  const handleMomentumScrollEnd = useCallback(
+    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const index = Math.round(e.nativeEvent.contentOffset.x / contentWidth);
+      setActiveIndex(index);
     },
-    [],
+    [contentWidth],
   );
-
-  const viewabilityConfigCallbackPairs = useRef([
-    { viewabilityConfig, onViewableItemsChanged },
-  ]);
 
   const keyExtractor = useCallback((item: BannerItem) => item.id, []);
 
@@ -64,10 +56,10 @@ export const useHomeBanner = (items: BannerItem[]) => {
     activeIndex,
     contentWidth,
     flatListRef,
-    viewabilityConfigCallbackPairs,
     keyExtractor,
     handleScrollBeginDrag,
     handleScrollEndDrag,
+    handleMomentumScrollEnd,
     getItemLayout,
   };
 };
