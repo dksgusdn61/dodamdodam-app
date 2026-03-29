@@ -8,6 +8,8 @@ export const AppWebView = () => {
 	const { webViewProps, NfcSheet } = useAppBridge();
 	const { uri } = useAppWebViewUri();
 
+	if (!uri) return <View style={{ flex: 1 }} />;
+
 	return (
 		<View style={{ flex: 1 }}>
 			<WebView
