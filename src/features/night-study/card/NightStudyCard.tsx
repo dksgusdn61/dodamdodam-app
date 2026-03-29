@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Animated, { FadeOut, LinearTransition } from "react-native-reanimated";
+import Animated, { LinearTransition } from "react-native-reanimated";
 import { useTheme } from "@shared/theme";
 import { typo, shapes } from "@shared/tokens";
 import { Tag, Divider, Progress, IconButton } from "@shared/ui";
@@ -38,7 +38,6 @@ export const NightStudyCard = ({ item, onDelete }: NightStudyCardProps) => {
   return (
     <Animated.View
       style={[styles.card, { backgroundColor: colors.background.surface }]}
-      exiting={FadeOut.duration(250)}
       layout={LinearTransition.duration(300)}
     >
       <View style={styles.header}>

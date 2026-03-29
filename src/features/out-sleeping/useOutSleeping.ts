@@ -8,6 +8,7 @@ import type { OutSleeping } from "@entities/out-sleeping/types";
 const fetchOutSleeping = async (): Promise<OutSleeping[]> => {
   try {
     const { data } = await outSleepingApi.getMe();
+    console.log("[OutSleeping] response:", JSON.stringify(data.data));
     return data.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.status === 403) {

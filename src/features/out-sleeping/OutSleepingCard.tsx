@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Animated, { FadeOut, LinearTransition } from "react-native-reanimated";
+import Animated, { LinearTransition } from "react-native-reanimated";
 import { useTheme } from "@shared/theme";
 import { typo, shapes } from "@shared/tokens";
 import { Tag, Divider, Progress, IconButton } from "@shared/ui";
@@ -16,9 +16,9 @@ interface OutSleepingCardProps {
 }
 
 const STATUS_MAP: Record<OutSleepingStatus, { label: string; color: TagColor }> = {
-  APPROVED: { label: "승인됨", color: "blue" },
+  ALLOWED: { label: "승인됨", color: "blue" },
   PENDING: { label: "대기 중", color: "default" },
-  REJECTED: { label: "거절됨", color: "red" },
+  DENIED: { label: "거절됨", color: "red" },
 };
 
 export const OutSleepingCard = ({ item, onDelete }: OutSleepingCardProps) => {
@@ -30,7 +30,6 @@ export const OutSleepingCard = ({ item, onDelete }: OutSleepingCardProps) => {
   return (
     <Animated.View
       style={[styles.card, { backgroundColor: colors.background.surface }]}
-      exiting={FadeOut.duration(250)}
       layout={LinearTransition.duration(300)}
     >
       <View style={styles.header}>
@@ -51,7 +50,7 @@ export const OutSleepingCard = ({ item, onDelete }: OutSleepingCardProps) => {
 
       <Divider marginHorizontal={0} marginVertical={0} />
 
-      {item.status !== "REJECTED" && (
+      {item.status !== "DENIED" && (
         <>
           <View style={styles.remainingRow}>
             <Text style={[styles.remainingText, { color: colors.text.primary }]}>
@@ -83,7 +82,7 @@ export const OutSleepingCard = ({ item, onDelete }: OutSleepingCardProps) => {
         </>
       )}
 
-      {item.status === "REJECTED" && (
+      {item.status === "DENIED" && (
         <View style={styles.dateItem}>
           <Text style={[styles.dateLabel, { color: colors.text.tertiary }]}>외출</Text>
           <Text style={[styles.dateValue, { color: colors.text.primary }]}>
