@@ -12,9 +12,17 @@
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		9012DE8121E340D0B837BE46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B049164D59ED41A8BDA81C4A /* GoogleService-Info.plist */; };
 		93ABF5822F74CA030053612F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93ABF57B2F74CA030053612F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		93F6CE332F78EE1500462E97 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F6CE322F78EE1500462E97 /* WidgetKit.framework */; };
+		93F6CE352F78EE1500462E97 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F6CE342F78EE1500462E97 /* SwiftUI.framework */; };
+		93F6CE402F78EE1600462E97 /* dodamwidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		93F6CF772F78EFD200462E97 /* RNMealWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CF712F78EFD200462E97 /* RNMealWidgetModule.swift */; };
+		93F6CF782F78EFD200462E97 /* RNTimetableWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CF742F78EFD200462E97 /* RNTimetableWidgetModule.swift */; };
+		93F6CF792F78EFD200462E97 /* RNMealWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CF702F78EFD200462E97 /* RNMealWidgetModule.m */; };
+		93F6CF7A2F78EFD200462E97 /* RNTimetableWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6CF732F78EFD200462E97 /* RNTimetableWidgetModule.m */; };
 		A008A4C648F27E99C8C0EB30 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001D3EBD9259BEB9958B8C8 /* ExpoModulesProvider.swift */; };
 		A9BB1FD72C8AD928A2AE9857 /* libPods-dodamdodamapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E087557581BAD9598CCBA1A0 /* libPods-dodamdodamapp.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		C3FEBF4EA48F62F449F3E0AA /* libPods-dodamwidgetExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F228636A37DF51F43590EA6 /* libPods-dodamwidgetExtension.a */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +34,13 @@
 			remoteGlobalIDString = 93ABF57A2F74CA030053612F;
 			remoteInfo = NotificationService;
 		};
+		93F6CE3E2F78EE1600462E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93F6CE302F78EE1500462E97;
+			remoteInfo = dodamwidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +50,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				93F6CE402F78EE1600462E97 /* dodamwidgetExtension.appex in Embed Foundation Extensions */,
 				93ABF5822F74CA030053612F /* NotificationService.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -43,15 +59,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0F228636A37DF51F43590EA6 /* libPods-dodamwidgetExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dodamwidgetExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1001D3EBD9259BEB9958B8C8 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* dodamdodamapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dodamdodamapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = dodamdodamapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = dodamdodamapp/Info.plist; sourceTree = "<group>"; };
+		7FC3D6A3CC25C51C9BD76F05 /* Pods-dodamwidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamwidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-dodamwidgetExtension/Pods-dodamwidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		8639F588B54A4F4DDE834E40 /* Pods-dodamdodamapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.debug.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.debug.xcconfig"; sourceTree = "<group>"; };
 		93ABF57B2F74CA030053612F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = dodamwidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		93F6CE322F78EE1500462E97 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		93F6CE342F78EE1500462E97 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		93F6CF702F78EFD200462E97 /* RNMealWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNMealWidgetModule.m; sourceTree = "<group>"; };
+		93F6CF712F78EFD200462E97 /* RNMealWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNMealWidgetModule.swift; sourceTree = "<group>"; };
+		93F6CF732F78EFD200462E97 /* RNTimetableWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTimetableWidgetModule.m; sourceTree = "<group>"; };
+		93F6CF742F78EFD200462E97 /* RNTimetableWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTimetableWidgetModule.swift; sourceTree = "<group>"; };
 		9FEFE21D7E9CFF3C99293B32 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = dodamdodamapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = dodamdodamapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B049164D59ED41A8BDA81C4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "dodamdodamapp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B898BF834A4193579A5AFE9C /* Pods-dodamwidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamwidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-dodamwidgetExtension/Pods-dodamwidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		E087557581BAD9598CCBA1A0 /* libPods-dodamdodamapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dodamdodamapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -68,10 +94,25 @@
 			);
 			target = 93ABF57A2F74CA030053612F /* NotificationService */;
 		};
+		93F6CE432F78EE1600462E97 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 93F6CE302F78EE1500462E97 /* dodamwidgetExtension */;
+		};
+		93F6CF7C2F78F00200462E97 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Shared/SharedDefaults.swift,
+			);
+			target = 13B07F861A680F5B00A75B9A /* dodamdodamapp */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		93ABF57C2F74CA030053612F /* NotificationService */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (93ABF5862F74CA030053612F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = NotificationService; sourceTree = "<group>"; };
+		93F6CE362F78EE1500462E97 /* dodamwidgetExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (93F6CF7C2F78F00200462E97 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 93F6CE432F78EE1600462E97 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = dodamwidgetExtension; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,12 +131,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		93F6CE2E2F78EE1500462E97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93F6CE352F78EE1500462E97 /* SwiftUI.framework in Frameworks */,
+				93F6CE332F78EE1500462E97 /* WidgetKit.framework in Frameworks */,
+				C3FEBF4EA48F62F449F3E0AA /* libPods-dodamwidgetExtension.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		13B07FAE1A68108700A75B9A /* dodamdodamapp */ = {
 			isa = PBXGroup;
 			children = (
+				93F6CF762F78EFD200462E97 /* NativeModules */,
 				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
 				F11748442D0722820044C1D9 /* dodamdodamapp-Bridging-Header.h */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
@@ -121,6 +173,9 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				E087557581BAD9598CCBA1A0 /* libPods-dodamdodamapp.a */,
+				93F6CE322F78EE1500462E97 /* WidgetKit.framework */,
+				93F6CE342F78EE1500462E97 /* SwiftUI.framework */,
+				0F228636A37DF51F43590EA6 /* libPods-dodamwidgetExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,6 +193,7 @@
 				13B07FAE1A68108700A75B9A /* dodamdodamapp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				93ABF57C2F74CA030053612F /* NotificationService */,
+				93F6CE362F78EE1500462E97 /* dodamwidgetExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D6E9745C2CF2FD243AD12CE9 /* Pods */,
@@ -153,6 +209,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* dodamdodamapp.app */,
 				93ABF57B2F74CA030053612F /* NotificationService.appex */,
+				93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +220,33 @@
 				2A28FC03DDCE938A01F69BE3 /* dodamdodamapp */,
 			);
 			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		93F6CF722F78EFD200462E97 /* Meal */ = {
+			isa = PBXGroup;
+			children = (
+				93F6CF702F78EFD200462E97 /* RNMealWidgetModule.m */,
+				93F6CF712F78EFD200462E97 /* RNMealWidgetModule.swift */,
+			);
+			path = Meal;
+			sourceTree = "<group>";
+		};
+		93F6CF752F78EFD200462E97 /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				93F6CF732F78EFD200462E97 /* RNTimetableWidgetModule.m */,
+				93F6CF742F78EFD200462E97 /* RNTimetableWidgetModule.swift */,
+			);
+			path = Timetable;
+			sourceTree = "<group>";
+		};
+		93F6CF762F78EFD200462E97 /* NativeModules */ = {
+			isa = PBXGroup;
+			children = (
+				93F6CF722F78EFD200462E97 /* Meal */,
+				93F6CF752F78EFD200462E97 /* Timetable */,
+			);
+			path = NativeModules;
 			sourceTree = "<group>";
 		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
@@ -179,6 +263,8 @@
 			children = (
 				8639F588B54A4F4DDE834E40 /* Pods-dodamdodamapp.debug.xcconfig */,
 				F3346488BF29E42BF0F449C2 /* Pods-dodamdodamapp.release.xcconfig */,
+				7FC3D6A3CC25C51C9BD76F05 /* Pods-dodamwidgetExtension.debug.xcconfig */,
+				B898BF834A4193579A5AFE9C /* Pods-dodamwidgetExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -205,6 +291,7 @@
 			);
 			dependencies = (
 				93ABF5812F74CA030053612F /* PBXTargetDependency */,
+				93F6CE3F2F78EE1600462E97 /* PBXTargetDependency */,
 			);
 			name = dodamdodamapp;
 			productName = dodamdodamapp;
@@ -227,10 +314,29 @@
 				93ABF57C2F74CA030053612F /* NotificationService */,
 			);
 			name = NotificationService;
-			packageProductDependencies = (
-			);
 			productName = NotificationService;
 			productReference = 93ABF57B2F74CA030053612F /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		93F6CE302F78EE1500462E97 /* dodamwidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93F6CE442F78EE1600462E97 /* Build configuration list for PBXNativeTarget "dodamwidgetExtension" */;
+			buildPhases = (
+				B2D0E4138CE992B38BF293B6 /* [CP] Check Pods Manifest.lock */,
+				93F6CE2D2F78EE1500462E97 /* Sources */,
+				93F6CE2E2F78EE1500462E97 /* Frameworks */,
+				93F6CE2F2F78EE1500462E97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				93F6CE362F78EE1500462E97 /* dodamwidgetExtension */,
+			);
+			name = dodamwidgetExtension;
+			productName = dodamwidgetExtension;
+			productReference = 93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -246,6 +352,9 @@
 						LastSwiftMigration = 1250;
 					};
 					93ABF57A2F74CA030053612F = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					93F6CE302F78EE1500462E97 = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
 				};
@@ -265,6 +374,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* dodamdodamapp */,
 				93ABF57A2F74CA030053612F /* NotificationService */,
+				93F6CE302F78EE1500462E97 /* dodamwidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -283,6 +393,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		93ABF5792F74CA030053612F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93F6CE2F2F78EE1500462E97 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -381,6 +498,7 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoDevice/ExpoDevice_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoFileSystem/ExpoFileSystem_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoNotifications/ExpoNotifications_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoSystemUI/ExpoSystemUI_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore/FirebaseCore_Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreExtension/FirebaseCoreExtension_Privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal/FirebaseCoreInternal_Privacy.bundle",
@@ -402,6 +520,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoDevice_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoFileSystem_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoNotifications_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoSystemUI_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseCore_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseCoreExtension_Privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseCoreInternal_Privacy.bundle",
@@ -418,6 +537,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2D0E4138CE992B38BF293B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-dodamwidgetExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EE8F0FDBDF681A5BCC3877F9 /* [Expo] Configure project */ = {
@@ -452,11 +593,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
+				93F6CF772F78EFD200462E97 /* RNMealWidgetModule.swift in Sources */,
+				93F6CF782F78EFD200462E97 /* RNTimetableWidgetModule.swift in Sources */,
+				93F6CF792F78EFD200462E97 /* RNMealWidgetModule.m in Sources */,
+				93F6CF7A2F78EFD200462E97 /* RNTimetableWidgetModule.m in Sources */,
 				A008A4C648F27E99C8C0EB30 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		93ABF5772F74CA030053612F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93F6CE2D2F78EE1500462E97 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -470,6 +622,11 @@
 			isa = PBXTargetDependency;
 			target = 93ABF57A2F74CA030053612F /* NotificationService */;
 			targetProxy = 93ABF5802F74CA030053612F /* PBXContainerItemProxy */;
+		};
+		93F6CE3F2F78EE1600462E97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93F6CE302F78EE1500462E97 /* dodamwidgetExtension */;
+			targetProxy = 93F6CE3E2F78EE1600462E97 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -695,6 +852,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodamdodamapp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -740,7 +898,105 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodamdodamapp.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		93F6CE412F78EE1600462E97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FC3D6A3CC25C51C9BD76F05 /* Pods-dodamwidgetExtension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 688647KH4L;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = dodamwidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodamdodamapp.dodamwidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		93F6CE422F78EE1600462E97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B898BF834A4193579A5AFE9C /* Pods-dodamwidgetExtension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 688647KH4L;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = dodamwidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodamdodamapp.dodamwidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -779,6 +1035,15 @@
 			buildConfigurations = (
 				93ABF5842F74CA030053612F /* Debug */,
 				93ABF5852F74CA030053612F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93F6CE442F78EE1600462E97 /* Build configuration list for PBXNativeTarget "dodamwidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93F6CE412F78EE1600462E97 /* Debug */,
+				93F6CE422F78EE1600462E97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

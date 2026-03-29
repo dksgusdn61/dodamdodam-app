@@ -11,6 +11,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     "@react-native-firebase/app",
     "@react-native-firebase/messaging",
     "./plugins/withModularHeaders",
+    "./plugins/withNativeModules",
+    "./plugins/withWidgetExtension",
     [
       "react-native-nfc-manager",
       { nfcPermission: "NFC 태그를 읽기 위해 권한이 필요해요." },
