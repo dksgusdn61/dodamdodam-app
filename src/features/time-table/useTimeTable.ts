@@ -1,10 +1,10 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { scheduleApi } from "@entities/schedule/api";
-import { scheduleQueryKeys } from "@entities/schedule/api/queryKeys";
-import type { Schedule } from "@entities/schedule/types";
-import type { ScheduleData } from "@features/home/home-schedule";
-import { saveTimetableToWidget } from "@shared/lib/widget/timetableWidget";
 import { useEffect } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { timeTableApi } from "@entities/time-table/api";
+import { timeTableQueryKeys } from "@entities/time-table/api/queryKeys";
+import type { TimeTable } from "@entities/time-table/types";
+import type { TimeTableData } from "@features/home/home-timetable";
+import { saveTimetableToWidget } from "@shared/lib/widget/timetableWidget";
 
 const getWeekDates = (): string[] => {
   const now = new Date();
@@ -22,7 +22,7 @@ const getWeekDates = (): string[] => {
   });
 };
 
-const toTimetable = (items: Schedule[]): string[][] => {
+const toTimetable = (items: TimeTable[]): string[][] => {
   const weekDates = getWeekDates();
 
   return weekDates.map((date) => {
@@ -43,15 +43,15 @@ const toTimetable = (items: Schedule[]): string[][] => {
   });
 };
 
-const fetchSchedule = async (): Promise<Schedule[]> => {
-  const { data } = await scheduleApi.getMySchedule();
+const fetchTimeTable = async (): Promise<TimeTable[]> => {
+  const { data } = await timeTableApi.getMyTimeTable();
   return data.data;
 };
 
-export const useScheduleSuspense = (): ScheduleData => {
+export const useTimeTableSuspense = (): TimeTableData => {
   const { data } = useSuspenseQuery({
-    queryKey: scheduleQueryKeys.me,
-    queryFn: fetchSchedule,
+    queryKey: timeTableQueryKeys.me,
+    queryFn: fetchTimeTable,
   });
 
   const timetable = toTimetable(data);

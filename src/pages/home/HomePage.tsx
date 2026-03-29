@@ -6,7 +6,7 @@ import { TopNavBar, RefreshView, WebPopup } from "@shared/ui";
 import { Bell } from "@shared/icons/mono";
 import { HomeBanner } from "@features/home/home-banner";
 import { HomeMealCard } from "@features/meal";
-import { HomeScheduleCard } from "@features/schedule";
+import { HomeTimeTableCard } from "@features/time-table";
 import { useHomePage } from "./useHomePage";
 
 export const HomePage = () => {
@@ -42,8 +42,8 @@ export const HomePage = () => {
         <Suspense fallback={<HomeMealCard.Skeleton />}>
           <HomeMealCard onPress={navigateToMeal} />
         </Suspense>
-        <Suspense fallback={<HomeScheduleCard.Skeleton />}>
-          <HomeScheduleCard />
+        <Suspense fallback={<HomeTimeTableCard.Skeleton />}>
+          <HomeTimeTableCard />
         </Suspense>
       </RefreshView>
 

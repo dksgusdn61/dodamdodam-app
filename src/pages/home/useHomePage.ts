@@ -6,7 +6,7 @@ import type { BannerItem } from "@features/home/home-banner";
 import { bannerApi } from "@entities/banner/api";
 import { bannerQueryKeys } from "@entities/banner/api/queryKeys";
 import { mealQueryKeys } from "@entities/meal/api/queryKeys";
-import { scheduleQueryKeys } from "@entities/schedule/api/queryKeys";
+import { timeTableQueryKeys } from "@entities/time-table/api/queryKeys";
 import { TAB_ROUTES, formatToday } from "./constants";
 
 const fetchBanner = async (): Promise<BannerItem[]> => {
@@ -60,7 +60,7 @@ export const useHomePage = () => {
 
   const today = useMemo(formatToday, []);
   const queryKeys = useMemo(
-    () => [mealQueryKeys.byDate(today), scheduleQueryKeys.me, bannerQueryKeys.banner],
+    () => [mealQueryKeys.byDate(today), timeTableQueryKeys.me, bannerQueryKeys.banner],
     [today],
   );
 

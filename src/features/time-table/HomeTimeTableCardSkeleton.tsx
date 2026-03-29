@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { useTheme } from "@shared/theme";
 import { Skeleton } from "@shared/ui";
 
-export const HomeScheduleCardSkeleton = () => {
+export const HomeTimeTableCardSkeleton = () => {
   const { colors } = useTheme();
 
   return (

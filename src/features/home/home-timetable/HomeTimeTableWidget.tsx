@@ -4,12 +4,12 @@ import { useTheme } from "@shared/theme";
 import { Clock } from "@shared/icons/mono";
 import { DAYS, styles } from "./styles";
 
-export interface ScheduleData {
+export interface TimeTableData {
   timetable: string[][];
 }
 
-interface HomeScheduleWidgetProps {
-  schedule: ScheduleData;
+interface HomeTimeTableWidgetProps {
+  timeTable: TimeTableData;
 }
 
 const PERIOD_TIMES = [
@@ -51,12 +51,12 @@ const getTodayIndex = () => {
   return day >= 1 && day <= 5 ? day - 1 : -1;
 };
 
-export const HomeScheduleWidget = React.memo(({ schedule }: HomeScheduleWidgetProps) => {
+export const HomeTimeTableWidget = React.memo(({ timeTable }: HomeTimeTableWidgetProps) => {
   const { colors } = useTheme();
   const todayIndex = getTodayIndex();
   const currentPeriodLabel = useMemo(getCurrentPeriodLabel, []);
   const currentPeriodIndex = useMemo(getCurrentPeriodIndex, []);
-  const maxPeriods = Math.max(...schedule.timetable.map((col) => col.length), 0);
+  const maxPeriods = Math.max(...timeTable.timetable.map((col) => col.length), 0);
 
   return (
     <View style={styles.container}>
@@ -99,7 +99,7 @@ export const HomeScheduleWidget = React.memo(({ schedule }: HomeScheduleWidgetPr
                 <Text style={[styles.periodText, { color: colors.text.tertiary }]}>{row + 1}</Text>
               </View>
               {DAYS.map((day, col) => {
-                const subject = schedule.timetable[col]?.[row] ?? "-";
+                const subject = timeTable.timetable[col]?.[row] ?? "-";
                 const isToday = col === todayIndex;
                 const isCurrentCell = isToday && row === currentPeriodIndex;
                 return (
