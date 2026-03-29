@@ -8,14 +8,12 @@ import { typo } from "@shared/tokens";
 import {
   TopNavBar,
   TextField,
-  FilledTextField,
   FilledButton,
   TextAreaProvider,
-  Dialog,
+  VerifyCodeDialog,
   useOverlay,
   toast,
 } from "@shared/ui";
-import { TextButton } from "@shared/ui/buttons";
 import { authApi } from "@entities/auth/api";
 import { Role } from "@features/register/types";
 import { validateStudentNumber } from "@features/register/validateStudentNumber";
@@ -176,91 +174,6 @@ export const EnterNamePage = () => {
   );
 };
 
-interface VerifyCodeDialogProps {
-  isOpen: boolean;
-  close: () => void;
-  exit: () => void;
-  setDimClickHandler: (handler: () => void) => void;
-  phone: string;
-  onVerified: () => void;
-}
-
-const VerifyCodeDialog = ({
-  isOpen,
-  close,
-  exit,
-  setDimClickHandler,
-  phone,
-  onVerified,
-}: VerifyCodeDialogProps) => {
-  const [code, setCode] = useState("");
-  const [verifying, setVerifying] = useState(false);
-
-  const handleCodeChange = useCallback((text: string) => {
-    setCode(text.replace(/[^0-9]/g, "").slice(0, 6));
-  }, []);
-
-  const handleConfirm = useCallback(async () => {
-    if (verifying) return;
-    setVerifying(true);
-    try {
-      await authApi.confirmPhoneVerification(phone, code);
-      onVerified();
-    } catch {
-      toast.error("인증코드가 올바르지 않아요.", { position: "top" });
-    } finally {
-      setVerifying(false);
-    }
-  }, [phone, code, verifying, onVerified]);
-
-  return (
-    <Dialog
-      open={isOpen}
-      title="인증코드 입력"
-      description="전송된 인증코드를 입력해주세요"
-      closeOnDimmerClick
-      onClose={close}
-      onExited={exit}
-      setDimClickHandler={setDimClickHandler}
-    >
-      <View style={dialogStyles.content}>
-        <FilledTextField
-          type="text"
-          placeholder="인증코드 6자리"
-          value={code}
-          onChangeText={handleCodeChange}
-          keyboardType="number-pad"
-        />
-        <View style={dialogStyles.buttons}>
-          <TextButton size="large" onPress={close}>
-            취소
-          </TextButton>
-          <FilledButton
-            size="large"
-            disabled={code.length !== 6}
-            isLoading={verifying}
-            onPress={handleConfirm}
-          >
-            확인
-          </FilledButton>
-        </View>
-      </View>
-    </Dialog>
-  );
-};
-
-const dialogStyles = StyleSheet.create({
-  content: {
-    width: "100%",
-    gap: 16,
-    marginTop: 8,
-  },
-  buttons: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    gap: 8,
-  },
-});
 
 const styles = StyleSheet.create({
   container: {
