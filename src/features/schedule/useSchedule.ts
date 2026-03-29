@@ -3,8 +3,8 @@ import { scheduleApi } from "@entities/schedule/api";
 import { scheduleQueryKeys } from "@entities/schedule/api/queryKeys";
 import type { Schedule } from "@entities/schedule/types";
 import type { ScheduleData } from "@features/home/home-schedule";
-
-const DAYS = ["월", "화", "수", "목", "금"] as const;
+import { saveTimetableToWidget } from "@shared/lib/widget/timetableWidget";
+import { useEffect } from "react";
 
 const getWeekDates = (): string[] => {
   const now = new Date();
@@ -54,5 +54,11 @@ export const useScheduleSuspense = (): ScheduleData => {
     queryFn: fetchSchedule,
   });
 
-  return { timetable: toTimetable(data) };
+  const timetable = toTimetable(data);
+
+  useEffect(() => {
+    saveTimetableToWidget(timetable);
+  }, [data]);
+
+  return { timetable };
 };
