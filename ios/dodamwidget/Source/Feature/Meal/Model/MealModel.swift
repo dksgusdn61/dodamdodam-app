@@ -8,26 +8,25 @@
 import Foundation
 
 struct MealModel: Codable, Hashable {
-  let date: String
   let mealType: String
   let menus: [String]
-  let calorie: Double
+  let kcal: Double
 }
 
 func loadMeals() -> [MealModel] {
-  let json = UserDefaults(suiteName: "group.com.dodamdodam.shared")?.string(forKey: "widgetMeals")
-  print("DEBUG loadMeals json:", json ?? "nil")
-  
-  guard let json,
-        let data = json.data(using: .utf8)
-  else { return [] }
-  
-  return (try? JSONDecoder().decode([MealModel].self, from: data)) ?? []
-}
-
-func loadTodayMeals() -> [MealModel] {
-  let formatter = DateFormatter()
-  formatter.dateFormat = "yyyy-MM-dd"
-  let today = formatter.string(from: Date())
-  return loadMeals().filter { $0.date == today }
+    let json = UserDefaults(suiteName: "group.com.dodamdodam.shared")?.string(forKey: "widgetMeals")
+    print("DEBUG loadMeals json:", json ?? "nil")
+    
+    guard let json,
+          let data = json.data(using: .utf8)
+    else { return [] }
+    
+    do {
+        let result = try JSONDecoder().decode([MealModel].self, from: data)
+        print("DEBUG loadMeals result:", result)
+        return result
+    } catch {
+        print("DEBUG loadMeals error:", error)
+        return []
+    }
 }

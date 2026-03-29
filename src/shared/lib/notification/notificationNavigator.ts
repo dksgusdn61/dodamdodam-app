@@ -1,6 +1,7 @@
 import { type NavigationContainerRef, CommonActions } from "@react-navigation/native";
 import messaging, { type FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 import { tokenStorage } from "@entities/api/common";
+import { notificationApi } from "@entities/notification/api";
 
 const TAB_ROUTES: Record<string, string> = {
   "/meal": "Meal",
@@ -18,6 +19,10 @@ async function handleNotificationNavigation(
 
   const token = await tokenStorage.getAccessToken();
   if (!token) return;
+
+  if (data.id) {
+    notificationApi.markAsRead(data.id).catch(() => {});
+  }
 
   navigateTo(navigationRef.current, data);
 }

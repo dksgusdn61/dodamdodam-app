@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { useRoute, type RouteProp } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { tokenStorage } from "@entities/api/common/tokenStorage";
 
 interface AppWebViewParams {
   appUrl: string;
@@ -9,11 +11,17 @@ interface AppWebViewParams {
 type AppWebViewRouteProp = RouteProp<{ AppWebView: AppWebViewParams }, "AppWebView">;
 
 export const useAppWebViewUri = () => {
-	const { params } = useRoute<AppWebViewRouteProp>();
-	const { top, bottom } = useSafeAreaInsets();
+  const { params } = useRoute<AppWebViewRouteProp>();
+  const { top, bottom } = useSafeAreaInsets();
+  const [uri, setUri] = useState("");
 
-	const separator = params.appUrl.includes("?") ? "&" : "?";
-	const uri = `${params.appUrl}${separator}top=${top}&bottom=${bottom}`;
+  useEffect(() => {
+    (async () => {
+      const token = await tokenStorage.getAccessToken();
+      const separator = params.appUrl.includes("?") ? "&" : "?";
+      setUri(`${params.appUrl}${separator}top=${top}&bottom=${bottom}&token=${token ?? ""}`);
+    })();
+  }, [params.appUrl, top, bottom]);
 
-	return { uri };
+  return { uri };
 };

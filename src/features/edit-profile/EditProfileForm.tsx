@@ -8,7 +8,7 @@ import {
   type BottomSheetBackdropProps,
 } from "@gorhom/bottom-sheet";
 import { useTheme } from "@shared/theme";
-import { FilledButton, TextField, Avatar } from "@shared/ui";
+import { FilledButton, TextField, Avatar, VerifyCodeDialog, useOverlay } from "@shared/ui";
 import { usePressAnimation } from "@shared/hooks";
 import { Plus } from "@shared/icons/mono";
 import { typo } from "@shared/tokens";
@@ -24,14 +24,16 @@ interface EditProfileFormProps {
 export const EditProfileForm = ({ onComplete }: EditProfileFormProps) => {
   const { colors } = useTheme();
   const sheetRef = useRef<BottomSheetModal>(null);
+  const overlay = useOverlay();
 
   const {
-    isStudent, isTeacher, profileImageUri,
+    isStudent, isTeacher, isPhoneChanged, profileImageUri,
     name, setName, phone, setPhone,
     grade, setGrade, room, setRoom, number, setNumber,
     position, setPosition,
-    pickFromAlbum, resetToDefault, save,
-    isSaving, hasChanges,
+    pickFromAlbum, resetToDefault,
+    sendVerificationCode, submitUpdate,
+    isSaving, isSendingCode, hasChanges,
   } = useEditProfile(onComplete);
 
   const [imgError, setImgError] = useState(false);
@@ -59,6 +61,30 @@ export const EditProfileForm = ({ onComplete }: EditProfileFormProps) => {
     ),
     [],
   );
+
+  const handleSave = useCallback(async () => {
+    if (!isPhoneChanged) {
+      submitUpdate();
+      return;
+    }
+
+    const sent = await sendVerificationCode();
+    if (!sent) return;
+
+    overlay.open(({ isOpen, close, exit, setDimClickHandler }) => (
+      <VerifyCodeDialog
+        isOpen={isOpen}
+        close={close}
+        exit={exit}
+        setDimClickHandler={setDimClickHandler}
+        phone={phone}
+        onVerified={() => {
+          close();
+          submitUpdate();
+        }}
+      />
+    ));
+  }, [isPhoneChanged, phone, sendVerificationCode, submitUpdate, overlay]);
 
   const showImage = profileImageUri && !imgError;
 
@@ -99,7 +125,13 @@ export const EditProfileForm = ({ onComplete }: EditProfileFormProps) => {
       </View>
 
       <View style={styles.buttonWrapper}>
-        <FilledButton display="fill" size="large" onPress={save} disabled={!hasChanges || isSaving} isLoading={isSaving}>
+        <FilledButton
+          display="fill"
+          size="large"
+          onPress={handleSave}
+          disabled={!hasChanges || isSaving}
+          isLoading={isSaving || isSendingCode}
+        >
           수정 완료
         </FilledButton>
       </View>

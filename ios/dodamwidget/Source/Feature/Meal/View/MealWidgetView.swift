@@ -60,7 +60,7 @@ struct MealWidgetView: View {
                   .foregroundColor(isSelected ? .white : WidgetColor.labelAlternative)
                 Spacer()
                 if let meal {
-                  Text("\(Int(meal.calorie))Kcal")
+                  Text("\(Int(meal.kcal))Kcal")
                     .font(.system(size: 9, weight: .medium))
                     .foregroundColor(isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative)
                     .lineLimit(1)
@@ -84,7 +84,7 @@ struct MealWidgetView: View {
             .font(.footnote.bold())
           Spacer()
           if let meal = currentMeal {
-            Text("\(Int(meal.calorie))Kcal")
+            Text("\(Int(meal.kcal))Kcal")
               .font(.caption)
               .foregroundColor(WidgetColor.labelAlternative)
           }
@@ -148,7 +148,7 @@ struct MealWidgetView: View {
             .clipShape(Capsule())
             .font(.footnote.bold())
           Spacer()
-          Text("\(Int(meal.calorie))Kcal")
+          Text("\(Int(meal.kcal))Kcal")
             .font(.caption)
             .foregroundColor(WidgetColor.labelAlternative)
         }

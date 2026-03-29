@@ -9,8 +9,8 @@ export const useLogout = () => {
   const queryClient = useQueryClient();
 
   return useCallback(async () => {
-    await unregisterPushToken();
-    await tokenStorage.clear();
+    unregisterPushToken();
+    await tokenStorage.clear().catch(() => {});
     queryClient.clear();
     navigation.dispatch(
       CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),

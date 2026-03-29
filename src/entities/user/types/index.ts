@@ -1,5 +1,18 @@
 export type UserStatus = "DEACTIVATED" | "ACTIVE" | "PENDING";
-export type UserRole = "STUDENT" | "TEACHER" | "ADMIN";
+export type UserRole = "STUDENT" | "TEACHER" | "BROADCASTER" | "DORMITORY_MANAGER";
+
+export interface UserSearchParams {
+  keyword: string | null;
+  roles: UserRole[];
+  generationOnly: boolean;
+  page: number;
+  size: number;
+}
+
+export interface UserSearchResponse {
+  content: User[];
+  hasNext: boolean;
+}
 
 export interface StudentInfo {
   grade: number;
