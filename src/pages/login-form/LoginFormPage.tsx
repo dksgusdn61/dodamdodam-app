@@ -92,7 +92,7 @@ export const LoginFormPage = () => {
             <Text style={[typo("Label", "Regular"), { color: colors.text.tertiary }]}>
               비밀번호를 잊으셨나요?{" "}
             </Text>
-            <Pressable>
+            <Pressable onPress={() => navigation.navigate("ResetPassword" as never)}>
               <Text
                 style={[
                   typo("Label", "Medium"),

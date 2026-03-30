@@ -16,6 +16,7 @@ import { AppWebViewPage } from "@pages/app-webview";
 import { OutSleepingApplyPage } from "@pages/out-sleeping";
 import { NightStudyApplyPage } from "@pages/night-study";
 import { ChangePasswordPage } from "@pages/change-password";
+import { ResetPasswordPage } from "@pages/reset-password";
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,7 @@ export const RootStackNavigator = () => (
     <Stack.Screen name="EnterName" component={EnterNamePage} />
     <Stack.Screen name="CreateAccount" component={CreateAccountPage} />
     <Stack.Screen name="ChangePassword" component={ChangePasswordPage} />
+    <Stack.Screen name="ResetPassword" component={ResetPasswordPage} />
     <Stack.Screen name="OutSleepingApply" component={OutSleepingApplyPage} />
     <Stack.Screen name="NightStudyApply" component={NightStudyApplyPage} />
     <Stack.Screen

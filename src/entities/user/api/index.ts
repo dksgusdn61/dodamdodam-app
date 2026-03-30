@@ -1,6 +1,6 @@
 import { basicApiHandler } from "@entities/api/common";
 import type { ApiResponse } from "@shared/types";
-import type { User, UpdateUserRequest, StudentInfo, TeacherInfo, UserSearchParams, UserSearchResponse, ChangePasswordRequest } from "@entities/user/types";
+import type { User, UpdateUserRequest, StudentInfo, TeacherInfo, UserSearchParams, UserSearchResponse, ChangePasswordRequest, ResetPasswordRequest } from "@entities/user/types";
 
 export const userApi = {
   getMe: () => basicApiHandler.get<ApiResponse<User>>("/user/me"),
@@ -15,7 +15,10 @@ export const userApi = {
     basicApiHandler.patch<ApiResponse<void>>("/user/teacher", body),
 
   changePassword: (body: ChangePasswordRequest) =>
-    basicApiHandler.patch<ApiResponse<void>>("/user/change-password", body),
+    basicApiHandler.patch<ApiResponse<void>>("/user/password", body),
+
+  resetPassword: (body: ResetPasswordRequest) =>
+    basicApiHandler.patch<ApiResponse<void>>("/user/reset-password", body),
 
   search: (params: UserSearchParams) => {
     const query: Record<string, any> = {

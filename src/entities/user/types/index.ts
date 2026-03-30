@@ -51,3 +51,8 @@ export interface ChangePasswordRequest {
   pastPassword: string;
   newPassword: string;
 }
+
+export interface ResetPasswordRequest {
+  phone: string;
+  newPassword: string;
+}
