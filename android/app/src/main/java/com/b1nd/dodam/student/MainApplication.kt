@@ -1,4 +1,4 @@
-package com.b1nd.dodamdodamapp
+package com.b1nd.dodam.student
 
 import android.app.Application
 import android.content.res.Configuration
