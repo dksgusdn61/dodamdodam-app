@@ -4,7 +4,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "dodamdodam-app",
   slug: "dodamdodam-app",
-  version: "1.0.0",
+  version: "5.0.0",
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
   plugins: [
