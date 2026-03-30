@@ -1,5 +1,9 @@
 export type UserStatus = "DEACTIVATED" | "ACTIVE" | "PENDING";
-export type UserRole = "STUDENT" | "TEACHER" | "BROADCASTER" | "DORMITORY_MANAGER";
+export type UserRole =
+  | "STUDENT"
+  | "TEACHER"
+  | "BROADCASTER"
+  | "DORMITORY_MANAGER";
 
 export interface UserSearchParams {
   keyword: string | null;
@@ -41,4 +45,14 @@ export interface UpdateUserRequest {
   name: string | null;
   phone: string | null;
   profileImage: string | null;
+}
+
+export interface ChangePasswordRequest {
+  pastPassword: string;
+  newPassword: string;
+}
+
+export interface ResetPasswordRequest {
+  phone: string;
+  newPassword: string;
 }
