@@ -11,6 +11,7 @@
 		31DA4E42C77820A48721228C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9FEFE21D7E9CFF3C99293B32 /* PrivacyInfo.xcprivacy */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		9012DE8121E340D0B837BE46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B049164D59ED41A8BDA81C4A /* GoogleService-Info.plist */; };
+		93ABF57E2F74CA030053612F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ABF57D2F74CA030053612F /* NotificationService.swift */; };
 		93ABF5822F74CA030053612F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93ABF57B2F74CA030053612F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		93F6CE332F78EE1500462E97 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F6CE322F78EE1500462E97 /* WidgetKit.framework */; };
 		93F6CE352F78EE1500462E97 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F6CE342F78EE1500462E97 /* SwiftUI.framework */; };
@@ -23,6 +24,23 @@
 		A9BB1FD72C8AD928A2AE9857 /* libPods-dodamdodamapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E087557581BAD9598CCBA1A0 /* libPods-dodamdodamapp.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		C3FEBF4EA48F62F449F3E0AA /* libPods-dodamwidgetExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F228636A37DF51F43590EA6 /* libPods-dodamwidgetExtension.a */; };
+		DX0000000000000000000000 /* AppMainWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000000 /* AppMainWidget.swift */; };
+		DX0000000000000000000001 /* MealMenuText.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000001 /* MealMenuText.swift */; };
+		DX0000000000000000000002 /* SelectMealIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000002 /* SelectMealIntent.swift */; };
+		DX0000000000000000000003 /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000003 /* MealType.swift */; };
+		DX0000000000000000000004 /* MealWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000004 /* MealWidget.swift */; };
+		DX0000000000000000000005 /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000005 /* MealModel.swift */; };
+		DX0000000000000000000006 /* MealProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000006 /* MealProvider.swift */; };
+		DX0000000000000000000007 /* MealWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000007 /* MealWidgetView.swift */; };
+		DX0000000000000000000008 /* TimetableEmptyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000008 /* TimetableEmptyText.swift */; };
+		DX0000000000000000000009 /* TimetableHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000009 /* TimetableHeaderLabel.swift */; };
+		DX0000000000000000000010 /* TimetablePeriodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000010 /* TimetablePeriodRow.swift */; };
+		DX0000000000000000000011 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000011 /* TimetableModel.swift */; };
+		DX0000000000000000000012 /* TimetableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000012 /* TimetableProvider.swift */; };
+		DX0000000000000000000013 /* TimetableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000013 /* TimetableWidget.swift */; };
+		DX0000000000000000000014 /* TimetableWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000014 /* TimetableWidgetView.swift */; };
+		DX0000000000000000000015 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000015 /* SharedDefaults.swift */; };
+		DX0000000000000000000016 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DW0000000000000000000016 /* WidgetColors.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +85,7 @@
 		7FC3D6A3CC25C51C9BD76F05 /* Pods-dodamwidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamwidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-dodamwidgetExtension/Pods-dodamwidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		8639F588B54A4F4DDE834E40 /* Pods-dodamdodamapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.debug.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.debug.xcconfig"; sourceTree = "<group>"; };
 		93ABF57B2F74CA030053612F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		93ABF57D2F74CA030053612F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = dodamwidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		93F6CE322F78EE1500462E97 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		93F6CE342F78EE1500462E97 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -79,52 +98,29 @@
 		B049164D59ED41A8BDA81C4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "dodamdodamapp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B898BF834A4193579A5AFE9C /* Pods-dodamwidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamwidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-dodamwidgetExtension/Pods-dodamwidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
+		DW0000000000000000000000 /* AppMainWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMainWidget.swift; sourceTree = "<group>"; };
+		DW0000000000000000000001 /* MealMenuText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Meal/Component/MealMenuText.swift; sourceTree = "<group>"; };
+		DW0000000000000000000002 /* SelectMealIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Meal/Component/SelectMealIntent.swift; sourceTree = "<group>"; };
+		DW0000000000000000000003 /* MealType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Meal/Enum/MealType.swift; sourceTree = "<group>"; };
+		DW0000000000000000000004 /* MealWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Meal/MealWidget.swift; sourceTree = "<group>"; };
+		DW0000000000000000000005 /* MealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Meal/Model/MealModel.swift; sourceTree = "<group>"; };
+		DW0000000000000000000006 /* MealProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Meal/Provider/MealProvider.swift; sourceTree = "<group>"; };
+		DW0000000000000000000007 /* MealWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Meal/View/MealWidgetView.swift; sourceTree = "<group>"; };
+		DW0000000000000000000008 /* TimetableEmptyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Timetable/Component/TimetableEmptyText.swift; sourceTree = "<group>"; };
+		DW0000000000000000000009 /* TimetableHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Timetable/Component/TimetableHeaderLabel.swift; sourceTree = "<group>"; };
+		DW0000000000000000000010 /* TimetablePeriodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Timetable/Component/TimetablePeriodRow.swift; sourceTree = "<group>"; };
+		DW0000000000000000000011 /* TimetableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Timetable/Model/TimetableModel.swift; sourceTree = "<group>"; };
+		DW0000000000000000000012 /* TimetableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Timetable/Provider/TimetableProvider.swift; sourceTree = "<group>"; };
+		DW0000000000000000000013 /* TimetableWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Timetable/TimetableWidget.swift; sourceTree = "<group>"; };
+		DW0000000000000000000014 /* TimetableWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature/Timetable/View/TimetableWidgetView.swift; sourceTree = "<group>"; };
+		DW0000000000000000000015 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/SharedDefaults.swift; sourceTree = "<group>"; };
+		DW0000000000000000000016 /* WidgetColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/WidgetColors.swift; sourceTree = "<group>"; };
 		E087557581BAD9598CCBA1A0 /* libPods-dodamdodamapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dodamdodamapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = dodamdodamapp/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* dodamdodamapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "dodamdodamapp-Bridging-Header.h"; path = "dodamdodamapp/dodamdodamapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		F3346488BF29E42BF0F449C2 /* Pods-dodamdodamapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.release.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		7B85A5E42F74F20000172651 /* Exceptions for "dodamwidget" folder in "dodamwidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 93ABF57A2F74CA030053612F /* NotificationService */;
-		};
-		7BC24A192F751FC4006E2FFB /* Exceptions for "dodamwidget" folder in "dodamdodamapp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 93F6CE302F78EE1500462E97 /* dodamwidgetExtension */;
-		};
-		93F6CF7C2F78F00200462E97 /* Exceptions for "dodamwidgetExtension" folder in "dodamdodamapp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Shared/SharedDefaults.swift,
-			);
-			target = 13B07F861A680F5B00A75B9A /* dodamdodamapp */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		7B85A5D62F74F1FE00172651 /* dodamwidget */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				7BC24A192F751FC4006E2FFB /* Exceptions for "dodamwidget" folder in "dodamdodamapp" target */,
-				7B85A5E42F74F20000172651 /* Exceptions for "dodamwidget" folder in "dodamwidgetExtension" target */,
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = dodamwidget;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
@@ -209,6 +205,8 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D6E9745C2CF2FD243AD12CE9 /* Pods */,
 				84D6B7334AB88B31F97A7954 /* ExpoModulesProviders */,
+				93ABF57C2F74CA030053612F /* NotificationService */,
+				93F6CE362F78EE1500462E97 /* dodamwidgetExtension */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -231,6 +229,38 @@
 				2A28FC03DDCE938A01F69BE3 /* dodamdodamapp */,
 			);
 			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		93ABF57C2F74CA030053612F /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				93ABF57D2F74CA030053612F /* NotificationService.swift */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		93F6CE362F78EE1500462E97 /* dodamwidgetExtension */ = {
+			isa = PBXGroup;
+			children = (
+				DW0000000000000000000000 /* AppMainWidget.swift */,
+				DW0000000000000000000001 /* MealMenuText.swift */,
+				DW0000000000000000000002 /* SelectMealIntent.swift */,
+				DW0000000000000000000003 /* MealType.swift */,
+				DW0000000000000000000004 /* MealWidget.swift */,
+				DW0000000000000000000005 /* MealModel.swift */,
+				DW0000000000000000000006 /* MealProvider.swift */,
+				DW0000000000000000000007 /* MealWidgetView.swift */,
+				DW0000000000000000000008 /* TimetableEmptyText.swift */,
+				DW0000000000000000000009 /* TimetableHeaderLabel.swift */,
+				DW0000000000000000000010 /* TimetablePeriodRow.swift */,
+				DW0000000000000000000011 /* TimetableModel.swift */,
+				DW0000000000000000000012 /* TimetableProvider.swift */,
+				DW0000000000000000000013 /* TimetableWidget.swift */,
+				DW0000000000000000000014 /* TimetableWidgetView.swift */,
+				DW0000000000000000000015 /* SharedDefaults.swift */,
+				DW0000000000000000000016 /* WidgetColors.swift */,
+			);
+			path = dodamwidgetExtension;
 			sourceTree = "<group>";
 		};
 		93F6CF722F78EFD200462E97 /* Meal */ = {
@@ -321,9 +351,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				93ABF57C2F74CA030053612F /* NotificationService */,
-			);
 			name = NotificationService;
 			productName = NotificationService;
 			productReference = 93ABF57B2F74CA030053612F /* NotificationService.appex */;
@@ -341,9 +368,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				93F6CE362F78EE1500462E97 /* dodamwidgetExtension */,
 			);
 			name = dodamwidgetExtension;
 			productName = dodamwidgetExtension;
@@ -588,25 +612,12 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-dodamdodamapp-checkManifestLockResult.txt",
+				"$(SRCROOT)/Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D9C611D6C5E9CCA057E36286 /* [CP-User] [RNFB] Core Configuration */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = "[CP-User] [RNFB] Core Configuration";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-dodamdodamapp/expo-configure-project.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -628,6 +639,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93ABF57E2F74CA030053612F /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +647,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DX0000000000000000000000 /* AppMainWidget.swift in Sources */,
+				DX0000000000000000000001 /* MealMenuText.swift in Sources */,
+				DX0000000000000000000002 /* SelectMealIntent.swift in Sources */,
+				DX0000000000000000000003 /* MealType.swift in Sources */,
+				DX0000000000000000000004 /* MealWidget.swift in Sources */,
+				DX0000000000000000000005 /* MealModel.swift in Sources */,
+				DX0000000000000000000006 /* MealProvider.swift in Sources */,
+				DX0000000000000000000007 /* MealWidgetView.swift in Sources */,
+				DX0000000000000000000008 /* TimetableEmptyText.swift in Sources */,
+				DX0000000000000000000009 /* TimetableHeaderLabel.swift in Sources */,
+				DX0000000000000000000010 /* TimetablePeriodRow.swift in Sources */,
+				DX0000000000000000000011 /* TimetableModel.swift in Sources */,
+				DX0000000000000000000012 /* TimetableProvider.swift in Sources */,
+				DX0000000000000000000013 /* TimetableWidget.swift in Sources */,
+				DX0000000000000000000014 /* TimetableWidgetView.swift in Sources */,
+				DX0000000000000000000015 /* SharedDefaults.swift in Sources */,
+				DX0000000000000000000016 /* WidgetColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,7 +894,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -912,7 +941,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -959,7 +988,7 @@
 				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = dodamwidgetExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1009,7 +1038,7 @@
 				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = dodamwidgetExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
