@@ -15,12 +15,18 @@ struct SelectMealIntent: AppIntent {
   @Parameter(title: "급식 타입")
   var mealType: String
   
-  init() { self.mealType = MealType.from(Date()).rawValue }
-  init(mealType: String) { self.mealType = mealType }
+  init() {
+    self.mealType = MealType.from(Date()).type.rawValue
+  }
+  
+  init(mealType: String) {
+    self.mealType = mealType
+  }
   
   func perform() async throws -> some IntentResult {
-    UserDefaults(suiteName: "group.com.dodamdodam.shared")?
-      .set(mealType, forKey: "selectedMealType")
+    let defaults = UserDefaults(suiteName: "group.com.dodamdodam.shared")
+    defaults?.set(mealType, forKey: "selectedMealType")
+    defaults?.set(Date(), forKey: "selectedMealTime")
     WidgetCenter.shared.reloadAllTimelines()
     return .result()
   }

@@ -15,15 +15,15 @@ struct MealEntry: TimelineEntry {
 
 struct MealProvider: TimelineProvider {
   func placeholder(in context: Context) -> MealEntry {
-    MealEntry(date: Date(), meals: [])
+    MealEntry(date: Date(), meals: loadMeals())
   }
   
   func getSnapshot(in context: Context, completion: @escaping (MealEntry) -> ()) {
-    completion(MealEntry(date: Date(), meals: loadTodayMeals()))
+    completion(MealEntry(date: Date(), meals: loadMeals()))
   }
   
   func getTimeline(in context: Context, completion: @escaping (Timeline<MealEntry>) -> ()) {
-    let entry = MealEntry(date: Date(), meals: loadTodayMeals())
+    let entry = MealEntry(date: Date(), meals: loadMeals())
     let nextUpdate = Date().addingTimeInterval(60 * 30)
     completion(Timeline(entries: [entry], policy: .after(nextUpdate)))
   }

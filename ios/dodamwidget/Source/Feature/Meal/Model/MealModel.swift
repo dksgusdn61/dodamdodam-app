@@ -24,10 +24,3 @@ func loadMeals() -> [MealModel] {
   
   return (try? JSONDecoder().decode([MealModel].self, from: data)) ?? []
 }
-
-func loadTodayMeals() -> [MealModel] {
-  let formatter = DateFormatter()
-  formatter.dateFormat = "yyyy-MM-dd"
-  let today = formatter.string(from: Date())
-  return loadMeals().filter { $0.date == today }
-}

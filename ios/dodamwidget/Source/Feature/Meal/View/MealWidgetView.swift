@@ -13,14 +13,24 @@ struct MealWidgetView: View {
   var entry: MealEntry
   @Environment(\.widgetFamily) var widgetFamily
   @Environment(\.widgetRenderingMode) var renderingMode
+  private let selectionValidSeconds: TimeInterval = 60 * 60 * 3
+  
+  private var defaultInfo: (type: MealType, isTomorrow: Bool) {
+    MealType.from(Date())
+  }
   
   var selectedType: MealType {
-    if #available(iOS 17.0, *) {
-      let saved = UserDefaults(suiteName: "group.com.dodamdodam.shared")?
-        .string(forKey: "selectedMealType") ?? ""
-      return MealType(rawValue: saved) ?? MealType.from(Date())
+    guard #available(iOS 17.0, *) else {
+      return defaultInfo.type
     }
-    return MealType.from(Date())
+    
+    return MealSelectionStorage.loadSelectedMealType(
+      defaultType: defaultInfo.type
+    )
+  }
+  
+  private var targetDateString: String {
+    MealDateHelper.targetDateString()
   }
   
   var body: some View {
@@ -43,16 +53,19 @@ struct MealWidgetView: View {
     }
   }
   
+  //MARK: Medium
   @ViewBuilder
   var mediumContent: some View {
-    let currentMeal = entry.meals.first { $0.mealType == selectedType.rawValue }
+    let displayType = selectedType
+    let targetDate = targetDateString
+    let currentMeal = entry.meals.first { $0.date == targetDate && $0.mealType == displayType.rawValue }
     
     VStack(spacing: 8) {
       HStack(spacing: 6) {
         if #available(iOS 17.0, *) {
           ForEach(MealType.allCases, id: \.self) { type in
-            let meal = entry.meals.first { $0.mealType == type.rawValue }
-            let isSelected = selectedType == type
+            let meal = entry.meals.first { $0.date == targetDate && $0.mealType == type.rawValue }
+            let isSelected = (displayType == type)
             
             Button(intent: SelectMealIntent(mealType: type.rawValue)) {
               HStack(spacing: 4) {
@@ -79,11 +92,7 @@ struct MealWidgetView: View {
                       Color.clear
                     }
                   } else {
-                    if isSelected {
-                      Capsule().fill(WidgetColor.primaryNormal)
-                    } else {
-                      Capsule().fill(WidgetColor.backgroundNormal)
-                    }
+                    Capsule().fill(isSelected ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
                   }
                 }
               )
@@ -128,16 +137,17 @@ struct MealWidgetView: View {
     .padding(12)
   }
   
-  
+  //MARK: Small
   @ViewBuilder
   var smallContent: some View {
-    let currentType = MealType.from(Date())
-    let currentMeal = entry.meals.first { $0.mealType == currentType.rawValue }
+    let info = defaultInfo
+    let targetDate = targetDateString
+    let currentMeal = entry.meals.first { $0.date == targetDate && $0.mealType == info.type.rawValue }
     
     VStack(spacing: 8) {
       if let meal = currentMeal {
         HStack {
-          Text(currentType.label)
+          Text(info.type.label)
             .foregroundColor(.white)
             .padding(.horizontal, 10)
             .padding(.vertical, 4)
