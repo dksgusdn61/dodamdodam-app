@@ -3,6 +3,7 @@ import { useSuspenseQuery, useMutation, useQueryClient } from "@tanstack/react-q
 import * as ImagePicker from "expo-image-picker";
 import { userApi } from "@entities/user/api";
 import { userQueryKeys } from "@entities/user/api/queryKeys";
+import { authApi } from "@entities/auth/api";
 import { fileApi } from "@entities/file/api";
 import { toast } from "@shared/ui";
 import type { User } from "@entities/user/types";
@@ -43,9 +44,11 @@ export const useEditProfile = (onSuccess: () => void) => {
   const [room, setRoom] = useState(user.student?.room.toString() ?? "");
   const [number, setNumber] = useState(user.student?.number.toString() ?? "");
   const [position, setPosition] = useState(user.teacher?.position ?? "");
+  const [sendingCode, setSendingCode] = useState(false);
 
   const isStudent = user.roles?.includes("STUDENT") ?? false;
   const isTeacher = user.roles?.includes("TEACHER") ?? false;
+  const isPhoneChanged = phone !== (user.phone ?? "");
 
   const uploadMutation = useMutation({
     mutationFn: async (asset: ImagePicker.ImagePickerAsset) => {
@@ -116,11 +119,27 @@ export const useEditProfile = (onSuccess: () => void) => {
     setUploadedImageUrl("");
   }, []);
 
-  const save = useCallback(() => updateMutation.mutate(), [updateMutation]);
+  const sendVerificationCode = useCallback(async () => {
+    if (sendingCode) return;
+    setSendingCode(true);
+    try {
+      await authApi.requestPhoneVerification(phone);
+      toast.success("인증코드가 전송되었어요.", { position: "top" });
+      return true;
+    } catch {
+      toast.error("인증코드 전송에 실패했어요.", { position: "top" });
+      return false;
+    } finally {
+      setSendingCode(false);
+    }
+  }, [sendingCode, phone]);
+
+  const submitUpdate = useCallback(() => updateMutation.mutate(), [updateMutation]);
 
   return {
     isStudent,
     isTeacher,
+    isPhoneChanged,
     profileImageUri,
     name, setName,
     phone, setPhone,
@@ -130,8 +149,10 @@ export const useEditProfile = (onSuccess: () => void) => {
     position, setPosition,
     pickFromAlbum,
     resetToDefault,
-    save,
+    sendVerificationCode,
+    submitUpdate,
     isSaving: uploadMutation.isPending || updateMutation.isPending,
+    isSendingCode: sendingCode,
     hasChanges: hasProfileChanges(user, { name, phone, uploadedImageUrl, grade, room, number, position }, isStudent, isTeacher),
   };
 };

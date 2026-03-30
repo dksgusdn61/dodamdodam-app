@@ -1,4 +1,4 @@
-export type OutSleepingStatus = "PENDING" | "APPROVED" | "REJECTED";
+export type OutSleepingStatus = "PENDING" | "ALLOWED" | "DENIED";
 
 export interface OutSleeping {
   publicId: string;
@@ -8,9 +8,7 @@ export interface OutSleeping {
   endAt: string;
 }
 
-export interface OutSleepingResponse {
-  outSleeping: OutSleeping[];
-}
+export type OutSleepingResponse = OutSleeping[];
 
 export interface OutSleepingRequest {
   reason: string;

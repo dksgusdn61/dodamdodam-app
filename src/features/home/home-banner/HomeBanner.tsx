@@ -3,7 +3,6 @@ import {
   FlatList,
   StyleSheet,
   View,
-  type ImageSourcePropType,
   type ListRenderItemInfo,
 } from "react-native";
 import { useTheme } from "@shared/theme";
@@ -14,31 +13,33 @@ import { BannerImage } from "./BannerImage";
 
 export interface BannerItem {
   id: string;
-  image: ImageSourcePropType;
+  imageUrl: string;
+  linkUrl: string;
 }
 
 interface HomeBannerProps {
   items: BannerItem[];
+  onPressItem?: (item: BannerItem) => void;
 }
 
-export const HomeBanner = React.memo(({ items }: HomeBannerProps) => {
+export const HomeBanner = React.memo(({ items, onPressItem }: HomeBannerProps) => {
   const { colors } = useTheme();
   const {
     activeIndex,
     contentWidth,
     flatListRef,
-    viewabilityConfigCallbackPairs,
     keyExtractor,
     handleScrollBeginDrag,
     handleScrollEndDrag,
+    handleMomentumScrollEnd,
     getItemLayout,
   } = useHomeBanner(items);
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<BannerItem>) => (
-      <BannerImage item={item} width={contentWidth} />
+      <BannerImage item={item} width={contentWidth} onPress={() => onPressItem?.(item)} />
     ),
-    [contentWidth],
+    [contentWidth, onPressItem],
   );
 
   if (items.length === 0) return null;
@@ -52,17 +53,18 @@ export const HomeBanner = React.memo(({ items }: HomeBannerProps) => {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           horizontal
-          pagingEnabled
           showsHorizontalScrollIndicator={false}
           bounces={false}
           overScrollMode="never"
+          snapToInterval={contentWidth}
+          snapToAlignment="start"
+          decelerationRate="fast"
+          scrollEventThrottle={16}
           onScrollBeginDrag={handleScrollBeginDrag}
           onScrollEndDrag={handleScrollEndDrag}
+          onMomentumScrollEnd={handleMomentumScrollEnd}
           style={{ width: contentWidth }}
           getItemLayout={getItemLayout}
-          viewabilityConfigCallbackPairs={
-            viewabilityConfigCallbackPairs.current
-          }
         />
         <Indicator
           current={activeIndex}

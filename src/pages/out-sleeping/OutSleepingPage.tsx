@@ -41,14 +41,11 @@ export const OutSleepingPage = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scroll: {
-    flex: 1,
-  },
+  container: { flex: 1 },
+  scroll: { flex: 1 },
   scrollContent: {
     paddingHorizontal: 16,
     paddingVertical: 12,
+    paddingBottom: 140,
   },
 });

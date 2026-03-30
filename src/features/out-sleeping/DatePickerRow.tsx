@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, Keyboard, StyleSheet } from "react-native";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
 import { DatePicker, PickerTrigger } from "@shared/ui";
@@ -29,7 +29,7 @@ export const DatePickerRow = ({ label, date, onChangeDate }: DatePickerRowProps)
         />
       )}
     >
-      <Pressable style={styles.row}>
+      <Pressable style={styles.row} onPressIn={Keyboard.dismiss}>
         <Text style={[styles.label, { color: colors.text.tertiary }]}>
           {label}
         </Text>

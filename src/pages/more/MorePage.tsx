@@ -1,19 +1,19 @@
 import React, { Suspense, useCallback } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { useInfiniteScroll } from "@shared/hooks";
-import { TopNavBar } from "@shared/ui";
+import { TopNavBar, RefreshView } from "@shared/ui";
 import { Gear, Chart, File } from "@shared/icons/mono";
 import { ProfileCard } from "@features/profile";
 import { InAppList } from "@features/inapp";
+import { userQueryKeys } from "@entities/user/api/queryKeys";
+import { inappQueryKeys } from "@entities/inapp/api/queryKeys";
 import { MenuItem } from "./ui/MenuItem";
 
 export const MorePage = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
-  const { onScroll, onEndReachedRef } = useInfiniteScroll();
 
   const openSettings = useCallback(() => navigation.navigate("Settings"), [navigation]);
   const openEditProfile = useCallback(() => navigation.navigate("EditProfile"), [navigation]);
@@ -28,12 +28,11 @@ export const MorePage = () => {
       >
         <TopNavBar.Title>전체</TopNavBar.Title>
       </TopNavBar>
-      <ScrollView
+      <RefreshView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
-        onScroll={onScroll}
-        scrollEventThrottle={200}
+        queryKeys={[userQueryKeys.me, inappQueryKeys.activeApps]}
       >
         <Suspense fallback={<ProfileCard.Skeleton />}>
           <ProfileCard onPress={openEditProfile} />
@@ -45,9 +44,9 @@ export const MorePage = () => {
         </View>
 
         <Suspense fallback={<InAppList.Skeleton />}>
-          <InAppList onEndReachedRef={onEndReachedRef} />
+          <InAppList />
         </Suspense>
-      </ScrollView>
+      </RefreshView>
     </SafeAreaView>
   );
 };

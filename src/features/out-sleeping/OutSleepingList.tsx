@@ -1,21 +1,41 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "@shared/theme";
 import { shapes } from "@shared/tokens";
-import { EmptyState, FilledButton } from "@shared/ui";
+import { EmptyState, FilledButton, toast } from "@shared/ui";
 import { Tent } from "@shared/icons/illustration";
+import { outSleepingApi } from "@entities/out-sleeping/api";
+import { outSleepingQueryKeys } from "@entities/out-sleeping/api/queryKeys";
 import { OutSleepingCard } from "./OutSleepingCard";
 import { useOutSleepingSuspense } from "./useOutSleeping";
 
 export const OutSleepingList = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
-  const { outSleeping } = useOutSleepingSuspense();
+  const queryClient = useQueryClient();
+  const outSleeping = useOutSleepingSuspense();
 
   const handleApply = useCallback(() => {
     navigation.navigate("OutSleepingApply");
   }, [navigation]);
+
+  const deletingRef = useRef(false);
+
+  const handleDelete = useCallback(async (publicId: string) => {
+    if (deletingRef.current) return;
+    deletingRef.current = true;
+    try {
+      await outSleepingApi.delete(publicId);
+      await queryClient.invalidateQueries({ queryKey: outSleepingQueryKeys.me });
+      toast.success("외박 신청이 삭제되었어요.", { position: "top" });
+    } catch {
+      toast.error("외박 삭제에 실패했어요.", { position: "top" });
+    } finally {
+      deletingRef.current = false;
+    }
+  }, [queryClient]);
 
   if (outSleeping.length === 0) {
     return (
@@ -41,7 +61,7 @@ export const OutSleepingList = () => {
   return (
     <View style={styles.list}>
       {outSleeping.map((item) => (
-        <OutSleepingCard key={item.publicId} item={item} />
+        <OutSleepingCard key={item.publicId} item={item} onDelete={handleDelete} />
       ))}
     </View>
   );

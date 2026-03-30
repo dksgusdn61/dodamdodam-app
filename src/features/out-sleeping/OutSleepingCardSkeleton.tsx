@@ -1,10 +1,11 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { useTheme } from "@shared/theme";
 import { Skeleton } from "@shared/ui";
 import { shapes } from "@shared/tokens";
 
-const CardSkeleton = () => (
-  <View style={styles.card}>
+const CardSkeleton = ({ backgroundColor }: { backgroundColor: string }) => (
+  <View style={[styles.card, { backgroundColor }]}>
     <View style={styles.header}>
       <Skeleton width={64} height={30} radius={34} />
       <Skeleton width={24} height={24} radius={4} />
@@ -20,18 +21,20 @@ const CardSkeleton = () => (
   </View>
 );
 
-export const OutSleepingCardSkeleton = () => (
-  <View style={styles.container}>
-    <CardSkeleton />
-    <CardSkeleton />
-    <CardSkeleton />
-  </View>
-);
+export const OutSleepingCardSkeleton = () => {
+  const { colors } = useTheme();
+
+  return (
+    <View style={styles.container}>
+      <CardSkeleton backgroundColor={colors.background.surface} />
+      <CardSkeleton backgroundColor={colors.background.surface} />
+      <CardSkeleton backgroundColor={colors.background.surface} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    gap: 12,
-  },
+  container: { gap: 12 },
   card: {
     padding: 16,
     paddingHorizontal: 12,
@@ -43,9 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  divider: {
-    height: 1,
-  },
+  divider: { height: 1 },
   dateRow: {
     flexDirection: "row",
     justifyContent: "space-between",

@@ -8,15 +8,20 @@ export interface TokenData {
   refresh: string;
 }
 
-export interface SignUpRequest {
+export interface RegisterStudentRequest {
+  username: string;
   name: string;
-  email: string;
-  id: string;
-  pw: string;
+  password: string;
   phone: string;
-  role: "STUDENT" | "TEACHER";
-  grade?: number;
-  room?: number;
-  number?: number;
-  position?: string;
+  grade: number;
+  room: number;
+  number: number;
+}
+
+export interface RegisterTeacherRequest {
+  username: string;
+  name: string;
+  password: string;
+  phone: string;
+  position: string;
 }

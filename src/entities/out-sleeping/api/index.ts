@@ -8,4 +8,7 @@ export const outSleepingApi = {
 
   create: (body: OutSleepingRequest) =>
     basicApiHandler.post<ApiResponse>("/out-sleeping", body),
+
+  delete: (publicId: string) =>
+    basicApiHandler.delete<ApiResponse>(`/out-sleeping/${publicId}`),
 };
