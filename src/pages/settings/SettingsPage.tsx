@@ -19,6 +19,7 @@ export const SettingsPage = () => {
   const [popupUrl, setPopupUrl] = useState("");
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
   const openEditProfile = useCallback(() => navigation.navigate("EditProfile"), [navigation]);
+  const openChangePassword = useCallback(() => navigation.navigate("ChangePassword"), [navigation]);
   const logout = useLogout();
 
   const openWebPopup = useCallback((path: string) => {
@@ -38,6 +39,10 @@ export const SettingsPage = () => {
         <Suspense fallback={<ProfileSkeleton />}>
           <SettingProfile onEditPress={openEditProfile} />
         </Suspense>
+        <Divider />
+        <View style={styles.section}>
+          <SettingItem title="비밀번호 수정" onPress={openChangePassword} />
+        </View>
         <Divider />
         <View style={styles.section}>
           <SettingItem title="서비스 운영 정책" onPress={() => openWebPopup("/terms")} />
