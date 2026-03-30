@@ -8,9 +8,10 @@
 import Foundation
 
 struct MealModel: Codable, Hashable {
+  let date: String
   let mealType: String
+  let calorie: Double
   let menus: [String]
-  let kcal: Double
 }
 
 func loadMeals() -> [MealModel] {
