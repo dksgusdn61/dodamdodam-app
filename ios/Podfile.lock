@@ -34,7 +34,7 @@ PODS:
     - ExpoModulesCore
   - ExpoDomWebView (55.0.3):
     - ExpoModulesCore
-  - ExpoFileSystem (55.0.10):
+  - ExpoFileSystem (55.0.12):
     - ExpoModulesCore
   - ExpoFont (55.0.4):
     - ExpoModulesCore
@@ -2666,7 +2666,7 @@ SPEC CHECKSUMS:
   ExpoAsset: 4fc5f72f8a74135c522fa61df0bfb869e5b3c3e6
   ExpoDevice: c9fdd7ae0e4a8f4d7a3359270ceab6018dbff01b
   ExpoDomWebView: d4f2ed3c3fa31d0ce89e79501a0c041c2f233189
-  ExpoFileSystem: 0d267067930a744555ff6ab842fd79d3eeb2c33b
+  ExpoFileSystem: a36716f500022a3ca30605d3f10b908d7728b414
   ExpoFont: 4d2a6dedce012c4793532cb38d561d3da95eaafd
   ExpoHaptics: 8bce973169ae09427d0a10886d222601ada8c128
   ExpoImagePicker: 9005f90c3a2959b77655093488ab56650f69f93a

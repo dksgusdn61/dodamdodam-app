@@ -12,6 +12,7 @@ import AppIntents
 struct MealWidgetView: View {
   var entry: MealEntry
   @Environment(\.widgetFamily) var widgetFamily
+  @Environment(\.widgetRenderingMode) var renderingMode
   
   var selectedType: MealType {
     if #available(iOS 17.0, *) {
@@ -26,7 +27,7 @@ struct MealWidgetView: View {
     Group {
       if #available(iOSApplicationExtension 17.0, *) {
         content
-          .containerBackground(WidgetColor.backgroundNeutral, for: .widget)
+          .containerBackground(renderingMode == .accented ? Color.clear : WidgetColor.backgroundNeutral, for: .widget)
       } else {
         content
       }
@@ -57,65 +58,59 @@ struct MealWidgetView: View {
               HStack(spacing: 4) {
                 Text(type.label)
                   .font(.footnote.bold())
-                  .foregroundColor(isSelected ? .white : WidgetColor.labelAlternative)
+                  .foregroundColor(renderingMode == .accented ? .primary : (isSelected ? .white : WidgetColor.labelAlternative))
+                
                 Spacer()
+                
                 if let meal {
                   Text("\(Int(meal.calorie))Kcal")
                     .font(.system(size: 9, weight: .medium))
-                    .foregroundColor(isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative)
-                    .lineLimit(1)
-                    .layoutPriority(1)
+                    .foregroundColor(renderingMode == .accented ? .primary.opacity(0.7) : (isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative))
                 }
               }
               .padding(.horizontal, 10)
               .padding(.vertical, 6)
-              .background(isSelected ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
-              .clipShape(Capsule())
+              .background(
+                Group {
+                  if renderingMode == .accented {
+                    if isSelected {
+                      Capsule().strokeBorder(Color.white.opacity(0.6), lineWidth: 1.5)
+                    } else {
+                      Color.clear
+                    }
+                  } else {
+                    if isSelected {
+                      Capsule().fill(WidgetColor.primaryNormal)
+                    } else {
+                      Capsule().fill(WidgetColor.backgroundNormal)
+                    }
+                  }
+                }
+              )
             }
             .buttonStyle(.plain)
-          }
-        } else {
-          Text(selectedType.label)
-            .foregroundColor(.white)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 4)
-            .background(WidgetColor.primaryNormal)
-            .clipShape(Capsule())
-            .font(.footnote.bold())
-          Spacer()
-          if let meal = currentMeal {
-            Text("\(Int(meal.calorie))Kcal")
-              .font(.caption)
-              .foregroundColor(WidgetColor.labelAlternative)
           }
         }
       }
       
       VStack(alignment: .leading, spacing: 2) {
-        if let meal = currentMeal {
-          if meal.menus.isEmpty {
-            MealMenuText(text: "오늘은 급식이 없어요", isMealEmpty: true)
-          } else {
-            let half = Int(ceil(Double(meal.menus.count) / 2.0))
-            let left = Array(meal.menus.prefix(half))
-            let right = Array(meal.menus.dropFirst(half))
+        if let meal = currentMeal, !meal.menus.isEmpty {
+          let half = Int(ceil(Double(meal.menus.count) / 2.0))
+          HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading, spacing: 6) {
+              ForEach(meal.menus.prefix(half), id: \.self) { menu in
+                MealMenuText(text: menu)
+              }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack(alignment: .top, spacing: 8) {
+            if meal.menus.count > half {
               VStack(alignment: .leading, spacing: 6) {
-                ForEach(left, id: \.self) { menu in
+                ForEach(meal.menus.dropFirst(half), id: \.self) { menu in
                   MealMenuText(text: menu)
                 }
               }
               .frame(maxWidth: .infinity, alignment: .leading)
-              
-              if !right.isEmpty {
-                VStack(alignment: .leading, spacing: 6) {
-                  ForEach(right, id: \.self) { menu in
-                    MealMenuText(text: menu)
-                  }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-              }
             }
           }
         } else {
@@ -125,12 +120,14 @@ struct MealWidgetView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
       .padding(10)
-      .background(WidgetColor.backgroundNormal)
+      .background(renderingMode == .accented ? Color.clear : WidgetColor.backgroundNormal)
       .clipShape(RoundedRectangle(cornerRadius: 14))
+      .widgetAccentable()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(12)
   }
+  
   
   @ViewBuilder
   var smallContent: some View {
@@ -144,10 +141,15 @@ struct MealWidgetView: View {
             .foregroundColor(.white)
             .padding(.horizontal, 10)
             .padding(.vertical, 4)
-            .background(WidgetColor.primaryNormal)
+            .background(renderingMode == .accented ? Color.clear : WidgetColor.primaryNormal)
+            .overlay(
+              renderingMode == .accented ? Capsule().strokeBorder(Color.white.opacity(0.6), lineWidth: 1) : nil
+            )
             .clipShape(Capsule())
             .font(.footnote.bold())
+          
           Spacer()
+          
           Text("\(Int(meal.calorie))Kcal")
             .font(.caption)
             .foregroundColor(WidgetColor.labelAlternative)
@@ -167,14 +169,16 @@ struct MealWidgetView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(10)
-        .background(WidgetColor.backgroundNormal)
+        .background(renderingMode == .accented ? Color.clear : WidgetColor.backgroundNormal)
         .clipShape(RoundedRectangle(cornerRadius: 14))
+        .widgetAccentable()
         
       } else {
         Text("급식 정보가 없습니다")
           .font(.footnote)
           .foregroundStyle(WidgetColor.labelAlternative)
           .frame(maxWidth: .infinity, maxHeight: .infinity)
+          .widgetAccentable()
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
