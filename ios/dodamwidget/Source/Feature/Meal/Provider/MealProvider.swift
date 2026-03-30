@@ -15,7 +15,7 @@ struct MealEntry: TimelineEntry {
 
 struct MealProvider: TimelineProvider {
   func placeholder(in context: Context) -> MealEntry {
-    MealEntry(date: Date(), meals: [])
+    MealEntry(date: Date(), meals: loadMeals())
   }
   
   func getSnapshot(in context: Context, completion: @escaping (MealEntry) -> ()) {

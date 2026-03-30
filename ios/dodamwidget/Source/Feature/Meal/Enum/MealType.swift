@@ -20,19 +20,19 @@ public enum MealType: String, CaseIterable {
     }
   }
   
-  public static func from(_ date: Date) -> Self {
+  public static func from(_ date: Date) -> (type: Self, isTomorrow: Bool) {
     let hour = date[.hour]
     let minute = date[.minute]
     let currentTime = hour * 100 + minute
     
     if currentTime <= 820 {
-      return .breakfast
+      return (.breakfast, false)
     } else if currentTime <= 1330 {
-      return .lunch
+      return (.lunch, false)
     } else if currentTime <= 1910 {
-      return .dinner
+      return (.dinner, false)
     } else {
-      return .breakfast
+      return (.breakfast, true)
     }
   }
 }

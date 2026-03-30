@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct TimetablePeriodRow: View {
   let period: Int
@@ -14,17 +15,24 @@ struct TimetablePeriodRow: View {
   var periodWidth: CGFloat = 26
   var isHighlighted: Bool = false
   
+  @Environment(\.widgetRenderingMode) var renderingMode
+  
   var body: some View {
     HStack(spacing: 6) {
       Text("\(period)교시")
         .font(.system(size: fontSize - 1, weight: isHighlighted ? .bold : .medium))
-        .foregroundStyle(isHighlighted ? WidgetColor.primaryNormal : WidgetColor.labelAlternative)
+        .foregroundStyle(isHighlighted ?
+                         (renderingMode == .accented ? Color.primary : WidgetColor.primaryNormal) :
+                          WidgetColor.labelAlternative)
         .frame(width: periodWidth, alignment: .leading)
       
       Text(subject)
         .font(.system(size: fontSize, weight: isHighlighted ? .bold : .regular))
-        .foregroundStyle(isHighlighted ? WidgetColor.primaryNormal : WidgetColor.labelNormal)
+        .foregroundStyle(isHighlighted ?
+                         (renderingMode == .accented ? Color.primary : WidgetColor.primaryNormal) :
+                          WidgetColor.labelNormal)
         .lineLimit(1)
+      
       Spacer()
     }
   }

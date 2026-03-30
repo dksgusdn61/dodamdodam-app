@@ -87,14 +87,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		93ABF5862F74CA030053612F /* Exceptions for "NotificationService" folder in "NotificationService" target */ = {
+		7B85A5E42F74F20000172651 /* Exceptions for "dodamwidget" folder in "dodamwidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
 			target = 93ABF57A2F74CA030053612F /* NotificationService */;
 		};
-		93F6CE432F78EE1600462E97 /* Exceptions for "dodamwidgetExtension" folder in "dodamwidgetExtension" target */ = {
+		7BC24A192F751FC4006E2FFB /* Exceptions for "dodamwidget" folder in "dodamdodamapp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -111,29 +111,17 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		93ABF57C2F74CA030053612F /* NotificationService */ = {
+		7B85A5D62F74F1FE00172651 /* dodamwidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				93ABF5862F74CA030053612F /* Exceptions for "NotificationService" folder in "NotificationService" target */,
+				7BC24A192F751FC4006E2FFB /* Exceptions for "dodamwidget" folder in "dodamdodamapp" target */,
+				7B85A5E42F74F20000172651 /* Exceptions for "dodamwidget" folder in "dodamwidgetExtension" target */,
 			);
 			explicitFileTypes = {
 			};
 			explicitFolders = (
 			);
-			path = NotificationService;
-			sourceTree = "<group>";
-		};
-		93F6CE362F78EE1500462E97 /* dodamwidgetExtension */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				93F6CF7C2F78F00200462E97 /* Exceptions for "dodamwidgetExtension" folder in "dodamdodamapp" target */,
-				93F6CE432F78EE1600462E97 /* Exceptions for "dodamwidgetExtension" folder in "dodamwidgetExtension" target */,
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = dodamwidgetExtension;
+			path = dodamwidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -600,8 +588,22 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift",
+				"$(DERIVED_FILE_DIR)/Pods-dodamdodamapp-checkManifestLockResult.txt",
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9C611D6C5E9CCA057E36286 /* [CP-User] [RNFB] Core Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "[CP-User] [RNFB] Core Configuration";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-dodamdodamapp/expo-configure-project.sh\"\n";

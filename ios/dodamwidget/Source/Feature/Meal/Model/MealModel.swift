@@ -14,19 +14,12 @@ struct MealModel: Codable, Hashable {
 }
 
 func loadMeals() -> [MealModel] {
-    let json = UserDefaults(suiteName: "group.com.dodamdodam.shared")?.string(forKey: "widgetMeals")
-    print("DEBUG loadMeals json:", json ?? "nil")
-    
-    guard let json,
-          let data = json.data(using: .utf8)
-    else { return [] }
-    
-    do {
-        let result = try JSONDecoder().decode([MealModel].self, from: data)
-        print("DEBUG loadMeals result:", result)
-        return result
-    } catch {
-        print("DEBUG loadMeals error:", error)
-        return []
-    }
+  let json = UserDefaults(suiteName: "group.com.dodamdodam.shared")?.string(forKey: "widgetMeals")
+  print("DEBUG loadMeals json:", json ?? "nil")
+  
+  guard let json,
+        let data = json.data(using: .utf8)
+  else { return [] }
+  
+  return (try? JSONDecoder().decode([MealModel].self, from: data)) ?? []
 }

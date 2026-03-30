@@ -11,6 +11,7 @@ import WidgetKit
 struct TimetableWidgetView: View {
   var entry: TimetableEntry
   @Environment(\.widgetFamily) var widgetFamily
+  @Environment(\.widgetRenderingMode) var renderingMode
   
   private let days = ["월", "화", "수", "목", "금"]
   
@@ -31,7 +32,7 @@ struct TimetableWidgetView: View {
     Group {
       if #available(iOSApplicationExtension 17.0, *) {
         content
-          .containerBackground(WidgetColor.backgroundNeutral, for: .widget)
+          .containerBackground(renderingMode == .accented ? Color.clear : WidgetColor.backgroundNeutral, for: .widget)
       } else {
         content
       }
@@ -84,8 +85,9 @@ struct TimetableWidgetView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .padding(10)
-      .background(WidgetColor.backgroundNormal)
+      .background(renderingMode == .accented ? Color.clear : WidgetColor.backgroundNormal)
       .clipShape(RoundedRectangle(cornerRadius: 14))
+      .widgetAccentable()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(12)
@@ -146,8 +148,9 @@ struct TimetableWidgetView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .padding(12)
-      .background(WidgetColor.backgroundNormal)
+      .background(renderingMode == .accented ? Color.clear : WidgetColor.backgroundNormal)
       .clipShape(RoundedRectangle(cornerRadius: 14))
+      .widgetAccentable()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(12)
@@ -159,6 +162,7 @@ struct TimetableWidgetView: View {
     VStack(spacing: 8) {
       if entry.weekTimetable.isEmpty {
         TimetableEmptyText()
+          .widgetAccentable()
       } else {
         HStack(spacing: 4) {
           Color.clear.frame(width: 35, height: 1)
@@ -170,8 +174,15 @@ struct TimetableWidgetView: View {
               .foregroundColor(isTodayHighlight ? .white : WidgetColor.labelAlternative)
               .frame(maxWidth: .infinity)
               .padding(.vertical, 6)
-              .background(isTodayHighlight ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
-              .clipShape(Capsule())
+              .background(
+                Group {
+                  if renderingMode == .accented {
+                    isTodayHighlight ? Capsule().strokeBorder(Color.white.opacity(0.6), lineWidth: 1) : nil
+                  } else {
+                    isTodayHighlight ? Capsule().fill(WidgetColor.primaryNormal) : Capsule().fill(WidgetColor.backgroundNormal)
+                  }
+                }
+              )
           }
         }
         
@@ -179,7 +190,7 @@ struct TimetableWidgetView: View {
         
         VStack(spacing: 4) {
           ForEach(0..<maxPeriod, id: \.self) { period in
-            HStack(spacing: 4) {
+            HStack(spacing: 5) {
               let isCurrentRow = isWeekday && (period == entry.currentPeriod)
               
               Text("\(period + 1)교시")
@@ -203,8 +214,18 @@ struct TimetableWidgetView: View {
                   .frame(maxWidth: .infinity, maxHeight: .infinity)
                   .padding(.vertical, 4)
                   .background(
-                    isCurrentCell ? WidgetColor.primaryNormal :
-                      (isTodayColumn ? WidgetColor.primaryNormal.opacity(0.1) : WidgetColor.backgroundNormal)
+                    Group {
+                      if renderingMode == .accented {
+                        if isCurrentCell {
+                          RoundedRectangle(cornerRadius: 6).strokeBorder(Color.white.opacity(0.6), lineWidth: 1)
+                        } else {
+                          Color.clear
+                        }
+                      } else {
+                        isCurrentCell ? WidgetColor.primaryNormal :
+                        (isTodayColumn ? WidgetColor.primaryNormal.opacity(0.1) : WidgetColor.backgroundNormal)
+                      }
+                    }
                   )
                   .clipShape(RoundedRectangle(cornerRadius: 6))
               }
@@ -213,6 +234,7 @@ struct TimetableWidgetView: View {
           }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .widgetAccentable()
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
