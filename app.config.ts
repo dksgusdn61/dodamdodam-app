@@ -4,7 +4,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "dodamdodam-app",
   slug: "dodamdodam-app",
-  version: "1.0.0",
+  version: "5.0.0",
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
   plugins: [
@@ -34,7 +34,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     ...config.android,
-    package: "com.b1nd.dodamdodamapp",
+    package: "com.b1nd.dodam.student",
     googleServicesFile: "./google-services.json",
     permissions: [
       "android.permission.POST_NOTIFICATIONS",

@@ -1,4 +1,4 @@
-package com.b1nd.dodamdodamapp
+package com.b1nd.dodam.student
 
 import android.os.Build
 import android.os.Bundle
