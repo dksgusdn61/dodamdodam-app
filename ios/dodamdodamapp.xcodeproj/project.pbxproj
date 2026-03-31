@@ -7,29 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7BF9BA062F7A9C4700ECD4F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BF9BA052F7A9C4700ECD4F5 /* GoogleService-Info.plist */; };
 		7BF9BA0E2F7A9C7800ECD4F5 /* RNMealWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA082F7A9C7800ECD4F5 /* RNMealWidgetModule.swift */; };
 		7BF9BA0F2F7A9C7800ECD4F5 /* RNMealWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA072F7A9C7800ECD4F5 /* RNMealWidgetModule.m */; };
 		7BF9BA102F7A9C7800ECD4F5 /* RNTimetableWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA0B2F7A9C7800ECD4F5 /* RNTimetableWidgetModule.swift */; };
 		7BF9BA112F7A9C7800ECD4F5 /* RNTimetableWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA0A2F7A9C7800ECD4F5 /* RNTimetableWidgetModule.m */; };
-		7BF9BA3D2F7AA1CC00ECD4F5 /* TimetableEmptyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA232F7AA1CC00ECD4F5 /* TimetableEmptyText.swift */; };
-		7BF9BA3E2F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA252F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift */; };
-		7BF9BA3F2F7AA1CC00ECD4F5 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA272F7AA1CC00ECD4F5 /* TimetableModel.swift */; };
-		7BF9BA402F7AA1CC00ECD4F5 /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA1B2F7AA1CC00ECD4F5 /* MealModel.swift */; };
-		7BF9BA412F7AA1CC00ECD4F5 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA302F7AA1CC00ECD4F5 /* SharedDefaults.swift */; };
-		7BF9BA422F7AA1CC00ECD4F5 /* MealWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA212F7AA1CC00ECD4F5 /* MealWidget.swift */; };
-		7BF9BA432F7AA1CC00ECD4F5 /* SelectMealIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA172F7AA1CC00ECD4F5 /* SelectMealIntent.swift */; };
-		7BF9BA442F7AA1CC00ECD4F5 /* MealDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA142F7AA1CC00ECD4F5 /* MealDateHelper.swift */; };
-		7BF9BA452F7AA1CC00ECD4F5 /* MealProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA1D2F7AA1CC00ECD4F5 /* MealProvider.swift */; };
-		7BF9BA462F7AA1CC00ECD4F5 /* MealSelectionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA162F7AA1CC00ECD4F5 /* MealSelectionStorage.swift */; };
-		7BF9BA472F7AA1CC00ECD4F5 /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA192F7AA1CC00ECD4F5 /* MealType.swift */; };
-		7BF9BA482F7AA1CC00ECD4F5 /* TimetableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA292F7AA1CC00ECD4F5 /* TimetableProvider.swift */; };
-		7BF9BA492F7AA1CC00ECD4F5 /* TimetableHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA242F7AA1CC00ECD4F5 /* TimetableHeaderLabel.swift */; };
-		7BF9BA4A2F7AA1CC00ECD4F5 /* MealMenuText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA152F7AA1CC00ECD4F5 /* MealMenuText.swift */; };
-		7BF9BA4B2F7AA1CC00ECD4F5 /* AppMainWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA332F7AA1CC00ECD4F5 /* AppMainWidget.swift */; };
-		7BF9BA4C2F7AA1CC00ECD4F5 /* MealWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA1F2F7AA1CC00ECD4F5 /* MealWidgetView.swift */; };
-		7BF9BA4D2F7AA1CC00ECD4F5 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA312F7AA1CC00ECD4F5 /* WidgetColors.swift */; };
-		7BF9BA4E2F7AA1CC00ECD4F5 /* TimetableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA2D2F7AA1CC00ECD4F5 /* TimetableWidget.swift */; };
-		7BF9BA4F2F7AA1CC00ECD4F5 /* TimetableWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA2B2F7AA1CC00ECD4F5 /* TimetableWidgetView.swift */; };
 		7BF9BA502F7AA1CC00ECD4F5 /* TimetableEmptyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA232F7AA1CC00ECD4F5 /* TimetableEmptyText.swift */; };
 		7BF9BA512F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA252F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift */; };
 		7BF9BA522F7AA1CC00ECD4F5 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA272F7AA1CC00ECD4F5 /* TimetableModel.swift */; };
@@ -49,6 +31,8 @@
 		7BF9BA602F7AA1CC00ECD4F5 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA312F7AA1CC00ECD4F5 /* WidgetColors.swift */; };
 		7BF9BA612F7AA1CC00ECD4F5 /* TimetableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA2D2F7AA1CC00ECD4F5 /* TimetableWidget.swift */; };
 		7BF9BA622F7AA1CC00ECD4F5 /* TimetableWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA2B2F7AA1CC00ECD4F5 /* TimetableWidgetView.swift */; };
+		878C76E1D2E6534F147F87C2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9FEFE21D7E9CFF3C99293B32 /* PrivacyInfo.xcprivacy */; };
+		9361083E2F7BD56E00D1F84F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		93ABF57E2F74CA030053612F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ABF57D2F74CA030053612F /* NotificationService.swift */; };
 		93ABF5822F74CA030053612F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93ABF57B2F74CA030053612F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		93F6CE332F78EE1500462E97 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F6CE322F78EE1500462E97 /* WidgetKit.framework */; };
@@ -96,9 +80,8 @@
 		0F228636A37DF51F43590EA6 /* libPods-dodamwidgetExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dodamwidgetExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1001D3EBD9259BEB9958B8C8 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* dodamdodamapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dodamdodamapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = dodamdodamapp/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "/Users/kmg/coding/b1nd/dodamdodam-app/ios/dodamdodamapp/Images.xcassets"; sourceTree = "<absolute>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = dodamdodamapp/Info.plist; sourceTree = "<group>"; };
-		7BF9BA062F7A9C4700ECD4F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BF9BA052F7A9C4700ECD4F5 /* GoogleService-Info.plist */; };
 		7BF9BA052F7A9C4700ECD4F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7BF9BA072F7A9C7800ECD4F5 /* RNMealWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNMealWidgetModule.m; sourceTree = "<group>"; };
 		7BF9BA082F7A9C7800ECD4F5 /* RNMealWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNMealWidgetModule.swift; sourceTree = "<group>"; };
@@ -175,7 +158,6 @@
 		13B07FAE1A68108700A75B9A /* dodamdodamapp */ = {
 			isa = PBXGroup;
 			children = (
-				7BF9BA0D2F7A9C7800ECD4F5 /* NativeModules */,
 				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
 				F11748442D0722820044C1D9 /* dodamdodamapp-Bridging-Header.h */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
@@ -402,6 +384,7 @@
 				84D6B7334AB88B31F97A7954 /* ExpoModulesProviders */,
 				93ABF57C2F74CA030053612F /* NotificationService */,
 				93F6CE362F78EE1500462E97 /* dodamwidgetExtension */,
+				7BF9BA0D2F7A9C7800ECD4F5 /* NativeModules */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -571,7 +554,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9361083E2F7BD56E00D1F84F /* Images.xcassets in Resources */,
 				7BF9BA062F7A9C4700ECD4F5 /* GoogleService-Info.plist in Resources */,
+				878C76E1D2E6534F147F87C2 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1067,7 +1052,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1112,7 +1097,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1162,7 +1147,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1211,7 +1196,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

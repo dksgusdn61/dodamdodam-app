@@ -15,7 +15,7 @@ struct MealModel: Codable, Hashable {
 }
 
 func loadMeals() -> [MealModel] {
-  let json = UserDefaults(suiteName: "group.com.dodamdodam.shared")?.string(forKey: "widgetMeals")
+  let json = UserDefaults(suiteName: "group.com.b1nd.dodam.student.shared")?.string(forKey: "widgetMeals")
   print("DEBUG loadMeals json:", json ?? "nil")
   
   guard let json,

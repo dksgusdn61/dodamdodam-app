@@ -12,7 +12,7 @@ import WidgetKit
 final class SharedDefaults {
   static let shared = SharedDefaults()
   
-  private let userDefaults = UserDefaults(suiteName: "group.com.dodamdodam.shared")!
+  private let userDefaults = UserDefaults(suiteName: "group.com.b1nd.dodam.student.shared")!
   
   private init() {}
   

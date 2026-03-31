@@ -24,7 +24,7 @@ struct SelectMealIntent: AppIntent {
   }
   
   func perform() async throws -> some IntentResult {
-    let defaults = UserDefaults(suiteName: "group.com.dodamdodam.shared")
+    let defaults = UserDefaults(suiteName: "group.com.b1nd.dodam.student.shared")
     defaults?.set(mealType, forKey: "selectedMealType")
     defaults?.set(Date(), forKey: "selectedMealTime")
     WidgetCenter.shared.reloadAllTimelines()

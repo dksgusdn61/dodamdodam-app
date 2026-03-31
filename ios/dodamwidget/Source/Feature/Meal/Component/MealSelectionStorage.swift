@@ -10,7 +10,7 @@ import Foundation
 
 struct MealSelectionStorage {
   
-  private static let suite = UserDefaults(suiteName: "group.com.dodamdodam.shared")
+  private static let suite = UserDefaults(suiteName: "group.com.b1nd.dodam.student.shared")
   private static let typeKey = "selectedMealType"
   private static let timeKey = "selectedMealTime"
   

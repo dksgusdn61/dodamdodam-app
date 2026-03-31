@@ -8,7 +8,7 @@
 import Foundation
 
 func loadTimetable() -> [[String]] {
-  guard let json = UserDefaults(suiteName: "group.com.dodamdodam.shared")?
+  guard let json = UserDefaults(suiteName: "group.com.b1nd.dodam.student.shared")?
     .string(forKey: "widgetTimetable"),
         let data = json.data(using: .utf8)
   else { return [] }
