@@ -77,7 +77,7 @@ struct MealWidgetView: View {
                 
                 if let meal {
                   Text("\(Int(meal.calorie))Kcal")
-                    .font(.system(size: 9, weight: .medium))
+                    .font(.system(size: 8, weight: .medium))
                     .foregroundColor(renderingMode == .accented ? .primary.opacity(0.7) : (isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative))
                 }
               }

@@ -64,7 +64,7 @@ struct MealWidgetView: View {
                     .font(.system(size: 9, weight: .medium))
                     .foregroundColor(isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative)
                     .lineLimit(1)
-                    .layoutPriority(1)
+                    .fixedSize(horizontal: true, vertical: false)
                 }
               }
               .padding(.horizontal, 10)
